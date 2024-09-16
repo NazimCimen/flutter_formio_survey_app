@@ -39,6 +39,7 @@ dependencies:
   hive_flutter: ^1.1.0 # Provides simple and secure data storage with Hive in Flutter applications
   encrypt: ^5.0.3 # Used for data encryption
   flutter_secure_storage: ^9.2.2 # Secure storage for sensitive data (e.g., encrypted data)
+  share_plus: ^10.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
