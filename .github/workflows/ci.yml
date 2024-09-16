@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - development
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.22.0'
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Create firebase_options.dart from template
+      run: |
+        echo "import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;" > lib/firebase_options.dart
+        echo "import 'package:flutter/foundation.dart' show defaultTargetPlatform, kIsWeb, TargetPlatform;" >> lib/firebase_options.dart
+        echo "" >> lib/firebase_options.dart
+        echo "class DefaultFirebaseOptions {" >> lib/firebase_options.dart
+        echo "  static FirebaseOptions get currentPlatform {" >> lib/firebase_options.dart
+        echo "    if (kIsWeb) {" >> lib/firebase_options.dart
+        echo "      return web;" >> lib/firebase_options.dart
+        echo "    }" >> lib/firebase_options.dart
+        echo "    switch (defaultTargetPlatform) {" >> lib/firebase_options.dart
+        echo "      case TargetPlatform.android:" >> lib/firebase_options.dart
+        echo "        return android;" >> lib/firebase_options.dart
+        echo "      case TargetPlatform.iOS:" >> lib/firebase_options.dart
+        echo "        return ios;" >> lib/firebase_options.dart
+        echo "      default:" >> lib/firebase_options.dart
+        echo "        throw UnsupportedError('DefaultFirebaseOptions are not supported for this platform.');" >> lib/firebase_options.dart
+        echo "    }" >> lib/firebase_options.dart
+        echo "  }" >> lib/firebase_options.dart
+        echo "" >> lib/firebase_options.dart
+        echo "  static const FirebaseOptions web = FirebaseOptions(" >> lib/firebase_options.dart
+        echo "    apiKey: '${{ secrets.FIREBASE_API_KEY_WEB }}'," >> lib/firebase_options.dart
+        echo "    appId: '${{ secrets.FIREBASE_APP_ID_WEB }}'," >> lib/firebase_options.dart
+        echo "    messagingSenderId: '${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}'," >> lib/firebase_options.dart
+        echo "    projectId: '${{ secrets.FIREBASE_PROJECT_ID }}'," >> lib/firebase_options.dart
+        echo "    authDomain: '${{ secrets.FIREBASE_AUTH_DOMAIN_WEB }}'," >> lib/firebase_options.dart
+        echo "    storageBucket: '${{ secrets.FIREBASE_STORAGE_BUCKET }}'," >> lib/firebase_options.dart
+        echo "    measurementId: '${{ secrets.FLUTTER_MEASUREMENT_ID_WEB }}'," >> lib/firebase_options.dart
+        echo "  );" >> lib/firebase_options.dart
+        echo "" >> lib/firebase_options.dart
+        echo "  static const FirebaseOptions android = FirebaseOptions(" >> lib/firebase_options.dart
+        echo "    apiKey: '${{ secrets.FIREBASE_API_KEY_ANDROID }}'," >> lib/firebase_options.dart
+        echo "    appId: '${{ secrets.FIREBASE_APP_ID_ANDROID }}'," >> lib/firebase_options.dart
+        echo "    messagingSenderId: '${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}'," >> lib/firebase_options.dart
+        echo "    projectId: '${{ secrets.FIREBASE_PROJECT_ID }}'," >> lib/firebase_options.dart
+        echo "    storageBucket: '${{ secrets.FIREBASE_STORAGE_BUCKET }}'," >> lib/firebase_options.dart
+        echo "  );" >> lib/firebase_options.dart
+        echo "" >> lib/firebase_options.dart
+        echo "  static const FirebaseOptions ios = FirebaseOptions(" >> lib/firebase_options.dart
+        echo "    apiKey: '${{ secrets.FIREBASE_API_KEY_IOS }}'," >> lib/firebase_options.dart
+        echo "    appId: '${{ secrets.FIREBASE_APP_ID_IOS }}'," >> lib/firebase_options.dart
+        echo "    messagingSenderId: '${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}'," >> lib/firebase_options.dart
+        echo "    projectId: '${{ secrets.FIREBASE_PROJECT_ID }}'," >> lib/firebase_options.dart
+        echo "    storageBucket: '${{ secrets.FIREBASE_STORAGE_BUCKET }}'," >> lib/firebase_options.dart
+        echo "    iosBundleId: '${{ secrets.FIREBASE_IOS_BUNDLE_ID }}'," >> lib/firebase_options.dart
+        echo "  );" >> lib/firebase_options.dart
+        echo "}" >> lib/firebase_options.dart
+
+    - name: Run tests
+      run: flutter test
