@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:encrypt/encrypt.dart';
-import 'package:flutter_survey_app/core/cache/encryption/secure_encryption_key_manager.dart';
+import 'package:flutter_survey_app_mobile/core/cache/encryption/secure_encryption_key_manager.dart';
 
 /// THIS IS A CLASS THAT DEFINES ENCRYPTION AND DECRYPTION OPERATIONS
 abstract class BaseEncryptionService {

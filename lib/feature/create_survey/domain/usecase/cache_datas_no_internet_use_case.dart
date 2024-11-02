@@ -1,4 +1,4 @@
-import 'package:flutter_survey_app/feature/create_survey/domain/repository/create_survey_repository.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/domain/repository/create_survey_repository.dart';
 
 class CacheDatasNoInternetUseCase {
   final CreateSurveyRepository repository;

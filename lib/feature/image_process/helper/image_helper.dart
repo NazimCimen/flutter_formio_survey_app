@@ -1,13 +1,12 @@
 import 'dart:typed_data';
-
 import 'package:dartz/dartz.dart';
-import 'package:flutter_survey_app/core/error/failure.dart';
-import 'package:flutter_survey_app/core/error/failure_handler.dart';
-import 'package:flutter_survey_app/feature/image_process/domain/usecase/crop_image_use_case.dart';
-import 'package:flutter_survey_app/feature/image_process/domain/usecase/get_image_file_use_case.dart';
-import 'package:flutter_survey_app/feature/image_process/domain/usecase/get_image_url_use_case.dart';
-import 'package:flutter_survey_app/feature/image_process/domain/usecase/remove_survey_images_use_case.dart';
-import 'package:flutter_survey_app/product/constants/image_aspect_ratio.dart';
+import 'package:flutter_survey_app_mobile/core/error/failure.dart';
+import 'package:flutter_survey_app_mobile/core/error/failure_handler.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/domain/usecase/crop_image_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/domain/usecase/get_image_file_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/domain/usecase/get_image_url_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/domain/usecase/remove_survey_images_use_case.dart';
+import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -60,6 +59,7 @@ class ImageHelper {
             (croppedImage) => croppedImage,
           );
         }
+        return null;
       },
     );
   }
@@ -82,6 +82,7 @@ class ImageHelper {
             (croppedImage) => croppedImage,
           );
         }
+        return null;
       },
     );
   }
@@ -99,7 +100,9 @@ class ImageHelper {
   }
 
   Future<void> removeSurveyImages(
-      {required String? surveyId, required String? userId}) async {
+      // ignore: require_trailing_commas
+      {required String? surveyId,
+      required String? userId}) async {
     if (surveyId != null && userId != null) {
       final response = await removeSurveyImagesUseCase.call(
         path: 'user/$userId/survey/$surveyId/',

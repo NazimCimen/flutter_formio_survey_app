@@ -1,15 +1,9 @@
 import 'dart:typed_data';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_survey_app/core/connection/network_info.dart';
-import 'package:flutter_survey_app/core/error/failure.dart';
-import 'package:flutter_survey_app/core/error/failure_handler.dart';
-import 'package:flutter_survey_app/feature/shared_layers/data/model/question_model.dart';
-import 'package:flutter_survey_app/feature/shared_layers/data/model/survey_model.dart';
-import 'package:flutter_survey_app/product/firebase/firebase_collection_enum.dart';
-import 'package:flutter_survey_app/product/firebase/firebase_converter.dart';
+import 'package:flutter_survey_app_mobile/core/connection/network_info.dart';
+import 'package:flutter_survey_app_mobile/core/error/failure.dart';
+import 'package:flutter_survey_app_mobile/core/error/failure_handler.dart';
 
 abstract class ImageProcessRemoteSource {
   Future<Either<Failure, String>> getImageUrl({

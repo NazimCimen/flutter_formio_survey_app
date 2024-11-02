@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app/config/localization/locale_constants.dart';
-import 'package:flutter_survey_app/config/localization/string_constanrs.dart';
-import 'package:flutter_survey_app/core/utils/app_size_extensions.dart';
-import 'package:flutter_survey_app/feature/settings/presentation/view/settings_view.dart';
+import 'package:flutter_survey_app_mobile/config/localization/locale_constants.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constanrs.dart';
+import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
+import 'package:flutter_survey_app_mobile/feature/settings/presentation/view/settings_view.dart';
 
 class LanguageSheetWidget extends StatefulWidget {
   const LanguageSheetWidget({super.key});

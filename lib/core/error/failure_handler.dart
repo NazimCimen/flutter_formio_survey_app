@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_survey_app/core/error/exception.dart';
-import 'package:flutter_survey_app/core/error/failure.dart';
+import 'package:flutter_survey_app_mobile/core/error/exception.dart';
+import 'package:flutter_survey_app_mobile/core/error/failure.dart';
 
 class FailureHandler {
   FailureHandler._();

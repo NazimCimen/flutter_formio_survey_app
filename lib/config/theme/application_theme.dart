@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app/config/theme/custom_color_sheme.dart';
+import 'package:flutter_survey_app_mobile/config/theme/custom_color_sheme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 abstract class ApplicationTheme {

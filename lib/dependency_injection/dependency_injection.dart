@@ -1,35 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_survey_app/core/cache/cache_enum.dart';
-import 'package:flutter_survey_app/core/cache/cache_manager/base_cache_manager.dart';
-import 'package:flutter_survey_app/core/cache/cache_manager/encrypted_cache_manager.dart';
-import 'package:flutter_survey_app/core/cache/cache_manager/standart_cache_manager.dart';
-import 'package:flutter_survey_app/core/cache/encryption/encryption_service.dart';
-import 'package:flutter_survey_app/core/cache/encryption/secure_encryption_key_manager.dart';
-import 'package:flutter_survey_app/core/connection/network_info.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/usecase/cache_datas_no_internet_use_case.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/usecase/remove_survey_use_case.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/viewmodel/survey_logic.dart';
-import 'package:flutter_survey_app/feature/image_process/data/data_source/image_process_local_source.dart';
-import 'package:flutter_survey_app/feature/image_process/data/data_source/image_process_remote_source.dart';
-import 'package:flutter_survey_app/feature/image_process/data/repository/image_process_repository_impl.dart';
-import 'package:flutter_survey_app/feature/image_process/domain/repository/image_process_repository.dart';
-import 'package:flutter_survey_app/feature/image_process/helper/image_helper.dart';
-import 'package:flutter_survey_app/feature/shared_layers/data/model/question_model.dart';
-import 'package:flutter_survey_app/feature/shared_layers/data/model/survey_model.dart';
-import 'package:flutter_survey_app/feature/create_survey/data/data_source/create_survey_local_data_source.dart';
-import 'package:flutter_survey_app/feature/create_survey/data/data_source/create_survey_remote_data_source.dart';
-import 'package:flutter_survey_app/feature/create_survey/data/repository/create_survey_repository_impl.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/repository/create_survey_repository.dart';
-import 'package:flutter_survey_app/feature/image_process/domain/usecase/crop_image_use_case.dart';
-import 'package:flutter_survey_app/feature/image_process/domain/usecase/get_image_file_use_case.dart';
-import 'package:flutter_survey_app/feature/image_process/domain/usecase/get_image_url_use_case.dart';
-import 'package:flutter_survey_app/feature/image_process/domain/usecase/remove_survey_images_use_case.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/usecase/share_questions_use_case.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/usecase/share_survey_info_use_case.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app/product/firebase/firebase_converter.dart';
+import 'package:flutter_survey_app_mobile/core/cache/cache_enum.dart';
+import 'package:flutter_survey_app_mobile/core/cache/cache_manager/standart_cache_manager.dart';
+import 'package:flutter_survey_app_mobile/core/cache/encryption/encryption_service.dart';
+import 'package:flutter_survey_app_mobile/core/cache/encryption/secure_encryption_key_manager.dart';
+import 'package:flutter_survey_app_mobile/core/connection/network_info.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/cache_datas_no_internet_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/remove_survey_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/survey_logic.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/data/data_source/image_process_local_source.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/data/data_source/image_process_remote_source.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/data/repository/image_process_repository_impl.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/domain/repository/image_process_repository.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/helper/image_helper.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/data/model/question_model.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/data/model/survey_model.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/data/data_source/create_survey_local_data_source.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/data/data_source/create_survey_remote_data_source.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/data/repository/create_survey_repository_impl.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/domain/repository/create_survey_repository.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/domain/usecase/crop_image_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/domain/usecase/get_image_file_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/domain/usecase/get_image_url_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/domain/usecase/remove_survey_images_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/share_questions_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/share_survey_info_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
+import 'package:flutter_survey_app_mobile/product/firebase/service/base_firebase_service.dart';
+import 'package:flutter_survey_app_mobile/product/firebase/service/firebase_service_impl.dart';
+import 'package:flutter_survey_app_mobile/product/helper/link_sharing_helper.dart';
 
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -61,7 +60,8 @@ void setupLocator() {
       ),
     )
     ..registerLazySingleton<InternetConnectionChecker>(
-        () => InternetConnectionChecker())
+      () => InternetConnectionChecker(),
+    )
     ..registerLazySingleton<INetworkInfo>(
       () => NetworkInfo(serviceLocator<InternetConnectionChecker>()),
     )
@@ -76,25 +76,22 @@ void setupLocator() {
     ..registerLazySingleton<QuestionModel>(
       () => const QuestionModel(),
     )
-    ..registerLazySingleton<FirebaseConverter<SurveyModel>>(
-      () => FirebaseConverter<SurveyModel>(
-        model: serviceLocator<SurveyModel>(),
+    ..registerLazySingleton<BaseFirebaseService<SurveyModel>>(
+      () => FirebaseServiceImpl(
         firestore: serviceLocator<FirebaseFirestore>(),
       ),
     )
-    ..registerLazySingleton<FirebaseConverter<QuestionModel>>(
-      () => FirebaseConverter<QuestionModel>(
-        model: serviceLocator<QuestionModel>(),
+    ..registerLazySingleton<BaseFirebaseService<QuestionModel>>(
+      () => FirebaseServiceImpl(
         firestore: serviceLocator<FirebaseFirestore>(),
       ),
     )
     ..registerLazySingleton<CreateSurveyRemoteDataSource>(
       () => CreateSurveyRemoteDataSourceImpl(
-        storage: serviceLocator<FirebaseStorage>(),
-        surveyFirebaseConverter:
-            serviceLocator<FirebaseConverter<SurveyModel>>(),
-        questionFirebaseConverter:
-            serviceLocator<FirebaseConverter<QuestionModel>>(),
+        surveyFirebaseService:
+            serviceLocator<BaseFirebaseService<SurveyModel>>(),
+        questionFirebaseService:
+            serviceLocator<BaseFirebaseService<QuestionModel>>(),
         connectivity: serviceLocator<INetworkInfo>(),
       ),
     )
@@ -138,6 +135,9 @@ void setupLocator() {
         shareQuestionsUseCase: serviceLocator<ShareQuestionsUseCase>(),
       ),
     )
+    ..registerLazySingleton<LinkSharingHelper>(
+      () => LinkSharingHelperImpl(),
+    )
     ..registerLazySingleton<CreateSurveyViewModel>(
       () => CreateSurveyViewModel(
         cacheDatasNoInternetUseCase:
@@ -145,6 +145,7 @@ void setupLocator() {
         connectivity: serviceLocator<INetworkInfo>(),
         imageHelper: serviceLocator<ImageHelper>(),
         surveyLogic: serviceLocator<SurveyLogic>(),
+        shareLink: serviceLocator<LinkSharingHelper>(),
       ),
     ) //////////////////////////////////////////////////////////////////////////
     ..registerLazySingleton<ImageProcessRemoteSource>(
@@ -164,11 +165,13 @@ void setupLocator() {
     )
     ..registerLazySingleton<GetImageUrlUseCase>(
       () => GetImageUrlUseCase(
-          repository: serviceLocator<ImageProcessRepository>()),
+        repository: serviceLocator<ImageProcessRepository>(),
+      ),
     )
     ..registerLazySingleton<GetImageFileUseCase>(
       () => GetImageFileUseCase(
-          repository: serviceLocator<ImageProcessRepository>()),
+        repository: serviceLocator<ImageProcessRepository>(),
+      ),
     )
     ..registerLazySingleton<CropImageUseCase>(
       () => CropImageUseCase(

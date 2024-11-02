@@ -1,14 +1,14 @@
 import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
-import 'package:flutter_survey_app/core/error/failure.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/usecase/remove_survey_use_case.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/usecase/share_questions_use_case.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/usecase/share_survey_info_use_case.dart';
-import 'package:flutter_survey_app/feature/image_process/helper/image_helper.dart';
-import 'package:flutter_survey_app/feature/shared_layers/domain/entity/question_entity.dart';
-import 'package:flutter_survey_app/feature/shared_layers/domain/entity/survey_entity.dart';
-import 'package:flutter_survey_app/feature/shared_layers/domain/entity/survey_entity_extension.dart';
+import 'package:flutter_survey_app_mobile/core/error/failure.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/remove_survey_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/share_questions_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/share_survey_info_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/helper/image_helper.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/survey_entity.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/survey_entity_extension.dart';
 
 class SurveyLogic {
   final ImageHelper imageHelper;
@@ -29,19 +29,24 @@ class SurveyLogic {
   }) async {
     // 1. Anketin görseli yüklenir
     String? imageUrl;
+    Failure? failure;
     if (selectedSurveyImageBytes != null) {
       final result = await imageHelper.getImageUrl(
         imageByte: selectedSurveyImageBytes,
         path: surveyEntity.surveyPath,
       );
       result.fold(
-        (fail) => fail,
+        (fail) {
+          failure = fail;
+        },
         (url) {
           imageUrl = url;
         },
       );
     }
-
+    if (failure != null) {
+      return Left(failure!);
+    }
     // 2. Soruların image url'leri alınır ve question entity'ye eklenir
     final questionsResult = await _convertFromMapToEntityList(
       questionEntityMap: questionEntityMap,
@@ -49,12 +54,16 @@ class SurveyLogic {
     );
     var questions = <QuestionEntity>[];
     questionsResult.fold(
-      (fail) => fail,
+      (fail) {
+        failure = fail;
+      },
       (questionList) {
         questions = questionList;
       },
     );
-
+    if (failure != null) {
+      return Left(failure!);
+    }
     // 3. Anket paylaşılır
     final updatedSurveyEntity = surveyEntity.copyWith(
       surveyImageUrl: imageUrl,
@@ -65,26 +74,37 @@ class SurveyLogic {
     final surveyResult =
         await shareSurveyInfoUseCase.call(entity: updatedSurveyEntity);
     surveyResult.fold(
-      (fail) => fail,
+      (fail) {
+        failure = fail;
+      },
       (success) {
         if (!success) {
-          return ServerFailure(errorMessage: 'errorMessage');
+          failure = ServerFailure(errorMessage: 'errorMessage');
         }
       },
     );
+    if (failure != null) {
+      return Left(failure!);
+    }
 
     // 4. Sorular paylaşılır
     final questionsResultUpload =
         await shareQuestionsUseCase.call(questionEntityList: questions);
     questionsResultUpload.fold(
-      (fail) => fail,
+      (fail) {
+        failure = fail;
+      },
       (succes) {
         if (!succes) {
-          return ServerFailure(errorMessage: 'errorMessage');
+          failure = ServerFailure(errorMessage: 'errorMessage');
         }
       },
     );
-    return const Right(true);
+    if (failure != null) {
+      return Left(failure!);
+    } else {
+      return const Right(true);
+    }
   }
 
   Future<void> removeSurvey({required String? surveyId}) async {
@@ -105,9 +125,10 @@ class SurveyLogic {
     }
   }
 
-  Future<Either<Failure, List<QuestionEntity>>> _convertFromMapToEntityList(
-      {required Map<QuestionEntity, Uint8List?> questionEntityMap,
-      required String path}) async {
+  Future<Either<Failure, List<QuestionEntity>>> _convertFromMapToEntityList({
+    required Map<QuestionEntity, Uint8List?> questionEntityMap,
+    required String path,
+  }) async {
     final questionEntityList = <QuestionEntity>[];
     for (final entry in questionEntityMap.entries) {
       final question = entry.key;

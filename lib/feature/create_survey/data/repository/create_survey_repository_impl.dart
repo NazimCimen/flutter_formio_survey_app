@@ -1,15 +1,13 @@
-import 'dart:typed_data';
-
 import 'package:dartz/dartz.dart';
-import 'package:flutter_survey_app/core/connection/network_info.dart';
-import 'package:flutter_survey_app/core/error/failure.dart';
-import 'package:flutter_survey_app/feature/shared_layers/data/model/question_model.dart';
-import 'package:flutter_survey_app/feature/shared_layers/data/model/survey_model.dart';
-import 'package:flutter_survey_app/feature/shared_layers/domain/entity/question_entity.dart';
-import 'package:flutter_survey_app/feature/shared_layers/domain/entity/survey_entity.dart';
-import 'package:flutter_survey_app/feature/create_survey/data/data_source/create_survey_local_data_source.dart';
-import 'package:flutter_survey_app/feature/create_survey/data/data_source/create_survey_remote_data_source.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/repository/create_survey_repository.dart';
+import 'package:flutter_survey_app_mobile/core/connection/network_info.dart';
+import 'package:flutter_survey_app_mobile/core/error/failure.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/data/model/question_model.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/data/model/survey_model.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/survey_entity.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/data/data_source/create_survey_local_data_source.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/data/data_source/create_survey_remote_data_source.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/domain/repository/create_survey_repository.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -38,18 +36,6 @@ class CreateSurveyRepositoryImpl implements CreateSurveyRepository {
   Future<Either<Failure, XFile?>> getImage(
       {required ImageSource source}) async {
     final result = await localDataSource.getImage(source);
-    return result;
-  }
-
-  @override
-  Future<Either<Failure, String>> getImageUrl({
-    required Uint8List imageBytes,
-    required String path,
-  }) async {
-    final result = await remoteDataSource.getImageUrl(
-      imageBytes: imageBytes,
-      path: path,
-    );
     return result;
   }
 

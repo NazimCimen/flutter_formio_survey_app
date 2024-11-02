@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app/config/routes/app_routes.dart';
-import 'package:flutter_survey_app/config/routes/navigator_service.dart';
-import 'package:flutter_survey_app/core/utils/type_parser.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/view/create_survey_info_view.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
+import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
+import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
+import 'package:flutter_survey_app_mobile/core/utils/type_parser.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/view/create_survey_info_view.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 

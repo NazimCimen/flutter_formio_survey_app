@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_survey_app/core/utils/app_size_extensions.dart';
-import 'package:flutter_survey_app/product/decorations/input_decorations/custom_input_decoration.dart';
-import 'package:flutter_survey_app/product/widgets/custom_text_widgets.dart';
+import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
+import 'package:flutter_survey_app_mobile/product/decorations/input_decorations/custom_input_decoration.dart';
+import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';
 
 class CustomInputField extends StatefulWidget {
   const CustomInputField({

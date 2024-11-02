@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app/core/utils/app_size_extensions.dart';
+import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
 
 extension BorderRadiusExtension on BuildContext {
   double get xLowRadius => dynamicHeight(0.005);
@@ -7,12 +7,15 @@ extension BorderRadiusExtension on BuildContext {
   double get mediumRadius => dynamicHeight(0.02);
   double get largeRadius => dynamicHeight(0.025);
   double get xLargeRadius => dynamicHeight(0.03);
+  double get xxLargeRadius => dynamicHeight(0.05);
 
   BorderRadius get borderRadiusAllXLow => BorderRadius.circular(xLowRadius);
   BorderRadius get borderRadiusAllLow => BorderRadius.circular(lowRadius);
   BorderRadius get borderRadiusAllMedium => BorderRadius.circular(mediumRadius);
   BorderRadius get borderRadiusAllLarge => BorderRadius.circular(largeRadius);
   BorderRadius get borderRadiusAllXLarge => BorderRadius.circular(xLargeRadius);
+  BorderRadius get borderRadiusAllXXLarge =>
+      BorderRadius.circular(xxLargeRadius);
 
   BorderRadius get borderRadiusTopXLow =>
       BorderRadius.vertical(top: Radius.circular(xLowRadius));

@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_survey_app/core/cache/cache_enum.dart';
-import 'package:flutter_survey_app/core/cache/cache_manager/standart_cache_manager.dart';
-import 'package:flutter_survey_app/core/error/failure.dart';
-import 'package:flutter_survey_app/core/utils/crop_ui_settings.dart';
+import 'package:flutter_survey_app_mobile/core/cache/cache_enum.dart';
+import 'package:flutter_survey_app_mobile/core/cache/cache_manager/standart_cache_manager.dart';
+import 'package:flutter_survey_app_mobile/core/error/failure.dart';
+import 'package:flutter_survey_app_mobile/core/utils/crop_ui_settings.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 

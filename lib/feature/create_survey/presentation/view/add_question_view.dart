@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app/config/routes/navigator_service.dart';
-import 'package:flutter_survey_app/core/utils/app_size_extensions.dart';
-import 'package:flutter_survey_app/feature/shared_layers/domain/entity/question_entity.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/mixin/add_question_view_mixin.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/widgets/custom_input_text_field.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/widgets/image_input_widgets.dart';
-import 'package:flutter_survey_app/product/componets/custom_snack_bars.dart';
-import 'package:flutter_survey_app/product/constants/image_aspect_ratio.dart';
-import 'package:flutter_survey_app/product/decorations/input_decorations/custom_input_decoration.dart';
-import 'package:flutter_survey_app/product/widgets/custom_text_widgets.dart';
+import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
+import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/mixin/add_question_view_mixin.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/custom_input_text_field.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/image_input_widgets.dart';
+import 'package:flutter_survey_app_mobile/product/componets/custom_snack_bars.dart';
+import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
+import 'package:flutter_survey_app_mobile/product/decorations/input_decorations/custom_input_decoration.dart';
+import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';
 import 'package:provider/provider.dart';
 part '../sub_view/add_question_sub_view.dart';
 
@@ -37,7 +37,7 @@ class _AddQuestionViewState extends State<AddQuestionView>
             padding: context.paddingAllMedium,
             child: SingleChildScrollView(
               padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
+                  bottom: MediaQuery.of(context).viewInsets.bottom,),
               reverse: true,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class _AddQuestionViewState extends State<AddQuestionView>
                   _BottomActionButtons(
                     onPressedCancel: NavigatorService.goBack,
                     onPressedSave: saveQuestion,
-                  )
+                  ),
                 ],
               ),
             ),
@@ -106,7 +106,7 @@ class _AddQuestionViewState extends State<AddQuestionView>
   }
 
   Widget _buildOptionField(
-      BuildContext context, TextEditingController controller) {
+      BuildContext context, TextEditingController controller,) {
     return Padding(
       padding: context.paddingVertAllLow,
       child: Row(
@@ -177,7 +177,7 @@ class _AddQuestionViewState extends State<AddQuestionView>
   @override
   void showSnackBar({required String errorMsg}) {
     FocusScope.of(context).unfocus();
-    CustomSnackBars.showRecipeScaffoldSnackBar(
+    CustomSnackBars.showCustomScaffoldSnackBar(
       context: context,
       text: errorMsg,
     );

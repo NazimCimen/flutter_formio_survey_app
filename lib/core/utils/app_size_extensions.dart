@@ -20,6 +20,7 @@ extension PaddingExtension on BuildContext {
   EdgeInsets get paddingAllMedium => EdgeInsets.all(mediumValue);
   EdgeInsets get paddingAllLarge => EdgeInsets.all(largeValue);
   EdgeInsets get paddingAllXlarge => EdgeInsets.all(xLargeValue);
+  EdgeInsets get paddingAllXXlarge => EdgeInsets.all(xxLargeValue);
 
   EdgeInsets get paddingHorizAllXLow =>
       EdgeInsets.only(left: xLowValue, right: xLowValue);
@@ -31,6 +32,8 @@ extension PaddingExtension on BuildContext {
       EdgeInsets.only(left: largeValue, right: largeValue);
   EdgeInsets get paddingHorizAllXlarge =>
       EdgeInsets.only(left: xLargeValue, right: xLargeValue);
+  EdgeInsets get paddingHorizAllXXlarge =>
+      EdgeInsets.only(left: xxLargeValue, right: xxLargeValue);
 
   EdgeInsets get paddingHorizLeftLow => EdgeInsets.only(left: lowValue);
   EdgeInsets get paddingHorizLeftMedium => EdgeInsets.only(left: mediumValue);

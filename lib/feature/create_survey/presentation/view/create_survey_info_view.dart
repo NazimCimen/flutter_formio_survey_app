@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app/core/utils/app_size_extensions.dart';
-import 'package:flutter_survey_app/core/utils/app_validators.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/mixin/create_survey_info_view_mixin.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/widgets/custom_input_text_field.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/widgets/image_input_widgets.dart';
-import 'package:flutter_survey_app/product/constants/image_aspect_ratio.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
+import 'package:flutter_survey_app_mobile/core/utils/app_validators.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/mixin/create_survey_info_view_mixin.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/custom_input_text_field.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/image_input_widgets.dart';
+import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
 import 'package:provider/provider.dart';
 
 class CreateSurveyInfoView extends StatefulWidget {

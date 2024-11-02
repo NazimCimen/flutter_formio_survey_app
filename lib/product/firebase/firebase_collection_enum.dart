@@ -1,15 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 enum FirebaseCollectionEnum {
-  version('version'),
-  surveys('surveys'),
-  questions('questions'),
-  user('user');
+  version,
+  surveys,
+  questions,
+  deneme,
+  test,
+  users;
 
-  final String collectionName;
-
-  const FirebaseCollectionEnum(this.collectionName);
-
-  CollectionReference getReference(FirebaseFirestore firestore) =>
-      firestore.collection(collectionName);
+  String getQuestionsPath({required String surveyId}) {
+    if (this == FirebaseCollectionEnum.surveys) {
+      return '$name/$surveyId/${FirebaseCollectionEnum.questions.name}';
+    }
+    throw Exception(
+        "Questions path can only be accessed from the 'surveys' collection.");
+  }
 }

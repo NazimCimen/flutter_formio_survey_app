@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:flutter_survey_app/config/localization/app_languages.dart';
-import 'package:flutter_survey_app/core/utils/image_enum.dart';
+import 'package:flutter_survey_app_mobile/config/localization/app_languages.dart';
+import 'package:flutter_survey_app_mobile/core/utils/image_enum.dart';
 
 class LocaleConstants {
   LocaleConstants._();

@@ -1,7 +1,8 @@
 part of '../view/create_questions_view.dart';
 
 class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _CustomAppBar();
+  final VoidCallback shareSurvey;
+  const _CustomAppBar({required this.shareSurvey});
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +27,7 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
           padding: context.paddingHorizRightLow,
           child: InkWell(
-            onTap: () async {
-              // await context.read<CreateSurveyViewModel>().getImageUrl();
-              await context.read<CreateSurveyViewModel>().shareSurvey();
-            },
+            onTap: shareSurvey,
             child: Text(
               'SHARE',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -114,6 +112,8 @@ class _CustomFloatingActionButton extends StatelessWidget {
           arguments: QuestionEntity(
             questionId: const Uuid().v1(),
             type: type,
+            surveyId:
+                context.read<CreateSurveyViewModel>().surveyEntity.surveyId,
           ),
         );
       },

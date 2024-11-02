@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app/config/routes/app_routes.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/view/create_questions_view.dart';
+import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/view/create_questions_view.dart';
 
 @immutable
 class NavigatorService {
@@ -75,5 +75,19 @@ class NavigatorService {
         );
       },
     );
+  }
+
+  static void handleDeepLink(String url) {
+    final uri = Uri.parse(url);
+    final surveyId = uri.queryParameters['surveyId'];
+
+    if (surveyId != null) {
+      navigatorKey.currentState?.pushNamed(
+        AppRoutes.answerSurveyView,
+        arguments: surveyId,
+      );
+    } else {
+      navigatorKey.currentState?.pushNamed(AppRoutes.homeView);
+    }
   }
 }

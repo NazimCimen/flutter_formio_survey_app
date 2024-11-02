@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app/config/theme/application_theme.dart';
+import 'package:flutter_survey_app_mobile/config/theme/application_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class IThemeManager {

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_survey_app/config/localization/string_constanrs.dart';
+import 'package:flutter_survey_app_mobile/core/utils/app_border_radius_extensions.dart';
+import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
 
 @immutable
 class CustomDialogs {
   const CustomDialogs._();
-  static void showMyDialog(
-          {required BuildContext context, required bool condition}) =>
+  static void showMyDialog({
+    required BuildContext context,
+    required bool condition,
+  }) =>
       showDialog<void>(
         context: context,
         barrierColor: Colors.transparent,
@@ -22,32 +24,60 @@ class CustomDialogs {
     required BuildContext context,
     required String title,
     required String description,
+    required VoidCallback onPressped,
+    required String imagePath,
   }) {
     showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
+          actionsAlignment: MainAxisAlignment.spaceBetween,
+          shape: ContinuousRectangleBorder(
+            borderRadius: context.borderRadiusAllLarge,
+          ),
           title: Text(
+            textAlign: TextAlign.start,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             title,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           content: Text(
+            textAlign: TextAlign.start,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 3,
             description,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
+          icon: Image.asset(
+            imagePath,
+            height: context.dynamicHeight(0.25),
+          ),
           actions: <Widget>[
             TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
               child: Text(
-                'Bir Sorun Oluştu Daha Sonra Tekrar Deneyin',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
+                'Kapat',
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.tertiaryFixed,
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              onPressed: () {
-                SystemNavigator.pop();
-              },
+            ),
+            TextButton(
+              onPressed: onPressped,
+              child: Text(
+                'Yeniden Dene',
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.tertiaryFixed,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
             ),
           ],
         );

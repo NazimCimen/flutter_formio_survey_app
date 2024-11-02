@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_survey_app/core/error/failure.dart';
-import 'package:flutter_survey_app/feature/image_process/data/data_source/image_process_local_source.dart';
-import 'package:flutter_survey_app/feature/image_process/data/data_source/image_process_remote_source.dart';
-import 'package:flutter_survey_app/feature/image_process/domain/repository/image_process_repository.dart';
+import 'package:flutter_survey_app_mobile/core/error/failure.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/data/data_source/image_process_local_source.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/data/data_source/image_process_remote_source.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/domain/repository/image_process_repository.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 

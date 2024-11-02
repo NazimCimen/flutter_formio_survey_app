@@ -1,18 +1,20 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:flutter_survey_app/config/routes/app_routes.dart';
-import 'package:flutter_survey_app/config/routes/navigator_service.dart';
-import 'package:flutter_survey_app/core/utils/app_border_radius_extensions.dart';
-import 'package:flutter_survey_app/core/utils/app_size_extensions.dart';
-import 'package:flutter_survey_app/feature/shared_layers/domain/entity/question_entity.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app/product/constants/image_aspect_ratio.dart';
-import 'package:flutter_survey_app/product/decorations/box_decorations/custom_box_decoration.dart';
-import 'package:flutter_survey_app/product/widgets/custom_error_widget.dart';
-import 'package:flutter_survey_app/product/widgets/custom_progress_indicator.dart';
-import 'package:flutter_survey_app/product/widgets/custom_text_widgets.dart';
-import 'package:flutter_survey_app/product/widgets/emphty_list_widget.dart';
+import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
+import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
+import 'package:flutter_survey_app_mobile/core/utils/app_border_radius_extensions.dart';
+import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/mixin/create_questions_view_mixin.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/view/survey_shared_success_view.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
+import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
+import 'package:flutter_survey_app_mobile/product/decorations/box_decorations/custom_box_decoration.dart';
+import 'package:flutter_survey_app_mobile/product/widgets/custom_error_widget.dart';
+import 'package:flutter_survey_app_mobile/product/widgets/custom_progress_indicator.dart';
+import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';
+import 'package:flutter_survey_app_mobile/product/widgets/no_internet_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
@@ -25,7 +27,8 @@ class CreateQuestionsView extends StatefulWidget {
   CreateQuestionsViewState createState() => CreateQuestionsViewState();
 }
 
-class CreateQuestionsViewState extends State<CreateQuestionsView> {
+class CreateQuestionsViewState extends State<CreateQuestionsView>
+    with CreateQuestionsViewMixin {
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
   @override
@@ -37,7 +40,9 @@ class CreateQuestionsViewState extends State<CreateQuestionsView> {
         floatingActionButton: _CustomFloatingActionButton(
           isDialOpen: isDialOpen,
         ),
-        appBar: const _CustomAppBar(),
+        appBar: _CustomAppBar(
+          shareSurvey: shareSurvey,
+        ),
         body: SafeArea(
           child: Padding(
             padding: context.paddingAllLow,
@@ -46,32 +51,29 @@ class CreateQuestionsViewState extends State<CreateQuestionsView> {
                 if (viewModel.state == ViewState.error) {
                   return const CustomErrorWidget(
                     title: 'Bir Sorun Oluştu Daha Sonra Tekrar Deneyin..',
+                    iconData: Icons.error_outline,
                   );
                 } else if (viewModel.state == ViewState.loading) {
                   return const CustomProgressIndicator();
                 } else if (viewModel.state == ViewState.noInternet) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const CustomErrorWidget(
-                        title:
-                            'İnternet Bağlantısı Yok.Bağlantından emin olduktan sonra yeniden anketini yayınlayabilirsin',
-                      ),
-                      TextButton(
-                          onPressed: () async {
-                            await viewModel.checkConnectivity();
-                          },
-                          child: Text('Yeniden Dene'))
-                    ],
+                  return NoInternetWidget(
+                    refresh: () async {
+                      await viewModel.checkConnectivity();
+                    },
+                  );
+                } else if (viewModel.state == ViewState.success) {
+                  return SurveySharedSuccessView(
+                    surveyLink: viewModel.getSurveyLink(),
                   );
                 } else if (viewModel.questionEntityMap.isNotEmpty) {
                   return _ShowAddedQuestions(
                     viewModel: viewModel,
                   );
                 } else {
-                  return const EmphtyList(
+                  return const CustomErrorWidget(
                     title:
                         'Henüz soru oluşturmadınız! Soru eklemek için aşağıdaki butona tıklayın.',
+                    iconData: Icons.insert_chart_outlined,
                   );
                 }
               },
@@ -121,5 +123,43 @@ class _ShowAddedQuestions extends StatelessWidget {
         );
       },
     );
+    /*Wrap(
+      spacing: context.dynamicWidht(0.02),
+      runSpacing: context.dynamicHeight(
+          0.01), // Fazla boşlukları azaltmak için runSpacing'i küçült
+      children: List.generate(viewModel.questionEntityMap.length, (index) {
+        final questionEntity =
+            viewModel.questionEntityMap.keys.elementAt(index);
+        final image = viewModel.questionEntityMap[questionEntity];
+
+        return SizedBox(
+          width: context.dynamicWidht(0.3), // Yatay genişliği düzenlemek için
+          child: Padding(
+            padding: context.paddingVertAllLow,
+            child: Container(
+              padding: context.paddingAllMedium,
+              decoration: CustomBoxDecoration.customBoxDecoration(context),
+              child: IntrinsicHeight(
+                // İçeriğin doğal yüksekliğine göre hizalama
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _Header(questionEntity: questionEntity),
+                    SizedBox(height: context.dynamicHeight(0.01)),
+                    _QuestionImage(image: image),
+                    SizedBox(height: context.dynamicHeight(0.02)),
+                    _QuestionTitle(questionEntity: questionEntity),
+                    SizedBox(height: context.dynamicHeight(0.02)),
+                    _QuestionOptions(questionEntity: questionEntity),
+                    SizedBox(height: context.dynamicHeight(0.02)),
+                    _QuestionRules(questionEntity: questionEntity),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      }),
+    );*/
   }
 }

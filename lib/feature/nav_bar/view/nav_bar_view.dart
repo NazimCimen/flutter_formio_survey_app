@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app/config/routes/app_routes.dart';
-import 'package:flutter_survey_app/config/routes/navigator_service.dart';
-import 'package:flutter_survey_app/core/utils/app_size_extensions.dart';
-import 'package:flutter_survey_app/core/utils/image_enum.dart';
-import 'package:flutter_survey_app/feature/home/presentation/view/home_view.dart';
-import 'package:flutter_survey_app/feature/nav_bar/mixin/nav_bar_view_mixin.dart';
-import 'package:flutter_survey_app/feature/profile/presentation/view/profile_view.dart';
+import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
+import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
+import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
+import 'package:flutter_survey_app_mobile/core/utils/image_enum.dart';
+import 'package:flutter_survey_app_mobile/feature/home/presentation/view/mobile/home_view.dart';
+import 'package:flutter_survey_app_mobile/feature/nav_bar/mixin/nav_bar_view_mixin.dart';
+import 'package:flutter_survey_app_mobile/feature/profile/presentation/view/profile_view.dart';
 
 class NavBarView extends StatefulWidget {
   const NavBarView({super.key});

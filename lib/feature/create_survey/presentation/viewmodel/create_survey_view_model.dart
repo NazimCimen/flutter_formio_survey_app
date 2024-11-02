@@ -1,34 +1,39 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_survey_app/core/connection/network_info.dart';
-import 'package:flutter_survey_app/core/error/failure.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/usecase/cache_datas_no_internet_use_case.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/usecase/remove_survey_use_case.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/viewmodel/survey_logic.dart';
-import 'package:flutter_survey_app/feature/image_process/helper/image_helper.dart';
-import 'package:flutter_survey_app/feature/shared_layers/domain/entity/question_entity.dart';
-import 'package:flutter_survey_app/feature/shared_layers/domain/entity/survey_entity.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/usecase/share_questions_use_case.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/usecase/share_survey_info_use_case.dart';
-import 'package:flutter_survey_app/feature/shared_layers/domain/entity/survey_entity_extension.dart';
-import 'package:flutter_survey_app/product/constants/image_aspect_ratio.dart';
+import 'package:flutter_survey_app_mobile/core/connection/network_info.dart';
+import 'package:flutter_survey_app_mobile/core/error/failure.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/cache_datas_no_internet_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/survey_logic.dart';
+import 'package:flutter_survey_app_mobile/feature/image_process/helper/image_helper.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/survey_entity.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/survey_entity_extension.dart';
+import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
+import 'package:flutter_survey_app_mobile/product/helper/link_sharing_helper.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
-enum ViewState { inActive, error, success, loading, noInternet }
+enum ViewState {
+  inActive,
+  error,
+  success,
+  loading,
+  noInternet,
+  noAddedQuestion
+}
 
 class CreateSurveyViewModel extends ChangeNotifier {
   final CacheDatasNoInternetUseCase cacheDatasNoInternetUseCase;
   final INetworkInfo connectivity;
   final ImageHelper imageHelper;
   final SurveyLogic surveyLogic;
-
+  final LinkSharingHelper shareLink;
   CreateSurveyViewModel({
     required this.cacheDatasNoInternetUseCase,
     required this.connectivity,
     required this.imageHelper,
     required this.surveyLogic,
+    required this.shareLink,
   });
 
   ViewState _state = ViewState.inActive;
@@ -42,6 +47,7 @@ class CreateSurveyViewModel extends ChangeNotifier {
   Map<QuestionEntity, Uint8List?> _questionEntityMap = {};
   Map<QuestionEntity, Uint8List?> get questionEntityMap => _questionEntityMap;
   Uint8List? selectedQuestionFileBytes;
+  bool isSnackBarShown = false;
 
   /// Sets the current state of the view model and notifies listeners.
   void setState(ViewState state) {
@@ -127,37 +133,65 @@ class CreateSurveyViewModel extends ChangeNotifier {
   }
 
   Future<void> shareSurvey() async {
-    setState(ViewState.loading);
-    Failure? fail;
-    final result = await surveyLogic.shareSurvey(
-      surveyEntity: _surveyEntity,
-      selectedSurveyImageBytes: selectedSurveyImageBytes,
-      questionEntityMap: _questionEntityMap,
-    );
-    result.fold(
-      (failure) {
-        fail = failure;
-      },
-      (success) {
-        setState(ViewState.success);
-      },
-    );
-    if (fail != null) {
-      await _rollbackSurvey(fail: fail!);
+    if (_questionEntityMap.isNotEmpty && state != ViewState.error) {
+      setState(ViewState.loading);
+      Failure? fail;
+      final result = await surveyLogic.shareSurvey(
+        surveyEntity: _surveyEntity,
+        selectedSurveyImageBytes: selectedSurveyImageBytes,
+        questionEntityMap: _questionEntityMap,
+      );
+      result.fold(
+        (failure) {
+          fail = failure;
+        },
+        (success) {
+          setState(ViewState.success);
+        },
+      );
+      if (fail != null) {
+        await _rollbackSurvey(fail: fail!);
+      }
+    } else {
+      if (state != ViewState.error) {
+        isSnackBarShown = true;
+        setState(ViewState.noAddedQuestion);
+      }
     }
   }
 
+  /// Shares the generated survey link.
+  void shareSurveyLink() {
+    if (_surveyEntity.surveyId != null) {
+      shareLink.shareSurveyLink(surveyId: _surveyEntity.surveyId!);
+    } else {
+      setState(ViewState.error);
+    }
+  }
+
+  /// Generates the survey link based on the survey ID.
+  String getSurveyLink() {
+    if (_surveyEntity.surveyId != null) {
+      return shareLink.generateSurveyLink(_surveyEntity.surveyId!);
+    } else {
+      setState(ViewState.error);
+      return '';
+    }
+  }
+
+  ///MARK:CHECK CACHE ON SPLASH
   Future<void> _rollbackSurvey({required Failure fail}) async {
     await _cacheSurveyDatas();
     if (fail is ConnectionFailure) {
       setState(ViewState.noInternet);
     } else if (fail is ServerFailure) {
+      setState(ViewState.error);
       await imageHelper.removeSurveyImages(
         surveyId: _surveyEntity.surveyId,
         userId: _surveyEntity.userId,
       );
       await surveyLogic.removeSurvey(surveyId: _surveyEntity.surveyId);
-      //log+crashlytics
+      //internet harici bir sorun olursa log+crashlytics
     } else {
       //log+crashlytics
     }

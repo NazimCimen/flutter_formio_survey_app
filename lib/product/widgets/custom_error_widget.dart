@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app/core/utils/app_size_extensions.dart';
-import 'package:flutter_survey_app/product/widgets/custom_text_widgets.dart';
+import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
+import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   final String title;
+  final IconData iconData;
   const CustomErrorWidget({
     required this.title,
+    required this.iconData,
     super.key,
   });
 
@@ -18,7 +20,7 @@ class CustomErrorWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              Icons.error_outline,
+              iconData,
               size: context.dynamicWidht(0.28),
               color: Theme.of(context).colorScheme.tertiary,
             ),

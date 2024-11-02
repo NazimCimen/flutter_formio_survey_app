@@ -35,6 +35,7 @@ final class CustomColorScheme {
 
     surface: Color(0xFF303030), // Kart arka planları ve diğer yüzeyler için
 
+    scrim: Colors.black,
     secondaryContainer: Colors.redAccent,
     tertiaryContainer: Colors.greenAccent,
     tertiaryFixed: Colors.amberAccent,

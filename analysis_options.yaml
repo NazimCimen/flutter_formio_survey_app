@@ -1,5 +1,6 @@
 analyzer:
   errors:
+    avoid_positional_boolean_parameters: ignore
     directives_ordering: ignore
     lines_longer_than_80_chars: ignore
     one_member_abstracts: ignore
