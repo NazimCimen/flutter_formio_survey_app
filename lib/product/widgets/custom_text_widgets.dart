@@ -54,9 +54,10 @@ class CustomTextGreySubTitleWidget extends StatelessWidget {
       maxLines: maxLine,
       subTitle,
       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-          fontWeight: FontWeight.bold,
-          color: Theme.of(context).colorScheme.tertiary,
-          overflow: TextOverflow.ellipsis),
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.tertiary,
+            overflow: TextOverflow.ellipsis,
+          ),
     );
   }
 }

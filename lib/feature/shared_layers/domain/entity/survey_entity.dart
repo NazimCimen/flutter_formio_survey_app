@@ -38,7 +38,7 @@ class SurveyEntity extends Equatable {
         surveyId,
         userId,
         surveyTitle,
-        questionCount
+        questionCount,
       ];
   SurveyEntity copyWith({
     String? surveyId,

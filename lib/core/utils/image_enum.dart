@@ -23,7 +23,7 @@ enum ImageEnums {
   formio,
   formio2,
   formioo,
-  formioo2,
+  appLogo,
   noInternet,
   notificationIcon,
   addImage,

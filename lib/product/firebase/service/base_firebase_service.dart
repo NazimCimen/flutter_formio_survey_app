@@ -11,8 +11,9 @@ abstract class BaseFirebaseService<T extends BaseFirebaseModel<T>> {
     List<String> subCollections,
   );
   Future<List<T>> getItems(String collectionPath);
-  Future<Map<String, dynamic>> getItem({
+  Future<T> getItem({
     required String collectionPath,
     required String docId,
+    required T model,
   });
 }

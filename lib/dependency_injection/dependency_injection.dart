@@ -8,6 +8,12 @@ import 'package:flutter_survey_app_mobile/core/connection/network_info.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/cache_datas_no_internet_use_case.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/remove_survey_use_case.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/survey_logic.dart';
+import 'package:flutter_survey_app_mobile/feature/home/data/data_source/home_remote_data_source.dart';
+import 'package:flutter_survey_app_mobile/feature/home/data/repository/home_repository_impl.dart';
+import 'package:flutter_survey_app_mobile/feature/home/domain/repository/home_repository.dart';
+import 'package:flutter_survey_app_mobile/feature/home/domain/usecase/get_published_survey_ids_usecase.dart';
+import 'package:flutter_survey_app_mobile/feature/home/domain/usecase/get_published_surveys_usecase.dart';
+import 'package:flutter_survey_app_mobile/feature/home/presentation/viewmodel/home_view_model.dart';
 import 'package:flutter_survey_app_mobile/feature/image_process/data/data_source/image_process_local_source.dart';
 import 'package:flutter_survey_app_mobile/feature/image_process/data/data_source/image_process_remote_source.dart';
 import 'package:flutter_survey_app_mobile/feature/image_process/data/repository/image_process_repository_impl.dart';
@@ -26,6 +32,7 @@ import 'package:flutter_survey_app_mobile/feature/image_process/domain/usecase/r
 import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/share_questions_use_case.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/share_survey_info_use_case.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/data/model/user_model.dart';
 import 'package:flutter_survey_app_mobile/product/firebase/service/base_firebase_service.dart';
 import 'package:flutter_survey_app_mobile/product/firebase/service/firebase_service_impl.dart';
 import 'package:flutter_survey_app_mobile/product/helper/link_sharing_helper.dart';
@@ -86,6 +93,41 @@ void setupLocator() {
         firestore: serviceLocator<FirebaseFirestore>(),
       ),
     )
+    ..registerLazySingleton<BaseFirebaseService<UserModel>>(
+      () => FirebaseServiceImpl(
+        firestore: serviceLocator<FirebaseFirestore>(),
+      ),
+    )
+//////////////////////////////////////////////////////////////////////////////////////
+    ..registerLazySingleton<HomeRemoteDataSource>(
+      () => HomeRemoteDataSourceImpl(
+        userService: serviceLocator<BaseFirebaseService<UserModel>>(),
+        surveyService: serviceLocator<BaseFirebaseService<SurveyModel>>(),
+      ),
+    )
+    ..registerLazySingleton<HomeRepository>(
+      () => HomeRepositoryImpl(
+        remoteDataSource: serviceLocator<HomeRemoteDataSource>(),
+      ),
+    )
+    ..registerLazySingleton<GetPublishedSurveyIdsUsecase>(
+      () => GetPublishedSurveyIdsUsecase(
+        repository: serviceLocator<HomeRepository>(),
+      ),
+    )
+    ..registerLazySingleton<GetPublishedSurveysUsecase>(
+      () => GetPublishedSurveysUsecase(
+        repository: serviceLocator<HomeRepository>(),
+      ),
+    )
+    ..registerLazySingleton<HomeViewModel>(
+      () => HomeViewModel(
+        getSurveyIdsUsecase: serviceLocator<GetPublishedSurveyIdsUsecase>(),
+        getSurveysUseCase: serviceLocator<GetPublishedSurveysUsecase>(),
+      ),
+    )
+
+//////////////////////////////////////////////////////////////////////////////////////
     ..registerLazySingleton<CreateSurveyRemoteDataSource>(
       () => CreateSurveyRemoteDataSourceImpl(
         surveyFirebaseService:

@@ -72,9 +72,10 @@ class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
   }
 
   @override
-  Future<Map<String, dynamic>> getItem({
+  Future<T> getItem({
     required String collectionPath,
     required String docId,
+    required T model,
   }) async {
     final snapshot =
         await firestore.collection(collectionPath).doc(docId).get().timeout(
@@ -87,8 +88,8 @@ class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
     if (data == null) {
       throw ServerException('Data not found');
     }
-
-    return data;
+    final item = model.fromJson(data);
+    return item;
   }
 
   @override
