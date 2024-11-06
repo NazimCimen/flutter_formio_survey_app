@@ -10,11 +10,9 @@ import 'package:flutter_survey_app_mobile/core/error/failure.dart' as _i5;
 import 'package:flutter_survey_app_mobile/feature/create_survey/domain/repository/create_survey_repository.dart'
     as _i3;
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart'
-    as _i9;
+    as _i7;
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/survey_entity.dart'
-    as _i8;
-import 'package:image_cropper/image_cropper.dart' as _i7;
-import 'package:image_picker/image_picker.dart' as _i6;
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -50,56 +48,8 @@ class MockCreateSurveyRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.XFile?>> getImage(
-          {required _i6.ImageSource? source}) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getImage,
-          [],
-          {#source: source},
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.XFile?>>.value(
-            _FakeEither_0<_i5.Failure, _i6.XFile?>(
-          this,
-          Invocation.method(
-            #getImage,
-            [],
-            {#source: source},
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.XFile?>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.XFile?>> cropImage({
-    required _i6.XFile? imageFile,
-    required _i7.CropAspectRatio? cropRatio,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #cropImage,
-          [],
-          {
-            #imageFile: imageFile,
-            #cropRatio: cropRatio,
-          },
-        ),
-        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.XFile?>>.value(
-            _FakeEither_0<_i5.Failure, _i6.XFile?>(
-          this,
-          Invocation.method(
-            #cropImage,
-            [],
-            {
-              #imageFile: imageFile,
-              #cropRatio: cropRatio,
-            },
-          ),
-        )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.XFile?>>);
-
-  @override
   _i4.Future<_i2.Either<_i5.Failure, bool>> shareSurveyInfo(
-          {required _i8.SurveyEntity? entity}) =>
+          {required _i6.SurveyEntity? entity}) =>
       (super.noSuchMethod(
         Invocation.method(
           #shareSurveyInfo,
@@ -119,7 +69,7 @@ class MockCreateSurveyRepository extends _i1.Mock
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, bool>> shareQuestions(
-          {required List<_i9.QuestionEntity>? questionEntityList}) =>
+          {required List<_i7.QuestionEntity>? questionEntityList}) =>
       (super.noSuchMethod(
         Invocation.method(
           #shareQuestions,

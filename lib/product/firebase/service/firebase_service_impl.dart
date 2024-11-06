@@ -91,15 +91,4 @@ class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
     final item = model.fromJson(data);
     return item;
   }
-
-  @override
-  Future<List<T>> getItems(String collectionPath) {
-    // TODO: implement getItems
-    throw UnimplementedError();
-  }
-  /* @override
-  Future<List<T>> getItems(String collectionPath) async {
-    final snapshot = await firestore.collection(collectionPath).get();
-    return snapshot.docs.map((doc) => fromJson(doc.data())).toList();
-  }*/
 }

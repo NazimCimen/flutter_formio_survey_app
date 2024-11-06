@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_survey_app_mobile/config/theme/theme_manager.dart';
+import 'package:flutter_survey_app_mobile/core/app/app_version_manager.dart';
 import 'package:flutter_survey_app_mobile/core/cache/cache_enum.dart';
 import 'package:flutter_survey_app_mobile/core/cache/cache_manager/standart_cache_manager.dart';
 import 'package:flutter_survey_app_mobile/core/cache/encryption/encryption_service.dart';
@@ -34,6 +35,14 @@ import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/s
 import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/share_survey_info_use_case.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/data/model/user_model.dart';
+import 'package:flutter_survey_app_mobile/feature/splash/data/data_source/splash_local_data_source.dart';
+import 'package:flutter_survey_app_mobile/feature/splash/data/data_source/splash_remote_data_source.dart';
+import 'package:flutter_survey_app_mobile/feature/splash/data/model/app_version_model.dart';
+import 'package:flutter_survey_app_mobile/feature/splash/data/repository/splash_repository_impl.dart';
+import 'package:flutter_survey_app_mobile/feature/splash/domain/repository/splash_repository.dart';
+import 'package:flutter_survey_app_mobile/feature/splash/domain/usecase/check_cache_onboard_shown_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/splash/domain/usecase/get_app_database_version_number_use_case.dart';
+import 'package:flutter_survey_app_mobile/feature/splash/presentation/viewmodel/splash_view_model.dart';
 import 'package:flutter_survey_app_mobile/product/firebase/service/base_firebase_service.dart';
 import 'package:flutter_survey_app_mobile/product/firebase/service/firebase_service_impl.dart';
 import 'package:flutter_survey_app_mobile/product/helper/link_sharing_helper.dart';
@@ -74,6 +83,47 @@ void setupLocator() {
     ..registerLazySingleton<INetworkInfo>(
       () => NetworkInfo(serviceLocator<InternetConnectionChecker>()),
     )
+    /////////////////////////////////////////////////////////////////////
+    ..registerLazySingleton<AppVersionManager>(
+      () => AppVersionManagerImpl(),
+    )
+    ..registerLazySingleton<BaseFirebaseService<AppVersionModel>>(
+      () => FirebaseServiceImpl(
+        firestore: serviceLocator<FirebaseFirestore>(),
+      ),
+    )
+    ..registerLazySingleton<GetAppDatabaseVersionNumberUseCase>(
+      () => GetAppDatabaseVersionNumberUseCase(
+        serviceLocator<SplashRepository>(),
+      ),
+    )
+    ..registerLazySingleton<SplashLocalDataSource>(
+      () => SplashLocalDataSourceImpl(serviceLocator<SharedPreferences>()),
+    )
+    ..registerLazySingleton<SplashRemoteDataSource>(
+      () => SplashRemoteDataSourceImpl(
+        serviceLocator<FirebaseFirestore>(),
+        serviceLocator<INetworkInfo>(),
+        serviceLocator<BaseFirebaseService<AppVersionModel>>(),
+      ),
+    )
+    ..registerLazySingleton<SplashRepository>(
+      () => SplashRepositoryImpl(
+        serviceLocator<SplashLocalDataSource>(),
+        serviceLocator<SplashRemoteDataSource>(),
+      ),
+    )
+    ..registerLazySingleton<CheckCacheOnboardShownUseCase>(
+      () => CheckCacheOnboardShownUseCase(serviceLocator<SplashRepository>()),
+    )
+    ..registerLazySingleton<SplashViewModel>(
+      () => SplashViewModel(
+        serviceLocator<CheckCacheOnboardShownUseCase>(),
+        serviceLocator<GetAppDatabaseVersionNumberUseCase>(),
+        serviceLocator<AppVersionManager>(),
+      ),
+    )
+    ////////////////////////////////////////////////////////////////////////////////
     ..registerLazySingleton<CreateSurveyLocalDataSource>(
       () => CreateSurveyLocalDataSourceImpl(
         cacheManager: serviceLocator<StandartCacheManager<String>>(),

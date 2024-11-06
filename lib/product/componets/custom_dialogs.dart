@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app_mobile/core/size/app_size/dynamic_size.dart';
-import 'package:flutter_survey_app_mobile/core/size/border_radius/dynamic_border_radius.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/border_radius/dynamic_border_radius.dart';
 
 @immutable
 class CustomDialogs {
@@ -24,8 +24,8 @@ class CustomDialogs {
     required BuildContext context,
     required String title,
     required String description,
-    required VoidCallback onPressped,
-    required String imagePath,
+    required VoidCallback? refresh,
+    required String? imagePath,
   }) {
     showDialog<void>(
       context: context,
@@ -50,10 +50,12 @@ class CustomDialogs {
             description,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
-          icon: Image.asset(
-            imagePath,
-            height: context.dynamicHeight(0.25),
-          ),
+          icon: imagePath != null
+              ? Image.asset(
+                  imagePath,
+                  height: context.dynamicHeight(0.25),
+                )
+              : null,
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -68,17 +70,18 @@ class CustomDialogs {
                     ),
               ),
             ),
-            TextButton(
-              onPressed: onPressped,
-              child: Text(
-                'Yeniden Dene',
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.tertiaryFixed,
-                      fontWeight: FontWeight.bold,
-                    ),
+            if (refresh != null)
+              TextButton(
+                onPressed: refresh,
+                child: Text(
+                  'Yeniden Dene',
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.tertiaryFixed,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
               ),
-            ),
           ],
         );
       },

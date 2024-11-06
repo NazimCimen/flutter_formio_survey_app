@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_mobile/core/base/state.dart';
-import 'package:flutter_survey_app_mobile/core/size/app_size/dynamic_size.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
 import 'package:flutter_survey_app_mobile/core/utils/image_enum.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
 import 'package:flutter_survey_app_mobile/product/componets/custom_sheets.dart';

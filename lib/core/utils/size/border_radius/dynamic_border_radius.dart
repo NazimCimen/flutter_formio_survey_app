@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app_mobile/core/size/app_size/dynamic_size.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
 
 extension DynamicBorderRadiusExtension on BuildContext {
   BorderRadius get borderRadiusAllXLow => BorderRadius.circular(dXLowValue);

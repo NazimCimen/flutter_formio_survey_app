@@ -10,7 +10,6 @@ abstract class BaseFirebaseService<T extends BaseFirebaseModel<T>> {
   Future<void> deleteSubCollections(
     List<String> subCollections,
   );
-  Future<List<T>> getItems(String collectionPath);
   Future<T> getItem({
     required String collectionPath,
     required String docId,

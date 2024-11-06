@@ -3,9 +3,9 @@ import 'package:flutter_survey_app_mobile/config/localization/string_constanrs.d
 import 'package:flutter_survey_app_mobile/config/theme/theme_manager.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
-import 'package:flutter_survey_app_mobile/core/size/app_size/constant_size.dart';
-import 'package:flutter_survey_app_mobile/core/size/border_radius/dynamic_border_radius.dart';
-import 'package:flutter_survey_app_mobile/core/size/padding/dynamic_padding.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/app_size/constant_size.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/border_radius/dynamic_border_radius.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/padding/dynamic_padding.dart';
 import 'package:provider/provider.dart';
 
 class ThemeCardWidget extends StatefulWidget {

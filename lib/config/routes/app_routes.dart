@@ -7,9 +7,10 @@ import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/vie
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/view/create_survey_info_view.dart';
 import 'package:flutter_survey_app_mobile/feature/home/presentation/view/home_view.dart';
 import 'package:flutter_survey_app_mobile/feature/profile/presentation/view/profile_view.dart';
+import 'package:flutter_survey_app_mobile/feature/splash/presentation/view/splash_view.dart';
 
 class AppRoutes {
-  static const String initialRoute = '/homeView';
+  static const String initialRoute = '/splashView';
   static const String homeView = '/homeView';
   static const String navBarView = '/navBarView';
   static const String profileView = '/profileView';
@@ -21,7 +22,8 @@ class AppRoutes {
   static const String surveySharedSuccessView = '/surveySharedSuccessView';
 
   static Map<String, WidgetBuilder> get routes => {
-        initialRoute: (context) => const HomeView(),
+        initialRoute: (context) => const SplashView(),
+        homeView: (context) => const HomeView(),
         createSurveyInfoView: (context) => const CreateSurveyInfoView(),
         createQuestionsView: (context) => const CreateQuestionsView(),
         addQuestionView: (context) {

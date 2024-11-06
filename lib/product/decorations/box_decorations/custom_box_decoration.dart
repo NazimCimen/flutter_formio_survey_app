@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app_mobile/core/size/border_radius/dynamic_border_radius.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/border_radius/dynamic_border_radius.dart';
 
 class CustomBoxDecoration {
   CustomBoxDecoration._();

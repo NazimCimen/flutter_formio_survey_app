@@ -3,9 +3,9 @@ import 'package:flutter_survey_app_mobile/config/localization/string_constanrs.d
 import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
-import 'package:flutter_survey_app_mobile/core/size/app_size/dynamic_size.dart';
-import 'package:flutter_survey_app_mobile/core/size/border_radius/dynamic_border_radius.dart';
-import 'package:flutter_survey_app_mobile/core/size/padding/dynamic_padding.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/border_radius/dynamic_border_radius.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/padding/dynamic_padding.dart';
 import 'package:flutter_survey_app_mobile/core/utils/image_enum.dart';
 import 'package:flutter_survey_app_mobile/feature/home/presentation/mixin/home_view_mixin.dart';
 import 'package:flutter_survey_app_mobile/feature/home/presentation/viewmodel/home_view_model.dart';

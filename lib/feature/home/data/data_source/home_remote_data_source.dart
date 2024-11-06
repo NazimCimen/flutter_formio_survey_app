@@ -30,7 +30,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
       final user = await userService.getItem(
         collectionPath: FirebaseCollectionEnum.user.name,
         docId: userId,
-        model: UserModel(),
+        model: const UserModel(),
       );
       return Right(user.publishedSurveyIds);
     } catch (e) {
@@ -49,7 +49,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
           final survey = await surveyService.getItem(
             collectionPath: FirebaseCollectionEnum.surveys.name,
             docId: id,
-            model: SurveyModel(),
+            model: const SurveyModel(),
           );
           surveyList.add(survey);
         }

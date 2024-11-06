@@ -16,16 +16,7 @@ final class CustomLightTheme implements ApplicationTheme {
         useMaterial3: true,
         fontFamily: GoogleFonts.poppins().fontFamily,
         colorScheme: CustomColorScheme.lightScheme,
-        /* textTheme: TextTheme(
-          bodyLarge: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: colorScheme.onSurface,
-          ),
-          titleLarge: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: colorScheme.surface,
-          ),
-        ),*/
+        scaffoldBackgroundColor: Colors.white,
       );
 }
 

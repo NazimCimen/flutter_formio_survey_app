@@ -8,8 +8,6 @@ import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/su
 import 'package:flutter_survey_app_mobile/feature/create_survey/data/data_source/create_survey_local_data_source.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/data/data_source/create_survey_remote_data_source.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/domain/repository/create_survey_repository.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
 
 class CreateSurveyRepositoryImpl implements CreateSurveyRepository {
   final CreateSurveyLocalDataSource localDataSource;
@@ -20,24 +18,6 @@ class CreateSurveyRepositoryImpl implements CreateSurveyRepository {
     required this.connectivity,
     required this.remoteDataSource,
   });
-  @override
-  Future<Either<Failure, XFile?>> cropImage({
-    required XFile imageFile,
-    required CropAspectRatio cropRatio,
-  }) async {
-    final result = await localDataSource.cropImage(
-      imageFile: imageFile,
-      cropRatio: cropRatio,
-    );
-    return result;
-  }
-
-  @override
-  Future<Either<Failure, XFile?>> getImage(
-      {required ImageSource source}) async {
-    final result = await localDataSource.getImage(source);
-    return result;
-  }
 
   @override
   Future<Either<Failure, bool>> shareSurveyInfo({
