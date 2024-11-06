@@ -1,1 +1,8 @@
-enum ViewState { inActive, error, success, loading }
+enum ViewState {
+  inActive,
+  error,
+  success,
+  loading,
+  noInternet,
+  noAddedQuestion
+}

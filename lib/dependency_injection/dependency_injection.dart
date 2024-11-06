@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_survey_app_mobile/config/theme/theme_manager.dart';
 import 'package:flutter_survey_app_mobile/core/cache/cache_enum.dart';
 import 'package:flutter_survey_app_mobile/core/cache/cache_manager/standart_cache_manager.dart';
 import 'package:flutter_survey_app_mobile/core/cache/encryption/encryption_service.dart';
@@ -44,6 +45,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 final serviceLocator = GetIt.instance;
 void setupLocator() {
   serviceLocator
+    ..registerLazySingleton<ThemeManager>(() => ThemeManager())
     ..registerLazySingleton<FirebaseFirestore>(
       () => FirebaseFirestore.instance,
     )

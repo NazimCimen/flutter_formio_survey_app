@@ -36,6 +36,7 @@ enum ImageEnums {
   alertImg,
   vvvv,
   zzzz,
+  bg_default_survey,
   survey_obstacle,
   survey_succes,
   survey_time_finish,

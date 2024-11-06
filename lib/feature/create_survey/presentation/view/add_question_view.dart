@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
-import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
+import 'package:flutter_survey_app_mobile/core/base/state.dart';
+import 'package:flutter_survey_app_mobile/core/size/app_size/dynamic_size.dart';
+import 'package:flutter_survey_app_mobile/core/size/padding/dynamic_padding.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/mixin/add_question_view_mixin.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
@@ -37,7 +39,8 @@ class _AddQuestionViewState extends State<AddQuestionView>
             padding: context.paddingAllMedium,
             child: SingleChildScrollView(
               padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,),
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
               reverse: true,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +109,9 @@ class _AddQuestionViewState extends State<AddQuestionView>
   }
 
   Widget _buildOptionField(
-      BuildContext context, TextEditingController controller,) {
+    BuildContext context,
+    TextEditingController controller,
+  ) {
     return Padding(
       padding: context.paddingVertAllLow,
       child: Row(

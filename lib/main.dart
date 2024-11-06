@@ -19,12 +19,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeManager>(
-      builder: (context, provider, child) => MaterialApp(
+      builder: (context, themeManager, child) => MaterialApp(
         title: StringConstants.appName,
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        theme: CustomDarkTheme().themeData,
+        theme: themeManager.currentTheme,
+        themeMode: themeManager.themeMode,
         debugShowCheckedModeBanner: false,
         navigatorKey: NavigatorService.navigatorKey,
         routes: AppRoutes.routes,

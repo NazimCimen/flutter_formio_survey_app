@@ -39,7 +39,7 @@ class AppInitImpl extends AppInit {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider<ThemeManager>(
-            create: (context) => ThemeManager(),
+            create: (context) => serviceLocator<ThemeManager>(),
           ),
           ChangeNotifierProvider<CreateSurveyViewModel>(
             create: (_) => serviceLocator<CreateSurveyViewModel>(),
@@ -62,6 +62,8 @@ class AppInitImpl extends AppInit {
       options: DefaultFirebaseOptions.currentPlatform,
     );
     setupLocator();
+    final themeManager = serviceLocator<ThemeManager>();
+    await themeManager.loadTheme();
   }
 
   @override

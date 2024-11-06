@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
-import 'package:flutter_survey_app_mobile/core/utils/app_border_radius_extensions.dart';
-import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
+import 'package:flutter_survey_app_mobile/core/base/state.dart';
+import 'package:flutter_survey_app_mobile/core/size/app_size/dynamic_size.dart';
+import 'package:flutter_survey_app_mobile/core/size/border_radius/dynamic_border_radius.dart';
+import 'package:flutter_survey_app_mobile/core/size/padding/dynamic_padding.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/mixin/create_questions_view_mixin.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/view/survey_shared_success_view.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
@@ -123,43 +125,5 @@ class _ShowAddedQuestions extends StatelessWidget {
         );
       },
     );
-    /*Wrap(
-      spacing: context.dynamicWidht(0.02),
-      runSpacing: context.dynamicHeight(
-          0.01), // Fazla boşlukları azaltmak için runSpacing'i küçült
-      children: List.generate(viewModel.questionEntityMap.length, (index) {
-        final questionEntity =
-            viewModel.questionEntityMap.keys.elementAt(index);
-        final image = viewModel.questionEntityMap[questionEntity];
-
-        return SizedBox(
-          width: context.dynamicWidht(0.3), // Yatay genişliği düzenlemek için
-          child: Padding(
-            padding: context.paddingVertAllLow,
-            child: Container(
-              padding: context.paddingAllMedium,
-              decoration: CustomBoxDecoration.customBoxDecoration(context),
-              child: IntrinsicHeight(
-                // İçeriğin doğal yüksekliğine göre hizalama
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _Header(questionEntity: questionEntity),
-                    SizedBox(height: context.dynamicHeight(0.01)),
-                    _QuestionImage(image: image),
-                    SizedBox(height: context.dynamicHeight(0.02)),
-                    _QuestionTitle(questionEntity: questionEntity),
-                    SizedBox(height: context.dynamicHeight(0.02)),
-                    _QuestionOptions(questionEntity: questionEntity),
-                    SizedBox(height: context.dynamicHeight(0.02)),
-                    _QuestionRules(questionEntity: questionEntity),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        );
-      }),
-    );*/
   }
 }

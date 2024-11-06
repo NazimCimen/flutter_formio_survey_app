@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_survey_app_mobile/core/base/state.dart';
 import 'package:flutter_survey_app_mobile/core/connection/network_info.dart';
 import 'package:flutter_survey_app_mobile/core/error/failure.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/domain/usecase/cache_datas_no_internet_use_case.dart';
@@ -12,15 +13,6 @@ import 'package:flutter_survey_app_mobile/product/helper/link_sharing_helper.dar
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
-
-enum ViewState {
-  inActive,
-  error,
-  success,
-  loading,
-  noInternet,
-  noAddedQuestion
-}
 
 class CreateSurveyViewModel extends ChangeNotifier {
   final CacheDatasNoInternetUseCase cacheDatasNoInternetUseCase;

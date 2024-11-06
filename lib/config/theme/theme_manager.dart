@@ -32,11 +32,14 @@ class ThemeManager extends ChangeNotifier implements IThemeManager {
   ThemeManager() {
     loadTheme();
   }
+  void isLoading(bool value) {
+    isLoadingTheme = value;
+    notifyListeners();
+  }
 
   @override
   Future<void> changeTheme(ThemeEnum theme) async {
-    isLoadingTheme = true;
-    notifyListeners();
+    isLoading(true);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_themeKey, theme.name);
     currentThemeEnum = theme;
@@ -44,8 +47,7 @@ class ThemeManager extends ChangeNotifier implements IThemeManager {
         ? CustomDarkTheme().themeData
         : CustomLightTheme().themeData;
     themeMode = theme == ThemeEnum.dark ? ThemeMode.dark : ThemeMode.light;
-    isLoadingTheme = false;
-    notifyListeners();
+    isLoading(false);
   }
 
   @override

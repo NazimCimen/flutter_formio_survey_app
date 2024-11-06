@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app_mobile/core/utils/app_border_radius_extensions.dart';
-import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
+import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
+import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
+import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
+import 'package:flutter_survey_app_mobile/core/base/state.dart';
+import 'package:flutter_survey_app_mobile/core/size/app_size/dynamic_size.dart';
+import 'package:flutter_survey_app_mobile/core/size/border_radius/dynamic_border_radius.dart';
+import 'package:flutter_survey_app_mobile/core/size/padding/dynamic_padding.dart';
 import 'package:flutter_survey_app_mobile/core/utils/image_enum.dart';
-import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/custom_text_headline_title_widget.dart';
 import 'package:flutter_survey_app_mobile/feature/home/presentation/viewmodel/home_view_model.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/survey_entity.dart';
+import 'package:flutter_survey_app_mobile/product/widgets/custom_image_widget.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/custom_progress_indicator.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';
 import 'package:provider/provider.dart';
@@ -19,14 +24,14 @@ class PublishedSurveyListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<HomeViewModel>(
       builder: (context, viewModel, child) {
-        if (viewModel.state == ViewState.loading) {
-          return const CustomProgressIndicator();
-        } else if (viewModel.publishedSurveys.isNotEmpty) {
-          return _PublishedSurveys(
-            publishedSurveys: viewModel.publishedSurveys,
-          );
+        if (viewModel.state == ViewState.success) {
+          return viewModel.publishedSurveys.isNotEmpty
+              ? _PublishedSurveys(
+                  publishedSurveys: viewModel.publishedSurveys,
+                )
+              : const _NoPublishedSurvey();
         } else {
-          return const _NoPublishedSurvey();
+          return const CustomProgressIndicator();
         }
       },
     );
@@ -39,75 +44,58 @@ class _PublishedSurveys extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        childAspectRatio: 1.2,
-      ),
-      itemCount: publishedSurveys.length,
-      itemBuilder: (context, index) {
-        return _SurveyCard(
-          title: publishedSurveys[index].surveyTitle ?? '',
-          subtitle: publishedSurveys[index].answeringCount != null
-              ? '${publishedSurveys[index].answeringCount} answered'
-              : '',
-          imageUrl: 'https://a.d-cd.net/J3aZtvdAfEzaArEuyR0d17Z_o1s-1920.jpg',
-        );
-      },
+    return Column(
+      children: [
+        const CustomTextHeadlineTitleWidget(
+          title: 'Yayınladığım Anketler',
+        ),
+        SizedBox(height: context.dynamicHeight(0.03)),
+        Expanded(
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 1.2,
+            ),
+            itemCount: publishedSurveys.length,
+            itemBuilder: (context, index) {
+              return _SurveyCard(
+                title: publishedSurveys[index].surveyTitle,
+                answeredCount: publishedSurveys[index].answeringCount,
+                imageUrl: publishedSurveys[index].surveyImageUrl,
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
 
-class _SurveyCard extends StatelessWidget {
+class _SurveyCard extends BaseStateless<void> {
   const _SurveyCard({
     required this.title,
-    required this.subtitle,
+    required this.answeredCount,
     required this.imageUrl,
   });
-  final String title;
-  final String subtitle;
-  final String imageUrl;
+  final String? title;
+  final int? answeredCount;
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Theme.of(context).colorScheme.onPrimaryContainer,
+      color: colorScheme(context).onPrimaryContainer,
       shape:
           RoundedRectangleBorder(borderRadius: context.borderRadiusAllMedium),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: ClipRRect(
-              borderRadius: context.borderRadiusTopMedium,
-              child: Image.network(
-                imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  }
-                  return Center(
-                    child: CircularProgressIndicator(
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
-                          : null,
-                    ),
-                  );
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  return Center(
-                    child: Icon(
-                      Icons.error,
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                  );
-                },
-              ),
+            child: CustomImageWidget(
+              imageUrl: imageUrl,
+              placeholderImagePath: ImageEnums.bg_default_survey.toPathPng,
             ),
           ),
           Padding(
@@ -115,9 +103,10 @@ class _SurveyCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomTextSubTitleWidget(subTitle: title),
+                CustomTextSubTitleWidget(subTitle: title ?? ''),
                 CustomTextGreySubTitleWidget(
-                  subTitle: subtitle,
+                  subTitle:
+                      answeredCount != null ? '$answeredCount answered' : '',
                 ),
               ],
             ),
@@ -128,7 +117,7 @@ class _SurveyCard extends StatelessWidget {
   }
 }
 
-class _NoPublishedSurvey extends StatelessWidget {
+class _NoPublishedSurvey extends BaseStateless<void> {
   const _NoPublishedSurvey();
 
   @override
@@ -145,18 +134,20 @@ class _NoPublishedSurvey extends StatelessWidget {
           Text(
             textAlign: TextAlign.center,
             'Henüz bir anketiniz yok, haydi hemen bir tane oluşturalım!',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            style: textTheme(context).bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
           ),
-          SizedBox(height: context.dynamicHeight(0.01)),
+          SizedBox(height: context.dynamicHeight(0.015)),
           OutlinedButton(
             style: OutlinedButton.styleFrom(
               shape: ContinuousRectangleBorder(
                 borderRadius: context.borderRadiusAllLow,
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              NavigatorService.pushNamed(AppRoutes.createSurveyInfoView);
+            },
             child: const CustomTextHeadlineTitleWidget(
               title: 'Hemen Oluştur',
             ),

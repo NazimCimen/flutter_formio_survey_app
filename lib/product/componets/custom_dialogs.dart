@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app_mobile/core/utils/app_border_radius_extensions.dart';
-import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
+import 'package:flutter_survey_app_mobile/core/size/app_size/dynamic_size.dart';
+import 'package:flutter_survey_app_mobile/core/size/border_radius/dynamic_border_radius.dart';
 
 @immutable
 class CustomDialogs {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
+import 'package:flutter_survey_app_mobile/core/base/state.dart';
 import 'package:flutter_survey_app_mobile/feature/home/domain/usecase/get_published_survey_ids_usecase.dart';
 import 'package:flutter_survey_app_mobile/feature/home/domain/usecase/get_published_surveys_usecase.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/survey_entity.dart';
@@ -15,7 +15,7 @@ class HomeViewModel extends ChangeNotifier {
   ViewState _state = ViewState.inActive;
   ViewState get state => _state;
 
-  /// Sets the current state of the view model and notifies listeners.
+  /// SETS THE CURRENT STATE OF THE VIEW MODEL AND NOTIFIES LISTENERS
   void setState(ViewState state) {
     _state = state;
     notifyListeners();
@@ -25,15 +25,14 @@ class HomeViewModel extends ChangeNotifier {
   Future<void> getSurveyIds({
     required String userId,
   }) async {
-    setState(ViewState.loading);
     final result = await getSurveyIdsUsecase.call(userId: userId);
-    result.fold(
+    await result.fold(
       (fail) {},
-      (succes) {
-        getSurveys(surveyIds: succes);
+      (succes) async {
+        await getSurveys(surveyIds: succes);
       },
     );
-    setState(ViewState.inActive);
+    setState(ViewState.success);
   }
 
   /// USED TO GET PUBLISHED SURVEYS FROM  IDS

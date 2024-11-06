@@ -1,8 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_mobile/config/localization/locale_constants.dart';
 import 'package:flutter_survey_app_mobile/config/localization/string_constanrs.dart';
-import 'package:flutter_survey_app_mobile/core/utils/app_size_extensions.dart';
-import 'package:flutter_survey_app_mobile/feature/settings/presentation/view/settings_view.dart';
+import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
+import 'package:flutter_survey_app_mobile/core/size/app_size/constant_size.dart';
+import 'package:flutter_survey_app_mobile/core/size/app_size/dynamic_size.dart';
+import 'package:flutter_survey_app_mobile/core/size/border_radius/constant_border_radius.dart';
+import 'package:flutter_survey_app_mobile/core/size/padding/constant_padding.dart';
+import 'package:flutter_survey_app_mobile/core/size/padding/dynamic_padding.dart';
 
 class LanguageSheetWidget extends StatefulWidget {
   const LanguageSheetWidget({super.key});
@@ -11,30 +16,30 @@ class LanguageSheetWidget extends StatefulWidget {
   State<LanguageSheetWidget> createState() => _LanguageSheetWidgetState();
 }
 
-class _LanguageSheetWidgetState extends SettingsBase<LanguageSheetWidget> {
+class _LanguageSheetWidgetState
+    extends BaseStateful<LanguageSheetWidget, void> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: context.dynamicHeight(0.6),
       child: Column(
         children: [
           SizedBox(height: context.dynamicHeight(0.02)),
           Center(
             child: Container(
-              width: 40.0,
-              height: 5.0,
+              width: context.cLowValue * 5,
+              height: context.cLowValue / 2,
               decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(2.5),
+                color: colorScheme.tertiary.withOpacity(0.5),
+                borderRadius: context.cBorderRadiusSmall / 4,
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: context.cPaddingMedium,
             child: Text(
               StringConstants.select_language,
-              style: TextStyle(
-                fontSize: 20,
+              style: textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -45,13 +50,13 @@ class _LanguageSheetWidgetState extends SettingsBase<LanguageSheetWidget> {
               itemBuilder: (BuildContext context, int index) {
                 final language = LocaleConstants.languageList[index];
                 return ListTile(
-                  title: Text(language.name),
+                  title: Text(language.name, style: textTheme.titleMedium),
                   trailing: Padding(
                     padding: context.paddingAllLow,
                     child: Image.asset(language.flagName),
                   ),
                   onTap: () {
-                    changeLanguage(language.locale);
+                    context.setLocale(language.locale);
                     Navigator.pop(context);
                   },
                 );
