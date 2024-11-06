@@ -1,21 +1,25 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
+import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
+import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
 import 'package:flutter_survey_app_mobile/core/base/state.dart';
 import 'package:flutter_survey_app_mobile/core/size/app_size/dynamic_size.dart';
 import 'package:flutter_survey_app_mobile/core/size/border_radius/dynamic_border_radius.dart';
 import 'package:flutter_survey_app_mobile/core/size/padding/dynamic_padding.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/mixin/create_questions_view_mixin.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/view/survey_shared_success_view.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/added_question_header.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/added_question_image.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/added_question_options.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/added_question_rules.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/added_question_title.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
 import 'package:flutter_survey_app_mobile/product/decorations/box_decorations/custom_box_decoration.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/custom_error_widget.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/custom_progress_indicator.dart';
-import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/no_internet_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
@@ -29,20 +33,20 @@ class CreateQuestionsView extends StatefulWidget {
   CreateQuestionsViewState createState() => CreateQuestionsViewState();
 }
 
-class CreateQuestionsViewState extends State<CreateQuestionsView>
+class CreateQuestionsViewState
+    extends BaseStateful<CreateQuestionsView, CreateSurveyViewModel>
     with CreateQuestionsViewMixin {
   ValueNotifier<bool> isDialOpen = ValueNotifier(false);
 
   @override
   Widget build(BuildContext context) {
     return AbsorbPointer(
-      absorbing:
-          context.watch<CreateSurveyViewModel>().state == ViewState.loading,
+      absorbing: watchViewModel.state == ViewState.loading,
       child: Scaffold(
         floatingActionButton: _CustomFloatingActionButton(
           isDialOpen: isDialOpen,
         ),
-        appBar: _CustomAppBar(
+        appBar: _AppBar(
           shareSurvey: shareSurvey,
         ),
         body: SafeArea(
@@ -68,9 +72,7 @@ class CreateQuestionsViewState extends State<CreateQuestionsView>
                     surveyLink: viewModel.getSurveyLink(),
                   );
                 } else if (viewModel.questionEntityMap.isNotEmpty) {
-                  return _ShowAddedQuestions(
-                    viewModel: viewModel,
-                  );
+                  return const _ShowAddedQuestions();
                 } else {
                   return const CustomErrorWidget(
                     title:
@@ -87,21 +89,18 @@ class CreateQuestionsViewState extends State<CreateQuestionsView>
   }
 }
 
-class _ShowAddedQuestions extends StatelessWidget {
-  final CreateSurveyViewModel viewModel;
-  const _ShowAddedQuestions({
-    required this.viewModel,
-  });
+class _ShowAddedQuestions extends BaseStateless<CreateSurveyViewModel> {
+  const _ShowAddedQuestions();
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: context.paddingVertBottomXXlarge,
-      itemCount: viewModel.questionEntityMap.length,
+      itemCount: readViewModel(context).questionEntityMap.length,
       itemBuilder: (context, index) {
         final questionEntity =
-            viewModel.questionEntityMap.keys.elementAt(index);
-        final image = viewModel.questionEntityMap[questionEntity];
+            readViewModel(context).questionEntityMap.keys.elementAt(index);
+        final image = readViewModel(context).questionEntityMap[questionEntity];
         return Padding(
           padding: context.paddingVertAllLow,
           child: Container(
@@ -110,15 +109,15 @@ class _ShowAddedQuestions extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _Header(questionEntity: questionEntity),
+                AddedQuestionHeader(questionEntity: questionEntity),
                 SizedBox(height: context.dynamicHeight(0.01)),
-                _QuestionImage(image: image),
+                AddedQuestionImage(image: image),
                 SizedBox(height: context.dynamicHeight(0.02)),
-                _QuestionTitle(questionEntity: questionEntity),
+                AddedQuestionTitle(questionEntity: questionEntity),
                 SizedBox(height: context.dynamicHeight(0.02)),
-                _QuestionOptions(questionEntity: questionEntity),
+                AddedQuestionOptions(questionEntity: questionEntity),
                 SizedBox(height: context.dynamicHeight(0.02)),
-                _QuestionRules(questionEntity: questionEntity),
+                AddedQuestionRules(questionEntity: questionEntity),
               ],
             ),
           ),

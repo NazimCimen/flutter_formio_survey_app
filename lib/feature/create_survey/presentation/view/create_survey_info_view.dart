@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
 import 'package:flutter_survey_app_mobile/core/base/state.dart';
 import 'package:flutter_survey_app_mobile/core/size/app_size/dynamic_size.dart';
 import 'package:flutter_survey_app_mobile/core/size/padding/dynamic_padding.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/wid
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/image_input_widgets.dart';
 import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
 import 'package:provider/provider.dart';
+part '../sub_view/create_survey_info_sub_view.dart';
 
 class CreateSurveyInfoView extends StatefulWidget {
   const CreateSurveyInfoView({super.key});
@@ -31,7 +33,10 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
         absorbing:
             context.watch<CreateSurveyViewModel>().state == ViewState.loading,
         child: Scaffold(
-          appBar: _buildAppBar(context),
+          appBar: _AppBar(
+            closePage: closePage,
+            navigateAndSetSurveyInfoValues: navigateAndSetSurveyInfoValues,
+          ),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
@@ -118,41 +123,6 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
           ),
         ),
       ),
-    );
-  }
-
-  AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      forceMaterialTransparency: true,
-      leading: GestureDetector(
-        onTap: closePage,
-        child: const Icon(Icons.close_outlined),
-      ),
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      title: Text(
-        'Create Your Survey',
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-      ),
-      actions: [
-        Padding(
-          padding: context.paddingHorizRightLow,
-          child: InkWell(
-            onTap: () {
-              navigateAndSetSurveyInfoValues();
-            },
-            child: Text(
-              'NEXT',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onSecondary,
-                  ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

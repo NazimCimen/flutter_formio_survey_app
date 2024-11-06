@@ -7,7 +7,6 @@ import 'package:flutter_survey_app_mobile/core/size/app_size/dynamic_size.dart';
 import 'package:flutter_survey_app_mobile/core/size/border_radius/dynamic_border_radius.dart';
 import 'package:flutter_survey_app_mobile/core/size/padding/dynamic_padding.dart';
 import 'package:flutter_survey_app_mobile/core/utils/image_enum.dart';
-import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/custom_text_headline_title_widget.dart';
 import 'package:flutter_survey_app_mobile/feature/home/presentation/viewmodel/home_view_model.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/survey_entity.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/custom_image_widget.dart';

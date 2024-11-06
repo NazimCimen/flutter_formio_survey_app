@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
+import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
+import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
 import 'package:flutter_survey_app_mobile/core/base/state.dart';
 import 'package:flutter_survey_app_mobile/core/size/app_size/dynamic_size.dart';
 import 'package:flutter_survey_app_mobile/core/size/padding/dynamic_padding.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/add_option.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/mixin/add_question_view_mixin.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
@@ -10,9 +13,7 @@ import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/wid
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/image_input_widgets.dart';
 import 'package:flutter_survey_app_mobile/product/componets/custom_snack_bars.dart';
 import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
-import 'package:flutter_survey_app_mobile/product/decorations/input_decorations/custom_input_decoration.dart';
-import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';
-import 'package:provider/provider.dart';
+
 part '../sub_view/add_question_sub_view.dart';
 
 class AddQuestionView extends StatefulWidget {
@@ -23,17 +24,16 @@ class AddQuestionView extends StatefulWidget {
   State<AddQuestionView> createState() => _AddQuestionViewState();
 }
 
-class _AddQuestionViewState extends State<AddQuestionView>
+class _AddQuestionViewState
+    extends BaseStateful<AddQuestionView, CreateSurveyViewModel>
     with AddQuestionViewMixin {
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<CreateSurveyViewModel>();
-
     return AbsorbPointer(
-      absorbing: viewModel.state == ViewState.loading,
+      absorbing: watchViewModel.state == ViewState.loading,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: _buildAppBar(context),
+        appBar: const _AppBar(),
         body: SafeArea(
           child: Padding(
             padding: context.paddingAllMedium,
@@ -61,7 +61,11 @@ class _AddQuestionViewState extends State<AddQuestionView>
                     keyboardType: TextInputType.text,
                   ),
                   if (widget.entity.type != QuestionType.openEnded)
-                    _buildOptionsSection(context),
+                    AddOption(
+                      inputOptions: inputOptions,
+                      addNewOption: addNewOption,
+                      deleteOption: deleteOption,
+                    ),
                   SizedBox(height: context.dynamicHeight(0.02)),
                   _buildCheckBoxSection(),
                   SizedBox(height: context.dynamicHeight(0.02)),
@@ -74,69 +78,6 @@ class _AddQuestionViewState extends State<AddQuestionView>
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      automaticallyImplyLeading: false,
-      title: Text(
-        'Çoktan Seçmeli',
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-      ),
-    );
-  }
-
-  Widget _buildOptionsSection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const CustomTextSubTitleWidget(subTitle: 'Seçenekler'),
-        SizedBox(height: context.dynamicHeight(0.01)),
-        Column(
-          children: inputOptions
-              .map((controller) => _buildOptionField(context, controller))
-              .toList(),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildOptionField(
-    BuildContext context,
-    TextEditingController controller,
-  ) {
-    return Padding(
-      padding: context.paddingVertAllLow,
-      child: Row(
-        children: [
-          Expanded(
-            child: TextFormField(
-              controller: controller,
-              onTap: addNewOption,
-              textInputAction: TextInputAction.next,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                    fontWeight: FontWeight.bold,
-                  ),
-              decoration: CustomInputDecoration.inputDecoration(
-                context: context,
-                hintText: 'Seçenek girin',
-              ),
-            ),
-          ),
-          SizedBox(width: context.dynamicWidht(0.07)),
-          GestureDetector(
-            onTap: () => deleteOption(inputOptions.indexOf(controller)),
-            child: const Icon(Icons.remove_circle_outline),
-          ),
-        ],
       ),
     );
   }
@@ -173,7 +114,7 @@ class _AddQuestionViewState extends State<AddQuestionView>
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: Theme.of(context).textTheme.bodyLarge),
+        Text(title, style: textTheme.bodyLarge),
         Checkbox(value: value, onChanged: onChanged),
       ],
     );

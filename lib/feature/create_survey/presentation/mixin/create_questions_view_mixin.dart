@@ -21,8 +21,9 @@ mixin CreateQuestionsViewMixin on State<CreateQuestionsView> {
         } else if (context.read<CreateSurveyViewModel>().state ==
             ViewState.success) {
           NavigatorService.pushNamedAndRemoveUntil(
-              AppRoutes.surveySharedSuccessView,
-              arguments: context.read<CreateSurveyViewModel>().getSurveyLink());
+            AppRoutes.surveySharedSuccessView,
+            arguments: context.read<CreateSurveyViewModel>().getSurveyLink(),
+          );
         }
       },
     );

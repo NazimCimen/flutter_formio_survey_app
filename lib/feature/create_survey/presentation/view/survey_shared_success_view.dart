@@ -121,7 +121,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
         TextButton(
           onPressed: () {
             context.read<CreateSurveyViewModel>().resetViewModel();
-            NavigatorService.pushNamedAndRemoveUntil(AppRoutes.navBarView);
+            NavigatorService.pushNamedAndRemoveUntil(AppRoutes.homeView);
           },
           child: Text(
             'Ana Sayfa',

@@ -10,7 +10,7 @@ mixin HomeViewMixin on BaseStateful<HomeView, HomeViewModel> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        await context.read<HomeViewModel>().getSurveyIds(userId: '123456');
+        await context.read<HomeViewModel>().getSurveyIds(userId: '12345678');
       },
     );
     super.initState();

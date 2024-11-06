@@ -63,11 +63,17 @@ class CreateSurveyLocalDataSourceImpl extends CreateSurveyLocalDataSource {
   }
 
   @override
-  Future<void> cacheDatasNoInternet(
-      {required String path, required String surveyId}) async {
+  Future<void> cacheDatasNoInternet({
+    required String path,
+    required String surveyId,
+  }) async {
     await cacheManager.saveData(
-        data: path, keyName: CacheKeyEnum.removeSurveyImages.name);
+      data: path,
+      keyName: CacheKeyEnum.removeSurveyImages.name,
+    );
     await cacheManager.saveData(
-        data: surveyId, keyName: CacheKeyEnum.removeSurvey.name);
+      data: surveyId,
+      keyName: CacheKeyEnum.removeSurvey.name,
+    );
   }
 }

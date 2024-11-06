@@ -36,7 +36,7 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     super.didChangeDependencies();
   }
 
-  /// this method overrided in view
+  /// THIS METHOD IS OVERRIDED IN AddQuestionView.dart
   void showSnackBar({required String errorMsg});
 
   void deleteImage() {

@@ -15,10 +15,10 @@ final class CustomColorScheme {
     surface: Color(0xFFFFFFFF), // Beyaz yüzeyler (kartlar vb.)
     onSurface: Color(0xFF000000), // Siyah, yüzey üzerindeki yazılar için
     tertiary: Colors.grey,
+    tertiaryFixed: Colors.amberAccent, // Amber, sabit üçüncül renk
 
     secondaryContainer: Colors.red, // Koyu kırmızı, vurgular için
     tertiaryContainer: Colors.green, // Koyu yeşil, yardımcı vurgular için
-    tertiaryFixed: Colors.amber, // Amber, sabit üçüncül renk
     onPrimaryContainer: Color.fromARGB(
         255, 226, 223, 223), // Konteyner içindeki öğeler için koyu gri
     // Orta koyu gri, ekstra aksan veya simgeler için
@@ -38,11 +38,11 @@ final class CustomColorScheme {
     surface: Color(0xFF303030), // Kart arka planları ve diğer yüzeyler için
     onSurface: Color(0xFFFFFFFF), // Siyah, yüzey üzerindeki yazılar için
     tertiary: Colors.grey, // Ekstra aksan veya simgeler için
+    tertiaryFixed: Colors.amberAccent,
 
     scrim: Colors.black,
     secondaryContainer: Colors.redAccent,
     tertiaryContainer: Colors.greenAccent,
-    tertiaryFixed: Colors.amberAccent,
     onPrimaryContainer:
         Color.fromARGB(95, 97, 97, 97), // Container içindeki öğeler için
 

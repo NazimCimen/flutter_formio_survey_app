@@ -31,7 +31,7 @@ class CreateSurveyViewModel extends ChangeNotifier {
   ViewState _state = ViewState.inActive;
   ViewState get state => _state;
   SurveyEntity _surveyEntity = SurveyEntity(
-    userId: const Uuid().v1(),
+    userId: '1234567',
     surveyId: const Uuid().v1(),
   );
   SurveyEntity get surveyEntity => _surveyEntity;
@@ -82,7 +82,6 @@ class CreateSurveyViewModel extends ChangeNotifier {
   }
 
   /// Selects and crops the survey image
-  ///
   Future<void> getImage({
     required ImageSource selectedSource,
     required CropAspectRatio cropRatio,
@@ -99,9 +98,7 @@ class CreateSurveyViewModel extends ChangeNotifier {
         selectedQuestionFileBytes = await result.readAsBytes();
         notifyListeners();
       }
-    } else {
-      /// uyarı mesajı.
-    }
+    } else {}
   }
 
   void addNewQuestion({
@@ -183,10 +180,7 @@ class CreateSurveyViewModel extends ChangeNotifier {
         userId: _surveyEntity.userId,
       );
       await surveyLogic.removeSurvey(surveyId: _surveyEntity.surveyId);
-      //internet harici bir sorun olursa log+crashlytics
-    } else {
-      //log+crashlytics
-    }
+    } else {}
   }
 
   Future<void> checkConnectivity() async {
