@@ -1,18 +1,20 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
+import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/view/add_question_view.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
-import 'package:provider/provider.dart';
 
-mixin AddQuestionViewMixin on State<AddQuestionView> {
+mixin AddQuestionViewMixin
+    on BaseStateful<AddQuestionView, CreateSurveyViewModel> {
   late TextEditingController titleController;
   late List<TextEditingController> inputOptions;
   bool isRequiredCheckBoxValue = false;
   bool isMultipleChoiceCheckBoxValue = false;
   bool isOtherCheckBoxValue = false;
   Uint8List? selectedImageBytes;
+
   @override
   void initState() {
     getDefaultValues();
@@ -31,31 +33,22 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
 
   @override
   void didChangeDependencies() {
-    selectedImageBytes =
-        context.watch<CreateSurveyViewModel>().selectedQuestionFileBytes;
+    selectedImageBytes = watchViewModel.selectedQuestionFileBytes;
     super.didChangeDependencies();
   }
 
-  /// THIS METHOD IS OVERRIDED IN AddQuestionView.dart
+  /// Displays a snackbar with an error message /// This method is overridden in AddQuestionView.dart
   void showSnackBar({required String errorMsg});
 
+  /// Deletes the currently selected image by resetting the question image in the ViewModel.
   void deleteImage() {
-    context.read<CreateSurveyViewModel>().resetQuestionImage();
+    readViewModel.resetQuestionImage();
   }
 
+  /// Saves the question by validating inputs and adding the question entity to the ViewModel.
   void saveQuestion() {
-    final options = <String>[];
-    for (final option in inputOptions) {
-      if (option.text.isNotEmpty) {
-        options.add(option.text.trim());
-      }
-    }
-    if (titleController.text.trim().isEmpty) {
-      showSnackBar(errorMsg: 'Soru Metnini girmeden ilerleyemezsiniz');
-    } else if (widget.entity.type != QuestionType.openEnded &&
-        options.isEmpty) {
-      showSnackBar(errorMsg: 'Please fill in the option fields.');
-    } else {
+    final options = validateQuestion();
+    if (options != null) {
       final entity = widget.entity.copyWith(
         title: titleController.text.trim(),
         addOptionOther: isOtherCheckBoxValue,
@@ -63,19 +56,37 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
         multipleChoices: isMultipleChoiceCheckBoxValue,
         options: options,
       );
-      context.read<CreateSurveyViewModel>().addNewQuestion(
-            entity: entity,
-            selectedQuestionFileBytes:
-                context.read<CreateSurveyViewModel>().selectedQuestionFileBytes,
-          );
-      context.read<CreateSurveyViewModel>().resetQuestionImage();
+      readViewModel
+        ..addNewQuestion(
+          entity: entity,
+          selectedQuestionFileBytes: readViewModel.selectedQuestionFileBytes,
+        )
+        ..resetQuestionImage();
       NavigatorService.goBack();
     }
   }
 
+  /// Validates the question title and options fields, returning options if valid.
+  List<String>? validateQuestion() {
+    final trimmedTitle = titleController.text.trim();
+    if (trimmedTitle.isEmpty) {
+      showSnackBar(errorMsg: 'Soru Metnini girmeden ilerleyemezsiniz');
+      return null;
+    }
+    final options = inputOptions
+        .where((option) => option.text.isNotEmpty)
+        .map((option) => option.text.trim())
+        .toList();
+    if (widget.entity.type != QuestionType.openEnded && options.isEmpty) {
+      showSnackBar(errorMsg: 'Please fill in the option fields.');
+      return null;
+    }
+    return options;
+  }
+
+  /// Initializes default values for question title, options, and selected image.
   void getDefaultValues() {
-    selectedImageBytes =
-        context.read<CreateSurveyViewModel>().selectedQuestionFileBytes;
+    selectedImageBytes = readViewModel.selectedQuestionFileBytes;
     titleController = TextEditingController(text: widget.entity.title ?? '');
     inputOptions = [];
     if (widget.entity.options != null) {
@@ -89,6 +100,7 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     }
   }
 
+  /// Adds a new option if the existing fields are validated.
   void addNewOption() {
     final isValidate = validateOptionFields();
     if (isValidate) {
@@ -96,6 +108,7 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     }
   }
 
+  /// Deletes an option at a specific index, if there is more than one option.
   void deleteOption(int index) {
     if (inputOptions.length != 1) {
       setState(() {
@@ -104,6 +117,7 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     }
   }
 
+  /// Validates that all option fields except the last one are non-empty.
   bool validateOptionFields() {
     var isEmpty = false;
     setState(() {});
@@ -114,13 +128,10 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
         }
       }
     }
-    if (isEmpty) {
-      return false;
-    } else {
-      return true;
-    }
+    return !isEmpty;
   }
 
+  /// Toggles the "is required" checkbox and updates its state.
   void isRequiredCheckBoxPressed({bool? value}) {
     if (value != null) {
       setState(() {
@@ -129,6 +140,7 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     }
   }
 
+  /// Toggles the "is multiple choice" checkbox and updates its state.
   void isMultipleChoiceCheckBoxPressed({bool? value}) {
     if (value != null) {
       setState(() {
@@ -137,6 +149,7 @@ mixin AddQuestionViewMixin on State<AddQuestionView> {
     }
   }
 
+  /// Toggles the "add other option" checkbox and updates its state.
   void isOtherCheckBoxPressed({bool? value}) {
     if (value != null) {
       setState(() {

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
+import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/padding/dynamic_padding.dart';
 import 'package:flutter_survey_app_mobile/core/utils/image_enum.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
 import 'package:flutter_survey_app_mobile/product/componets/custom_snack_bars.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';
-import 'package:provider/provider.dart';
 
 class SurveySharedSuccessView extends StatelessWidget {
   final String surveyLink;
@@ -43,7 +43,7 @@ class SurveySharedSuccessView extends StatelessWidget {
   }
 }
 
-class _ShareSurvey extends StatelessWidget {
+class _ShareSurvey extends BaseStateless<CreateSurveyViewModel> {
   const _ShareSurvey();
 
   @override
@@ -55,7 +55,7 @@ class _ShareSurvey extends StatelessWidget {
           iconData: Icons.share,
           text: 'Paylaş',
           onPressed: () {
-            context.read<CreateSurveyViewModel>().shareSurveyLink();
+            readViewModel(context).shareSurveyLink();
           },
         ),
         _TextButton(
@@ -64,7 +64,7 @@ class _ShareSurvey extends StatelessWidget {
           onPressed: () {
             Clipboard.setData(
               ClipboardData(
-                text: context.read<CreateSurveyViewModel>().getSurveyLink(),
+                text: readViewModel(context).getSurveyLink(),
               ),
             );
 
@@ -79,7 +79,7 @@ class _ShareSurvey extends StatelessWidget {
   }
 }
 
-class _TextButton extends StatelessWidget {
+class _TextButton extends BaseStateless<void> {
   final IconData iconData;
   final VoidCallback onPressed;
   final String text;
@@ -100,7 +100,7 @@ class _TextButton extends StatelessWidget {
       label: Text(
         text,
         overflow: TextOverflow.ellipsis,
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+        style: textTheme(context).bodySmall?.copyWith(
               fontWeight: FontWeight.bold,
             ),
       ),
@@ -108,7 +108,8 @@ class _TextButton extends StatelessWidget {
   }
 }
 
-class _AppBar extends StatelessWidget implements PreferredSizeWidget {
+class _AppBar extends BaseStateless<CreateSurveyViewModel>
+    implements PreferredSizeWidget {
   const _AppBar();
 
   @override
@@ -120,13 +121,13 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         TextButton(
           onPressed: () {
-            context.read<CreateSurveyViewModel>().resetViewModel();
+            readViewModel(context).resetViewModel();
             NavigatorService.pushNamedAndRemoveUntil(AppRoutes.homeView);
           },
           child: Text(
             'Ana Sayfa',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
+            style: textTheme(context).titleLarge?.copyWith(
+                  color: colorScheme(context).primary,
                   fontWeight: FontWeight.bold,
                 ),
           ),

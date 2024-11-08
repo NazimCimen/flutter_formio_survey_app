@@ -14,6 +14,7 @@ abstract class ImageProcessLocalSource {
 
 class ImageProcessLocalSourceImpl extends ImageProcessLocalSource {
   ImageProcessLocalSourceImpl();
+  ///IT USED TO GET IMAGE FROM DEVICE-GALLERY/CAMERA
   @override
   Future<Either<Failure, XFile?>> getImage(ImageSource source) async {
     final picker = ImagePicker();
@@ -29,6 +30,7 @@ class ImageProcessLocalSourceImpl extends ImageProcessLocalSource {
     }
   }
 
+  /// IT USED TO CROP IMAGE AFTER PICKING
   @override
   Future<Either<Failure, XFile?>> cropImage({
     required XFile imageFile,

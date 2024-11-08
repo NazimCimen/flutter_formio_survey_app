@@ -14,6 +14,8 @@ class ImageProcessRepositoryImpl implements ImageProcessRepository {
     required this.localDataSource,
     required this.remoteDataSource,
   });
+
+  /// IT USED TO CROP IMAGE AFTER PICKING
   @override
   Future<Either<Failure, XFile?>> cropImage({
     required XFile imageFile,
@@ -26,13 +28,16 @@ class ImageProcessRepositoryImpl implements ImageProcessRepository {
     return result;
   }
 
+  ///IT USED TO GET IMAGE FROM DEVICE-GALLERY/CAMERA
   @override
-  Future<Either<Failure, XFile?>> getImage(
-      {required ImageSource source}) async {
+  Future<Either<Failure, XFile?>> getImage({
+    required ImageSource source,
+  }) async {
     final result = await localDataSource.getImage(source);
     return result;
   }
 
+  /// IT USED TO GET IMAGE URL FROM STORAGE
   @override
   Future<Either<Failure, String>> getImageUrl({
     required Uint8List imageBytes,
@@ -45,6 +50,7 @@ class ImageProcessRepositoryImpl implements ImageProcessRepository {
     return result;
   }
 
+  /// IT USED TO REMOVE SURVEY IMAGES FROM STORAGE
   @override
   Future<Either<Failure, bool>> removeSurveyImages({
     required String path,

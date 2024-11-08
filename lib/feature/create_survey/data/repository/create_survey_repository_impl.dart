@@ -19,6 +19,7 @@ class CreateSurveyRepositoryImpl implements CreateSurveyRepository {
     required this.remoteDataSource,
   });
 
+  /// IT IS USED TO SAVE SURVEY INFO DATAS IN FIRESTORE
   @override
   Future<Either<Failure, bool>> shareSurveyInfo({
     required SurveyEntity entity,
@@ -28,6 +29,7 @@ class CreateSurveyRepositoryImpl implements CreateSurveyRepository {
     return result;
   }
 
+  /// IT IS USED TO SAVE QUESTIONS IN FIRESTORE
   @override
   Future<Either<Failure, bool>> shareQuestions({
     required List<QuestionEntity> questionEntityList,
@@ -43,6 +45,7 @@ class CreateSurveyRepositoryImpl implements CreateSurveyRepository {
     return result;
   }
 
+  /// IT IS USED TO REMOVE SURVEY DATAS FROM STORAGE AND FIRESTORE
   @override
   Future<Either<Failure, bool>> removeSurvey({required String surveyId}) async {
     final result = await remoteDataSource.removeSurvey(surveyId: surveyId);

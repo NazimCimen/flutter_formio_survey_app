@@ -26,7 +26,7 @@ class ImageProcessRemoteSourceImpl extends ImageProcessRemoteSource {
   });
   @override
 
-  /// nulll check
+/// IT USED TO GET IMAGE URL FROM STORAGE
   Future<Either<Failure, String>> getImageUrl({
     required Uint8List imageBytes,
     required String path,
@@ -47,21 +47,18 @@ class ImageProcessRemoteSourceImpl extends ImageProcessRemoteSource {
       return Left(FailureHandler.handleFailure(e: e));
     }
   }
-
+/// IT USED TO REMOVE SURVEY IMAGES FROM STORAGE 
   @override
   Future<Either<Failure, bool>> removeSurveyImages({
     required String path,
   }) async {
     try {
-//internet check
       final isConnected = await connectivity.currentConnectivityResult;
       if (!isConnected) {
         return Left(ConnectionFailure(errorMessage: 'No internet connection'));
       }
-      // Belirtilen klasördeki tüm dosyaları listele
       final listResult = await storage.ref(path).listAll();
 
-      // Listeyi gez ve her dosyayı sil
       for (final ref in listResult.items) {
         await ref.delete();
       }

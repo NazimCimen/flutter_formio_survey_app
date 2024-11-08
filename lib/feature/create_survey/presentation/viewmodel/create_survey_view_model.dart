@@ -20,6 +20,7 @@ class CreateSurveyViewModel extends ChangeNotifier {
   final ImageHelper imageHelper;
   final SurveyLogic surveyLogic;
   final LinkSharingHelper shareLink;
+
   CreateSurveyViewModel({
     required this.cacheDatasNoInternetUseCase,
     required this.connectivity,
@@ -30,11 +31,13 @@ class CreateSurveyViewModel extends ChangeNotifier {
 
   ViewState _state = ViewState.inActive;
   ViewState get state => _state;
+
   SurveyEntity _surveyEntity = SurveyEntity(
     userId: '1234567',
     surveyId: const Uuid().v1(),
   );
   SurveyEntity get surveyEntity => _surveyEntity;
+
   Uint8List? selectedSurveyImageBytes;
   Map<QuestionEntity, Uint8List?> _questionEntityMap = {};
   Map<QuestionEntity, Uint8List?> get questionEntityMap => _questionEntityMap;
@@ -47,6 +50,7 @@ class CreateSurveyViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Resets the ViewModel state and survey data for a fresh start.
   void resetViewModel() {
     _surveyEntity = SurveyEntity(
       userId: const Uuid().v1(),
@@ -58,7 +62,7 @@ class CreateSurveyViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Sets the recipe title and description based on the provided values.
+  /// Sets survey information such as title, description, and dates.
   void setSurveyInfos({
     required String surveyTitle,
     required String surveyDescription,
@@ -76,12 +80,13 @@ class CreateSurveyViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Resets the selected survey image, removing it from memory.
   void resetSurveyImage() {
     selectedSurveyImageBytes = null;
     notifyListeners();
   }
 
-  /// Selects and crops the survey image
+  /// Selects and crops an image for the survey or question, based on provided aspect ratio.
   Future<void> getImage({
     required ImageSource selectedSource,
     required CropAspectRatio cropRatio,
@@ -98,9 +103,10 @@ class CreateSurveyViewModel extends ChangeNotifier {
         selectedQuestionFileBytes = await result.readAsBytes();
         notifyListeners();
       }
-    } else {}
+    }
   }
 
+  /// Adds a new question with an optional image.
   void addNewQuestion({
     required QuestionEntity entity,
     required Uint8List? selectedQuestionFileBytes,
@@ -109,11 +115,13 @@ class CreateSurveyViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Resets the selected question image, removing it from memory.
   void resetQuestionImage() {
     selectedQuestionFileBytes = null;
     notifyListeners();
   }
 
+  /// Deletes a question from the survey.
   void deleteQuestionEntity(QuestionEntity entity) {
     if (_questionEntityMap.containsKey(entity)) {
       _questionEntityMap.remove(entity);
@@ -121,6 +129,7 @@ class CreateSurveyViewModel extends ChangeNotifier {
     }
   }
 
+  /// Initiates the survey sharing process; if successful, updates the state accordingly.
   Future<void> shareSurvey() async {
     if (_questionEntityMap.isNotEmpty && state != ViewState.error) {
       setState(ViewState.loading);
@@ -149,7 +158,7 @@ class CreateSurveyViewModel extends ChangeNotifier {
     }
   }
 
-  /// Shares the generated survey link.
+  /// Shares the survey link via the selected link sharing helper.
   void shareSurveyLink() {
     if (_surveyEntity.surveyId != null) {
       shareLink.shareSurveyLink(surveyId: _surveyEntity.surveyId!);
@@ -158,7 +167,7 @@ class CreateSurveyViewModel extends ChangeNotifier {
     }
   }
 
-  /// Generates the survey link based on the survey ID.
+  /// Generates a link for accessing the survey.
   String getSurveyLink() {
     if (_surveyEntity.surveyId != null) {
       return shareLink.generateSurveyLink(_surveyEntity.surveyId!);
@@ -168,7 +177,7 @@ class CreateSurveyViewModel extends ChangeNotifier {
     }
   }
 
-  ///MARK:CHECK CACHE ON SPLASH
+  /// Rolls back survey creation in case of a failure.
   Future<void> _rollbackSurvey({required Failure fail}) async {
     await _cacheSurveyDatas();
     if (fail is ConnectionFailure) {
@@ -180,9 +189,10 @@ class CreateSurveyViewModel extends ChangeNotifier {
         userId: _surveyEntity.userId,
       );
       await surveyLogic.removeSurvey(surveyId: _surveyEntity.surveyId);
-    } else {}
+    }
   }
 
+  /// Checks the current network connectivity status.
   Future<void> checkConnectivity() async {
     setState(ViewState.loading);
     final result = await connectivity.currentConnectivityResult;
@@ -193,6 +203,7 @@ class CreateSurveyViewModel extends ChangeNotifier {
     }
   }
 
+  /// Caches survey data for offline access.
   Future<void> _cacheSurveyDatas() async {
     if (_surveyEntity.surveyId == null) return;
     await cacheDatasNoInternetUseCase.call(

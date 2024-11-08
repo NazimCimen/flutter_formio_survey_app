@@ -22,6 +22,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
     required this.userService,
     required this.surveyService,
   });
+  /// IT USED TO GET PUBLISHED SURVEY IDS FROM FIRESTORE
   @override
   Future<Either<Failure, List<String>?>> getPublishedSurveyIds({
     required String userId,
@@ -37,7 +38,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
       return Left(ConnectionFailure(errorMessage: 'errorMessage'));
     }
   }
-
+  /// IT USED TO GET PUBLISHED SURVEYS
   @override
   Future<Either<Failure, List<SurveyModel>>> getPublishedSurveys({
     required List<String>? surveyIds,

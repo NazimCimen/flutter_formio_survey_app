@@ -30,7 +30,6 @@ class FailureHandler {
         errorMessage: 'Firebase hata: ${e.code} - ${e.message}',
       );
     } else if (e.toString().contains('SocketException')) {
-      // Bu örnek internet bağlantı hatalarını yakalamak için
       return ConnectionFailure(
         errorMessage: 'İnternet bağlantı hatası oluştu.',
       );
@@ -50,7 +49,6 @@ class FailureHandler {
     return UnKnownException('unknown-error');
   }
 
-  // Standart fold işlemleri için safeApiCall metodu
   static Future<Either<Failure, T>> foldAndReturnEitherResult<T>(
     Future<Either<Failure, T>> apiCall,
   ) async {

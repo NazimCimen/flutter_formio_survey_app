@@ -15,6 +15,7 @@ class SurveyLogic {
   final RemoveSurveyUseCase removeSurveyUseCase;
   final ShareSurveyInfoUseCase shareSurveyInfoUseCase;
   final ShareQuestionsUseCase shareQuestionsUseCase;
+
   SurveyLogic({
     required this.imageHelper,
     required this.removeSurveyUseCase,
@@ -22,12 +23,13 @@ class SurveyLogic {
     required this.shareQuestionsUseCase,
   });
 
+  /// Shares the survey by uploading images and data to the server.
   Future<Either<Failure, bool>> shareSurvey({
     required SurveyEntity surveyEntity,
     required Uint8List? selectedSurveyImageBytes,
     required Map<QuestionEntity, Uint8List?> questionEntityMap,
   }) async {
-    // 1. Anketin görseli yüklenir
+    // 1. Upload the survey image
     String? imageUrl;
     Failure? failure;
     if (selectedSurveyImageBytes != null) {
@@ -47,7 +49,8 @@ class SurveyLogic {
     if (failure != null) {
       return Left(failure!);
     }
-    // 2. Soruların image url'leri alınır ve question entity'ye eklenir
+
+    // 2. Obtain image URLs for questions and add them to each question entity
     final questionsResult = await _convertFromMapToEntityList(
       questionEntityMap: questionEntityMap,
       path: surveyEntity.surveyPath,
@@ -64,7 +67,8 @@ class SurveyLogic {
     if (failure != null) {
       return Left(failure!);
     }
-    // 3. Anket paylaşılır
+
+    // 3. Share the survey information
     final updatedSurveyEntity = surveyEntity.copyWith(
       surveyImageUrl: imageUrl,
       publicationDate: DateTime.now(),
@@ -87,15 +91,15 @@ class SurveyLogic {
       return Left(failure!);
     }
 
-    // 4. Sorular paylaşılır
+    // 4. Share the questions
     final questionsResultUpload =
         await shareQuestionsUseCase.call(questionEntityList: questions);
     questionsResultUpload.fold(
       (fail) {
         failure = fail;
       },
-      (succes) {
-        if (!succes) {
+      (success) {
+        if (!success) {
           failure = ServerFailure(errorMessage: 'errorMessage');
         }
       },
@@ -107,24 +111,26 @@ class SurveyLogic {
     }
   }
 
+  /// Removes the survey based on the survey ID provided.
   Future<void> removeSurvey({required String? surveyId}) async {
     if (surveyId != null) {
       final response = await removeSurveyUseCase.call(surveyId: surveyId);
       response.fold(
         (fail) {
           if (fail is! ConnectionFailure) {
-            /// crashlytics+loglama
+            // Log failure and send to Crashlytics
           }
         },
-        (succes) {
-          if (!succes) {
-            /// crashlytics+loglama
+        (success) {
+          if (!success) {
+            // Log failure and send to Crashlytics
           }
         },
       );
     }
   }
 
+  /// Converts the map of questions and image bytes into a list of question entities.
   Future<Either<Failure, List<QuestionEntity>>> _convertFromMapToEntityList({
     required Map<QuestionEntity, Uint8List?> questionEntityMap,
     required String path,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
 import 'package:flutter_survey_app_mobile/core/base/state.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
@@ -19,7 +20,8 @@ class CreateSurveyInfoView extends StatefulWidget {
   CreateSurveyInfoViewState createState() => CreateSurveyInfoViewState();
 }
 
-class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
+class CreateSurveyInfoViewState
+    extends BaseStateful<CreateSurveyInfoView, CreateSurveyViewModel>
     with CreateSurveyInfoViewMixin {
   @override
   Widget build(BuildContext context) {

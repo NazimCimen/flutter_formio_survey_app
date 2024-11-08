@@ -6,14 +6,14 @@ import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/vie
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/view/create_questions_view.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/view/create_survey_info_view.dart';
 import 'package:flutter_survey_app_mobile/feature/home/presentation/view/home_view.dart';
-import 'package:flutter_survey_app_mobile/feature/profile/presentation/view/profile_view.dart';
 import 'package:flutter_survey_app_mobile/feature/splash/presentation/view/splash_view.dart';
 
-class AppRoutes {
+final class AppRoutes {
+  const AppRoutes._();
+
   static const String initialRoute = '/splashView';
   static const String homeView = '/homeView';
   static const String navBarView = '/navBarView';
-  static const String profileView = '/profileView';
   static const String createSurveyInfoView = '/createSurveyInfoView';
   static const String createQuestionsView = '/createQuestionsView';
   static const String addQuestionView = '/addQuestionView';
@@ -38,7 +38,6 @@ class AppRoutes {
             surveyLink: surveyLink,
           );
         },
-        profileView: (context) => const ProfileView(),
         settingsView: (context) => const SettingsView(),
       };
 }

@@ -83,7 +83,8 @@ void setupLocator() {
     ..registerLazySingleton<INetworkInfo>(
       () => NetworkInfo(serviceLocator<InternetConnectionChecker>()),
     )
-    /////////////////////////////////////////////////////////////////////
+
+    /////////////////////////////// SPLASH FEATURE //////////////////////////////////////
     ..registerLazySingleton<AppVersionManager>(
       () => AppVersionManagerImpl(),
     )
@@ -123,7 +124,9 @@ void setupLocator() {
         serviceLocator<AppVersionManager>(),
       ),
     )
-    ////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
+
+    ////////////////////// CREATE SURVEY FEATURE /////////////////////////////////////
     ..registerLazySingleton<CreateSurveyLocalDataSource>(
       () => CreateSurveyLocalDataSourceImpl(
         cacheManager: serviceLocator<StandartCacheManager<String>>(),
@@ -145,41 +148,6 @@ void setupLocator() {
         firestore: serviceLocator<FirebaseFirestore>(),
       ),
     )
-    ..registerLazySingleton<BaseFirebaseService<UserModel>>(
-      () => FirebaseServiceImpl(
-        firestore: serviceLocator<FirebaseFirestore>(),
-      ),
-    )
-//////////////////////////////////////////////////////////////////////////////////////
-    ..registerLazySingleton<HomeRemoteDataSource>(
-      () => HomeRemoteDataSourceImpl(
-        userService: serviceLocator<BaseFirebaseService<UserModel>>(),
-        surveyService: serviceLocator<BaseFirebaseService<SurveyModel>>(),
-      ),
-    )
-    ..registerLazySingleton<HomeRepository>(
-      () => HomeRepositoryImpl(
-        remoteDataSource: serviceLocator<HomeRemoteDataSource>(),
-      ),
-    )
-    ..registerLazySingleton<GetPublishedSurveyIdsUsecase>(
-      () => GetPublishedSurveyIdsUsecase(
-        repository: serviceLocator<HomeRepository>(),
-      ),
-    )
-    ..registerLazySingleton<GetPublishedSurveysUsecase>(
-      () => GetPublishedSurveysUsecase(
-        repository: serviceLocator<HomeRepository>(),
-      ),
-    )
-    ..registerLazySingleton<HomeViewModel>(
-      () => HomeViewModel(
-        getSurveyIdsUsecase: serviceLocator<GetPublishedSurveyIdsUsecase>(),
-        getSurveysUseCase: serviceLocator<GetPublishedSurveysUsecase>(),
-      ),
-    )
-
-//////////////////////////////////////////////////////////////////////////////////////
     ..registerLazySingleton<CreateSurveyRemoteDataSource>(
       () => CreateSurveyRemoteDataSourceImpl(
         surveyFirebaseService:
@@ -204,11 +172,6 @@ void setupLocator() {
     ..registerLazySingleton<ShareSurveyInfoUseCase>(
       () => ShareSurveyInfoUseCase(
         repository: serviceLocator<CreateSurveyRepository>(),
-      ),
-    )
-    ..registerLazySingleton<RemoveSurveyImagesUseCase>(
-      () => RemoveSurveyImagesUseCase(
-        repository: serviceLocator<ImageProcessRepository>(),
       ),
     )
     ..registerLazySingleton<RemoveSurveyUseCase>(
@@ -241,7 +204,50 @@ void setupLocator() {
         surveyLogic: serviceLocator<SurveyLogic>(),
         shareLink: serviceLocator<LinkSharingHelper>(),
       ),
-    ) //////////////////////////////////////////////////////////////////////////
+    )
+//////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////// HOME FEATURE //////////////////////////////////////////////
+    ..registerLazySingleton<BaseFirebaseService<UserModel>>(
+      () => FirebaseServiceImpl(
+        firestore: serviceLocator<FirebaseFirestore>(),
+      ),
+    )
+    ..registerLazySingleton<HomeRemoteDataSource>(
+      () => HomeRemoteDataSourceImpl(
+        userService: serviceLocator<BaseFirebaseService<UserModel>>(),
+        surveyService: serviceLocator<BaseFirebaseService<SurveyModel>>(),
+      ),
+    )
+    ..registerLazySingleton<HomeRepository>(
+      () => HomeRepositoryImpl(
+        remoteDataSource: serviceLocator<HomeRemoteDataSource>(),
+      ),
+    )
+    ..registerLazySingleton<GetPublishedSurveyIdsUsecase>(
+      () => GetPublishedSurveyIdsUsecase(
+        repository: serviceLocator<HomeRepository>(),
+      ),
+    )
+    ..registerLazySingleton<GetPublishedSurveysUsecase>(
+      () => GetPublishedSurveysUsecase(
+        repository: serviceLocator<HomeRepository>(),
+      ),
+    )
+    ..registerLazySingleton<HomeViewModel>(
+      () => HomeViewModel(
+        getSurveyIdsUsecase: serviceLocator<GetPublishedSurveyIdsUsecase>(),
+        getSurveysUseCase: serviceLocator<GetPublishedSurveysUsecase>(),
+      ),
+    )
+
+///////////////////////////////// IMAGE PROCESS FEATURE////////////////////////////////////////////////////
+
+    ..registerLazySingleton<RemoveSurveyImagesUseCase>(
+      () => RemoveSurveyImagesUseCase(
+        repository: serviceLocator<ImageProcessRepository>(),
+      ),
+    )
     ..registerLazySingleton<ImageProcessRemoteSource>(
       () => ImageProcessRemoteSourceImpl(
         storage: serviceLocator<FirebaseStorage>(),
@@ -280,5 +286,6 @@ void setupLocator() {
         removeSurveyImagesUseCase: serviceLocator<RemoveSurveyImagesUseCase>(),
       ),
     );
-  //////////////////////////////////////////////////////////////////////////;
+////////////////////////////////////////////////////////////////////////////////////////
+
 }
