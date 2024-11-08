@@ -61,7 +61,7 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
                         maxLines: 1,
                         controller: surveyTitleController,
                         validator: (value) =>
-                            AppValidators().surveyTitleValidator(value),
+                            AppValidators.surveyTitleValidator(value),
                         keyboardType: TextInputType.text,
                       ),
                       SizedBox(height: context.dynamicHeight(0.035)),
@@ -71,8 +71,9 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
                         maxLines: 4,
                         controller: surveyDescriptionController,
                         validator: (value) =>
-                            AppValidators().surveyDescriptionValidator(value),
-                        keyboardType: TextInputType.text,
+                            AppValidators.surveyDescriptionValidator(value),
+                        keyboardType: TextInputType.multiline,
+                        textInputAction: TextInputAction.none,
                       ),
                       SizedBox(height: context.dynamicHeight(0.035)),
                       GestureDetector(
@@ -83,7 +84,7 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
                             hintText: 'Select Start Date',
                             controller: startDateController,
                             validator: (value) =>
-                                AppValidators().startDateValidator(value),
+                                AppValidators.startDateValidator(value),
                             keyboardType: TextInputType.none,
                             maxLines: 1,
                           ),
@@ -98,7 +99,7 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
                             hintText: 'Select End Date',
                             controller: endDateController,
                             validator: (value) =>
-                                AppValidators().endDateValidator(value),
+                                AppValidators.endDateValidator(value),
                             maxLines: 1,
                             keyboardType: TextInputType.none,
                           ),
@@ -111,7 +112,7 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
                         maxLines: 1,
                         controller: surveyTimeInMinute,
                         validator: (value) =>
-                            AppValidators().durationInMinuteValidator(value),
+                            AppValidators.durationInMinuteValidator(value),
                         keyboardType: TextInputType.number,
                       ),
                       SizedBox(height: context.dynamicHeight(0.035)),
