@@ -10,8 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dartz/dartz.dart';
-
-import 'use_cases_test.mocks.dart'; // Either için gerekli
+import 'create_survey_repository_test.mocks.dart';
 
 // Mock oluşturulacak sınıfların listesi
 @GenerateMocks([CreateSurveyRepository])
