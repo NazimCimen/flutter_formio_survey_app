@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app/core/utils/app_size_extensions.dart';
-import 'package:flutter_survey_app/core/utils/app_validators.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/mixin/create_survey_info_view_mixin.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/widgets/custom_input_text_field.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/widgets/image_input_widgets.dart';
-import 'package:flutter_survey_app/product/constants/image_aspect_ratio.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
+import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
+import 'package:flutter_survey_app_mobile/core/base/state.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/padding/dynamic_padding.dart';
+import 'package:flutter_survey_app_mobile/core/utils/app_validators.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/mixin/create_survey_info_view_mixin.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/custom_input_text_field.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/image_input_widgets.dart';
+import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
 import 'package:provider/provider.dart';
+part '../sub_view/create_survey_info_sub_view.dart';
 
 class CreateSurveyInfoView extends StatefulWidget {
   const CreateSurveyInfoView({super.key});
@@ -16,7 +20,8 @@ class CreateSurveyInfoView extends StatefulWidget {
   CreateSurveyInfoViewState createState() => CreateSurveyInfoViewState();
 }
 
-class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
+class CreateSurveyInfoViewState
+    extends BaseStateful<CreateSurveyInfoView, CreateSurveyViewModel>
     with CreateSurveyInfoViewMixin {
   @override
   Widget build(BuildContext context) {
@@ -30,7 +35,10 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
         absorbing:
             context.watch<CreateSurveyViewModel>().state == ViewState.loading,
         child: Scaffold(
-          appBar: _buildAppBar(context),
+          appBar: _AppBar(
+            closePage: closePage,
+            navigateAndSetSurveyInfoValues: navigateAndSetSurveyInfoValues,
+          ),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
@@ -55,7 +63,7 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
                         maxLines: 1,
                         controller: surveyTitleController,
                         validator: (value) =>
-                            AppValidators().surveyTitleValidator(value),
+                            AppValidators.surveyTitleValidator(value),
                         keyboardType: TextInputType.text,
                       ),
                       SizedBox(height: context.dynamicHeight(0.035)),
@@ -65,8 +73,9 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
                         maxLines: 4,
                         controller: surveyDescriptionController,
                         validator: (value) =>
-                            AppValidators().surveyDescriptionValidator(value),
-                        keyboardType: TextInputType.text,
+                            AppValidators.surveyDescriptionValidator(value),
+                        keyboardType: TextInputType.multiline,
+                        textInputAction: TextInputAction.none,
                       ),
                       SizedBox(height: context.dynamicHeight(0.035)),
                       GestureDetector(
@@ -77,7 +86,7 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
                             hintText: 'Select Start Date',
                             controller: startDateController,
                             validator: (value) =>
-                                AppValidators().startDateValidator(value),
+                                AppValidators.startDateValidator(value),
                             keyboardType: TextInputType.none,
                             maxLines: 1,
                           ),
@@ -92,7 +101,7 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
                             hintText: 'Select End Date',
                             controller: endDateController,
                             validator: (value) =>
-                                AppValidators().endDateValidator(value),
+                                AppValidators.endDateValidator(value),
                             maxLines: 1,
                             keyboardType: TextInputType.none,
                           ),
@@ -105,7 +114,7 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
                         maxLines: 1,
                         controller: surveyTimeInMinute,
                         validator: (value) =>
-                            AppValidators().durationInMinuteValidator(value),
+                            AppValidators.durationInMinuteValidator(value),
                         keyboardType: TextInputType.number,
                       ),
                       SizedBox(height: context.dynamicHeight(0.035)),
@@ -117,41 +126,6 @@ class CreateSurveyInfoViewState extends State<CreateSurveyInfoView>
           ),
         ),
       ),
-    );
-  }
-
-  AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      forceMaterialTransparency: true,
-      leading: GestureDetector(
-        onTap: closePage,
-        child: const Icon(Icons.close_outlined),
-      ),
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      title: Text(
-        'Create Your Survey',
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-      ),
-      actions: [
-        Padding(
-          padding: context.paddingHorizRightLow,
-          child: InkWell(
-            onTap: () {
-              navigateAndSetSurveyInfoValues();
-            },
-            child: Text(
-              'NEXT',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onSecondary,
-                  ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

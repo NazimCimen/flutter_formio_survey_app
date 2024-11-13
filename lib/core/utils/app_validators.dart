@@ -1,18 +1,17 @@
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
-class AppValidators {
-  static final AppValidators _instance = AppValidators._internal();
-  factory AppValidators() {
-    return _instance;
-  }
-  AppValidators._internal();
+@immutable
+final class AppValidators {
+  const AppValidators._();
 
-  final String emailRegExp =
+  static const String emailRegExp =
       r'^[^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*|(\".+\")@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-  final String passwordRegExp = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$';
-  final String usernameRegExp = r'^[a-zA-Z0-9_]{3,10}$';
+  static const String passwordRegExp =
+      r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$';
+  static const String usernameRegExp = r'^[a-zA-Z0-9_]{3,10}$';
 
-  String? emailValidator(String? value) {
+  static String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Lütfen geçerli bir e-posta giriniz';
     }
@@ -23,7 +22,7 @@ class AppValidators {
     return null;
   }
 
-  String? passwordValidator(String? value) {
+  static String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Lütfen şifrenizi giriniz';
     } else if (value.length < 6) {
@@ -37,7 +36,7 @@ class AppValidators {
     return null;
   }
 
-  String? usernameValidator(String? value) {
+  static String? usernameValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Lütfen kullanıcı adınızı giriniz';
     } else if (value.length < 3 || value.length > 10) {
@@ -51,7 +50,7 @@ class AppValidators {
     return null;
   }
 
-  String? surveyTitleValidator(String? value) {
+  static String? surveyTitleValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Anket başlığı boş olamaz';
     } else if (value.length > 50) {
@@ -60,7 +59,7 @@ class AppValidators {
     return null;
   }
 
-  String? surveyDescriptionValidator(String? value) {
+  static String? surveyDescriptionValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Anket açıklaması boş olamaz';
     } else if (value.length > 200) {
@@ -69,7 +68,7 @@ class AppValidators {
     return null;
   }
 
-  String? startDateValidator(String? value) {
+  static String? startDateValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Başlangıç tarihi boş olamaz';
     }
@@ -80,7 +79,7 @@ class AppValidators {
     return null;
   }
 
-  String? endDateValidator(String? value) {
+  static String? endDateValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Bitiş tarihi boş olamaz';
     }
@@ -91,7 +90,7 @@ class AppValidators {
     return null;
   }
 
-  bool _isValidDateFormat(String value, String format) {
+  static bool _isValidDateFormat(String value, String format) {
     try {
       DateFormat(format).parseStrict(value);
       return true;
@@ -100,7 +99,7 @@ class AppValidators {
     }
   }
 
-  String? durationInMinuteValidator(String? value) {
+  static String? durationInMinuteValidator(String? value) {
     if (value == null || value.isEmpty) {
       return null; // Boş geçilebilir.
     }

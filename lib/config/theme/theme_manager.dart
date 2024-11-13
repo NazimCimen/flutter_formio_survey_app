@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app/config/theme/application_theme.dart';
+import 'package:flutter_survey_app_mobile/config/theme/application_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class IThemeManager {
@@ -32,11 +32,14 @@ class ThemeManager extends ChangeNotifier implements IThemeManager {
   ThemeManager() {
     loadTheme();
   }
+  void isLoading(bool value) {
+    isLoadingTheme = value;
+    notifyListeners();
+  }
 
   @override
   Future<void> changeTheme(ThemeEnum theme) async {
-    isLoadingTheme = true;
-    notifyListeners();
+    isLoading(true);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_themeKey, theme.name);
     currentThemeEnum = theme;
@@ -44,8 +47,7 @@ class ThemeManager extends ChangeNotifier implements IThemeManager {
         ? CustomDarkTheme().themeData
         : CustomLightTheme().themeData;
     themeMode = theme == ThemeEnum.dark ? ThemeMode.dark : ThemeMode.light;
-    isLoadingTheme = false;
-    notifyListeners();
+    isLoading(false);
   }
 
   @override

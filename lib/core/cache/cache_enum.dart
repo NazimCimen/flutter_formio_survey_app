@@ -1,4 +1,10 @@
-enum CacheKeyEnum { authToken, encryptionKey, removeSurvey, removeSurveyImages }
+enum CacheKeyEnum {
+  authToken,
+  encryptionKey,
+  removeSurvey,
+  removeSurveyImages,
+  onboardVisibility,
+}
 
 enum CacheHiveBoxEnum {
   authBox,

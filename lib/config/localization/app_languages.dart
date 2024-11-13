@@ -1,11 +1,11 @@
-import 'dart:ui';
-
-class AppLanguages {
+import 'package:flutter/material.dart';
+@immutable
+final class AppLanguages {
   final String name;
   final String flagName;
   final Locale locale;
 
-  AppLanguages({
+  const AppLanguages({
     required this.name,
     required this.flagName,
     required this.locale,

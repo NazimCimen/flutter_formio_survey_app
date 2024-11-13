@@ -1,5 +1,28 @@
 part of '../view/add_question_view.dart';
 
+class _AppBar extends BaseStateless<void> implements PreferredSizeWidget {
+  const _AppBar();
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      title: Text(
+        'Çoktan Seçmeli',
+        style: textTheme(context).titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: colorScheme(context).primary,
+            ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
 class _BottomActionButtons extends StatelessWidget {
   final VoidCallback onPressedCancel;
   final VoidCallback onPressedSave;

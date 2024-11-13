@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_survey_app/core/cache/cache_enum.dart';
+import 'package:flutter_survey_app_mobile/core/cache/cache_enum.dart';
 import 'package:hive/hive.dart';
 
 //THIS CLASS THAT SECURELY STORES AND MANAGES THE ENCRPTION KEY.

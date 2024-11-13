@@ -1,4 +1,4 @@
-import 'package:flutter_survey_app/core/cache/cache_manager/base_cache_manager.dart';
+import 'package:flutter_survey_app_mobile/core/cache/cache_manager/base_cache_manager.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 /// IT IS A STANDART CACHE MANAGEMENT CLASS THAT DOES NOT PERFORM ENCRYPTION.IT EXTENDS BaseCacheManager<T>,

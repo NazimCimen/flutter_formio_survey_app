@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_survey_app/core/error/exception.dart';
-import 'package:flutter_survey_app/core/error/failure.dart';
+import 'package:flutter_survey_app_mobile/core/error/exception.dart';
+import 'package:flutter_survey_app_mobile/core/error/failure.dart';
 
 class FailureHandler {
   FailureHandler._();
@@ -30,7 +30,6 @@ class FailureHandler {
         errorMessage: 'Firebase hata: ${e.code} - ${e.message}',
       );
     } else if (e.toString().contains('SocketException')) {
-      // Bu örnek internet bağlantı hatalarını yakalamak için
       return ConnectionFailure(
         errorMessage: 'İnternet bağlantı hatası oluştu.',
       );
@@ -50,7 +49,6 @@ class FailureHandler {
     return UnKnownException('unknown-error');
   }
 
-  // Standart fold işlemleri için safeApiCall metodu
   static Future<Either<Failure, T>> foldAndReturnEitherResult<T>(
     Future<Either<Failure, T>> apiCall,
   ) async {
