@@ -1,15 +1,15 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app/core/utils/app_border_radius_extensions.dart';
-import 'package:flutter_survey_app/core/utils/app_size_extensions.dart';
-import 'package:flutter_survey_app/core/utils/image_enum.dart';
-import 'package:flutter_survey_app/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app/product/componets/custom_sheets.dart';
-import 'package:flutter_survey_app/product/constants/image_aspect_ratio.dart';
-import 'package:flutter_survey_app/product/decorations/box_decorations/custom_box_decoration.dart';
-import 'package:flutter_survey_app/product/widgets/custom_progress_indicator.dart';
-import 'package:flutter_survey_app/product/widgets/custom_text_widgets.dart';
+import 'package:flutter_survey_app_mobile/core/base/state.dart';
+import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
+import 'package:flutter_survey_app_mobile/core/utils/image_enum.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
+import 'package:flutter_survey_app_mobile/product/componets/custom_sheets.dart';
+import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
+import 'package:flutter_survey_app_mobile/product/decorations/box_decorations/custom_box_decoration.dart';
+import 'package:flutter_survey_app_mobile/product/widgets/custom_progress_indicator.dart';
+import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:provider/provider.dart';
 

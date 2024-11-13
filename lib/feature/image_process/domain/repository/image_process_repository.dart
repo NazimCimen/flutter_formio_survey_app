@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_survey_app/core/error/failure.dart';
+import 'package:flutter_survey_app_mobile/core/error/failure.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 

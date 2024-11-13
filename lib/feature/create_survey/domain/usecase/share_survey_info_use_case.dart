@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_survey_app/core/error/failure.dart';
-import 'package:flutter_survey_app/feature/shared_layers/domain/entity/survey_entity.dart';
-import 'package:flutter_survey_app/feature/create_survey/domain/repository/create_survey_repository.dart';
+import 'package:flutter_survey_app_mobile/core/error/failure.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/survey_entity.dart';
+import 'package:flutter_survey_app_mobile/feature/create_survey/domain/repository/create_survey_repository.dart';
 
 class ShareSurveyInfoUseCase {
   final CreateSurveyRepository repository;

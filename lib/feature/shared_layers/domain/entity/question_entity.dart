@@ -1,24 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-enum QuestionType {
-  multipleChoice,
-  openEnded,
-  dropdown,
-}
-
-extension QuestionTypeExtension on QuestionType {
-  String get qType {
-    switch (this) {
-      case QuestionType.multipleChoice:
-        return 'Multiple Choice';
-      case QuestionType.openEnded:
-        return 'Open Ended';
-      case QuestionType.dropdown:
-        return 'Dropdown';
-    }
-  }
-}
-
 class QuestionEntity extends Equatable {
   final String? questionId;
   final String? surveyId;
@@ -75,5 +56,24 @@ class QuestionEntity extends Equatable {
       isRequired: isRequired ?? this.isRequired,
       addOptionOther: addOptionOther ?? this.addOptionOther,
     );
+  }
+}
+
+enum QuestionType {
+  multipleChoice,
+  openEnded,
+  dropdown,
+}
+
+extension QuestionTypeExtension on QuestionType {
+  String get qType {
+    switch (this) {
+      case QuestionType.multipleChoice:
+        return 'Multiple Choice';
+      case QuestionType.openEnded:
+        return 'Open Ended';
+      case QuestionType.dropdown:
+        return 'Dropdown';
+    }
   }
 }

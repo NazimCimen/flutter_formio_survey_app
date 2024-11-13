@@ -1,5 +1,5 @@
-import 'package:flutter_survey_app/feature/shared_layers/domain/entity/question_entity.dart';
-import 'package:flutter_survey_app/product/firebase/base_firebase_model.dart';
+import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
+import 'package:flutter_survey_app_mobile/product/firebase/model/base_firebase_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'question_model.g.dart';
 
@@ -17,6 +17,8 @@ class QuestionModel extends QuestionEntity
     super.isRequired,
     super.multipleChoices,
   });
+  @override
+  String? get id => questionId;
   @override
   QuestionModel fromJson(Map<String, dynamic> json) =>
       _$QuestionModelFromJson(json);

@@ -8,39 +8,8 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      leading: Builder(
-        builder: (BuildContext context) {
-          return GestureDetector(
-            onTap: () {
-              Scaffold.of(context).openDrawer();
-            },
-            child: Padding(
-              padding: context.paddingAllLow,
-              child: Image.asset(
-                ImageEnums.formioo2.toPathPng,
-                fit: BoxFit.contain,
-              ),
-            ),
-          );
-        },
-      ),
       centerTitle: true,
-      title: const CustomTextHeadlineTitleWidget(title: 'Formio'),
-      actions: [
-        Padding(
-          padding: context.paddingAllLow,
-          child: GestureDetector(
-            child: SizedBox(
-              height: context.dynamicHeight(0.04),
-              child: Image.asset(
-                ImageEnums.notificationIcon.toPathPng,
-                color: Theme.of(context).colorScheme.onSurface,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ),
-      ],
+      title: CustomTextHeadlineTitleWidget(title: StringConstants.appName),
     );
   }
 
@@ -54,7 +23,6 @@ class _DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      // backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
       elevation: 0,
       shape: ContinuousRectangleBorder(
         borderRadius: context.borderRadiusTopMedium,
@@ -72,12 +40,12 @@ class _DrawerWidget extends StatelessWidget {
                   Padding(
                     padding: context.paddingAllLow,
                     child: Image.asset(
-                      ImageEnums.formioo2.toPathPng,
+                      ImageEnums.appLogo.toPathPng,
                       fit: BoxFit.cover,
                       height: context.dynamicHeight(0.1),
                     ),
                   ),
-                  const CustomTextHeadlineTitleWidget(title: 'Formio')
+                  const CustomTextHeadlineTitleWidget(title: 'Formio'),
                 ],
               ),
             ),
@@ -108,6 +76,24 @@ class _DrawerWidget extends StatelessWidget {
   }
 }
 
+class _FloatActionButton extends StatelessWidget {
+  const _FloatActionButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        NavigatorService.pushNamed(AppRoutes.createSurveyInfoView);
+      },
+      child: Icon(
+        Icons.add_outlined,
+        color: Theme.of(context).colorScheme.onSurface,
+        size: context.dynamicHeight(0.03),
+      ),
+    );
+  }
+}
+
 class _DrawerListTile extends StatelessWidget {
   final IconData iconData;
   final String text;
@@ -128,103 +114,6 @@ class _DrawerListTile extends StatelessWidget {
       onTap: () {
         NavigatorService.pushNamed(AppRoutes.settingsView);
       },
-    );
-  }
-}
-
-class _TabBarSection extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Column(
-        children: [
-          TabBar(
-            dividerColor: Colors.transparent,
-            indicatorColor: Theme.of(context).colorScheme.onSurface,
-            labelColor: Theme.of(context).colorScheme.onSurface,
-            unselectedLabelColor: Theme.of(context).colorScheme.tertiary,
-            tabs: const [
-              Tab(text: 'My Surveys'),
-              Tab(text: 'Shared with Me'),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SurveyCard extends StatelessWidget {
-  const _SurveyCard({
-    required this.title,
-    required this.subtitle,
-    required this.imageUrl,
-  });
-  final String title;
-  final String subtitle;
-  final String imageUrl;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Theme.of(context).colorScheme.onPrimaryContainer,
-      shape:
-          RoundedRectangleBorder(borderRadius: context.borderRadiusAllMedium),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: ClipRRect(
-              borderRadius: context.borderRadiusTopMedium,
-              child: Image.network(
-                imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-            ),
-          ),
-          Padding(
-            padding: context.paddingAllLow,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomTextSubTitleWidget(subTitle: title),
-                CustomTextGreySubTitleWidget(
-                  subTitle: subtitle,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SurveyList extends StatelessWidget {
-  const _SurveyList();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: context.paddingHorizAllMedium,
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          childAspectRatio: 1.2,
-        ),
-        itemCount: 6,
-        itemBuilder: (context, index) {
-          return _SurveyCard(
-            title: 'Virtual sky',
-            subtitle: '${index + 1} answered',
-            imageUrl: 'https://a.d-cd.net/J3aZtvdAfEzaArEuyR0d17Z_o1s-1920.jpg',
-          );
-        },
-      ),
     );
   }
 }

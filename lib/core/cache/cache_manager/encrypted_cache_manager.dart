@@ -1,5 +1,5 @@
-import 'package:flutter_survey_app/core/cache/cache_manager/base_cache_manager.dart';
-import 'package:flutter_survey_app/core/cache/encryption/encryption_service.dart';
+import 'package:flutter_survey_app_mobile/core/cache/cache_manager/base_cache_manager.dart';
+import 'package:flutter_survey_app_mobile/core/cache/encryption/encryption_service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 ///IT IS A CACHE MANAGEMENT CLASS THAT INCLUDES ENCRYPTION OPERATIONS BY EXTENDING BaseCacheManager<String>
