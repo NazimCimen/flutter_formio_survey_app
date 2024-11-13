@@ -7,8 +7,8 @@ import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/vie
 import 'package:flutter_survey_app_mobile/feature/image_process/helper/image_helper.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/survey_entity.dart';
-import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/survey_entity_extension.dart';
 import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
+import 'package:flutter_survey_app_mobile/product/firebase/firebase_paths.dart';
 import 'package:flutter_survey_app_mobile/product/helper/link_sharing_helper.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';

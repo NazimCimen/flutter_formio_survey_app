@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter_survey_app_mobile/core/error/exception.dart';
 import 'package:flutter_survey_app_mobile/product/constants/app_durations.dart';
 import 'package:flutter_survey_app_mobile/product/firebase/model/base_firebase_model.dart';
@@ -13,6 +12,7 @@ class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
     required this.firestore,
   });
 
+  /// TO SAVE ITEM IN FIRESTORE
   @override
   Future<void> setItem(String collectionPath, T item) async {
     await firestore
@@ -27,6 +27,7 @@ class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
     );
   }
 
+  /// TO UPDATE ITEM IN FIRESTORE
   @override
   Future<void> updateItem(String collectionPath, String docId, T item) async {
     await firestore
@@ -41,6 +42,7 @@ class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
     );
   }
 
+  /// TO DELETE ITEM IN FIRESTORE
   @override
   Future<void> deleteItem(
     String collectionPath,
@@ -54,6 +56,7 @@ class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
     );
   }
 
+  /// TO DELETE ITEM SUB COLLECTIONS IN FIRESTORE
   @override
   Future<void> deleteSubCollections(
     List<String> subCollections,
@@ -71,6 +74,7 @@ class FirebaseServiceImpl<T extends BaseFirebaseModel<T>>
     }
   }
 
+  /// TO GET ITEM FROM FIRETORE
   @override
   Future<T> getItem({
     required String collectionPath,

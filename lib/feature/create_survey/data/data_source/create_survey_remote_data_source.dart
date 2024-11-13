@@ -4,7 +4,7 @@ import 'package:flutter_survey_app_mobile/core/error/failure.dart';
 import 'package:flutter_survey_app_mobile/core/error/failure_handler.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/data/model/question_model.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/data/model/survey_model.dart';
-import 'package:flutter_survey_app_mobile/product/firebase/firebase_collection_enum.dart';
+import 'package:flutter_survey_app_mobile/product/firebase/firebase_paths.dart';
 import 'package:flutter_survey_app_mobile/product/firebase/service/base_firebase_service.dart';
 
 abstract class CreateSurveyRemoteDataSource {
@@ -69,7 +69,7 @@ class CreateSurveyRemoteDataSourceImpl extends CreateSurveyRemoteDataSource {
       }
       for (final model in questionModelList) {
         await questionFirebaseService.setItem(
-          FirebaseCollectionEnum.surveys.getQuestionsPath(
+          FirebaseCollectionEnum.surveys.getQuestions(
             surveyId: surveyId,
           ),
           model,
@@ -86,7 +86,7 @@ class CreateSurveyRemoteDataSourceImpl extends CreateSurveyRemoteDataSource {
   Future<Either<Failure, bool>> removeSurvey({required String surveyId}) async {
     try {
       await surveyFirebaseService.deleteSubCollections([
-        FirebaseCollectionEnum.surveys.getQuestionsPath(surveyId: surveyId),
+        FirebaseCollectionEnum.surveys.getQuestions(surveyId: surveyId),
       ]);
 
       await surveyFirebaseService.deleteItem(

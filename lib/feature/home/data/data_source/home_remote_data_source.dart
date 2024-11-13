@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_survey_app_mobile/core/error/failure.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/data/model/survey_model.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/data/model/user_model.dart';
-import 'package:flutter_survey_app_mobile/product/firebase/firebase_collection_enum.dart';
+import 'package:flutter_survey_app_mobile/product/firebase/firebase_paths.dart';
 import 'package:flutter_survey_app_mobile/product/firebase/service/base_firebase_service.dart';
 
 abstract class HomeRemoteDataSource {
@@ -22,6 +22,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
     required this.userService,
     required this.surveyService,
   });
+
   /// IT USED TO GET PUBLISHED SURVEY IDS FROM FIRESTORE
   @override
   Future<Either<Failure, List<String>?>> getPublishedSurveyIds({
@@ -38,6 +39,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
       return Left(ConnectionFailure(errorMessage: 'errorMessage'));
     }
   }
+
   /// IT USED TO GET PUBLISHED SURVEYS
   @override
   Future<Either<Failure, List<SurveyModel>>> getPublishedSurveys({

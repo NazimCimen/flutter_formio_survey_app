@@ -7,7 +7,7 @@ import 'package:flutter_survey_app_mobile/feature/image_process/domain/usecase/g
 import 'package:flutter_survey_app_mobile/feature/image_process/domain/usecase/get_image_url_use_case.dart';
 import 'package:flutter_survey_app_mobile/feature/image_process/domain/usecase/remove_survey_images_use_case.dart';
 import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
-import 'package:flutter_survey_app_mobile/product/firebase/firebase_constants.dart';
+import 'package:flutter_survey_app_mobile/product/firebase/firebase_paths.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
