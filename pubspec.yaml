@@ -32,7 +32,7 @@ dependencies:
   uuid: ^4.5.0
   intl: ^0.19.0
   flutter_speed_dial: ^7.0.0
-  internet_connection_checker: ^2.0.0
+  internet_connection_checker: ^1.0.0+1
   # Cache
   hive: ^2.2.3 # A fast and lightweight NoSQL database for local data storage
   hive_flutter: ^1.1.0 # Provides simple and secure data storage with Hive in Flutter applications
