@@ -1,68 +1,66 @@
 name: flutter_survey_app_mobile
 description: "A new Flutter project."
 
-publish_to: 'none' 
-
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.0 <4.0.0'
+  sdk: ">=3.4.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.6
+
+
+  # Core
+  dartz: ^0.10.1 # Functional programming library for Dart
+  get_it: ^7.7.0 # Service locator for dependency injection
+  uuid: ^4.5.0 # Generates unique IDs for objects or entities
+  intl: ^0.19.0 # Provides internationalization and localization facilities
+  change_app_package_name: ^1.4.0 # Allows changing the app package name without manual code adjustments
+  json_annotation: 4.9.0 # Enables code generation for JSON serialization/deserialization
+  package_info_plus: ^8.1.0 # Retrieves package information like app version, build number, etc.
+  equatable: ^2.0.5 # used to prevent object reference shifts
+  easy_localization: ^3.0.7 # Simplifies localization and internationalization of the app
+  shared_preferences: ^2.3.2
+  share_plus: ^10.0.2 # Enables sharing content from the app to other applications
+  url_launcher: ^6.3.0 # Launches URLs in a web browser or another app
+  mockito: ^5.4.4 # Used to test the app and improve the code quality
+  provider: ^6.1.2 # State management library
+  image_cropper: ^8.0.2 # Allows cropping of images
+  image_picker: ^1.1.2 # Enables image picking from gallery or camera
+  internet_connection_checker: ^1.0.0+1 # Checks for active internet connections
+
 
   # Firebase
+  firebase_core: ^3.5.0  # Used to initialize and configure Firebase services in the application.
+  cloud_firestore: ^5.4.2 # Used for cloud database services.
+  firebase_storage: ^12.3.1 # Used for file storage and management.
 
+  # Ui
+  font_awesome_flutter: ^10.7.0 # Provides Font Awesome icons for Flutter
+  cupertino_icons: ^1.0.6 # Cupertino style icons for iOS design
+  google_fonts: ^6.2.1 # Allows the use of fonts from Google Fonts
+  flutter_speed_dial: ^7.0.0 # Creates floating action buttons with a speed dial effect
 
-  equatable: ^2.0.5 # used to prevent object reference shifts
-  easy_localization: ^3.0.7
-  font_awesome_flutter: ^10.7.0
-  provider: ^6.1.2
-  google_fonts: ^6.2.1
-  shared_preferences: ^2.3.2
-  json_serializable: ^6.8.0
-  image_cropper: ^8.0.2
-  curved_navigation_bar: ^1.0.6
-  image_picker: ^1.1.2
-  dartz: ^0.10.1
-  get_it: ^7.7.0
-  uuid: ^4.5.0
-  intl: ^0.19.0
-  flutter_speed_dial: ^7.0.0
-  internet_connection_checker: ^1.0.0+1
   # Cache
   hive: ^2.2.3 # A fast and lightweight NoSQL database for local data storage
   hive_flutter: ^1.1.0 # Provides simple and secure data storage with Hive in Flutter applications
   encrypt: ^5.0.3 # Used for data encryption
   flutter_secure_storage: ^9.2.2 # Secure storage for sensitive data (e.g., encrypted data)
-  share_plus: ^10.0.2
-  url_launcher: ^6.3.0
-  mockito: ^5.4.4 
-  firebase_core: ^3.5.0
-  cloud_firestore: ^5.4.2
-  firebase_storage: ^12.3.1
-  change_app_package_name: ^1.4.0
-  json_annotation: 4.9.0
-  package_info_plus: ^8.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  json_serializable: ^6.8.0 # Code generator for JSON serialization
   build_runner: ^2.3.3 # Build system for Dart to generate code
   very_good_analysis: ^6.0.0 # Linter rules for code quality and consistency
-  hive_generator: ^2.0.1
-
+  hive_generator: ^2.0.1 # Generates TypeAdapter code for Hive database
 
 flutter:
-
   uses-material-design: true
 
   assets:
     - assets/images/
     - assets/lang/
-
-    
-
-  
