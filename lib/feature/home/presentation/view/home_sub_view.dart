@@ -40,12 +40,12 @@ class _DrawerWidget extends StatelessWidget {
                   Padding(
                     padding: context.paddingAllLow,
                     child: Image.asset(
-                      ImageEnums.appLogo.toPathPng,
+                      ImageEnums.app_logo.toPathPng,
                       fit: BoxFit.cover,
                       height: context.dynamicHeight(0.1),
                     ),
                   ),
-                  const CustomTextHeadlineTitleWidget(title: 'Formio'),
+                  CustomTextHeadlineTitleWidget(title: StringConstants.appName),
                 ],
               ),
             ),

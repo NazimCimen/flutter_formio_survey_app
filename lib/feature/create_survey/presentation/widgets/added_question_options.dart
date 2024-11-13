@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';
@@ -18,8 +19,8 @@ class AddedQuestionOptions extends BaseStateless<void> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextSubTitleWidget(
-            subTitle: 'Question Options',
+          CustomTextSubTitleWidget(
+            subTitle: StringConstants.question_options,
           ),
           ...List.generate(
             questionEntity.options != null ? questionEntity.options!.length : 0,

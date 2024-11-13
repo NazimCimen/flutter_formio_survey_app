@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/padding/dynamic_padding.dart';
@@ -20,7 +21,9 @@ class AddOption extends BaseStateless<void> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CustomTextSubTitleWidget(subTitle: 'Seçenekler'),
+        CustomTextSubTitleWidget(
+          subTitle: StringConstants.question_options,
+        ),
         SizedBox(height: context.dynamicHeight(0.01)),
         Column(
           children: inputOptions
@@ -40,7 +43,7 @@ class AddOption extends BaseStateless<void> {
                               ),
                           decoration: CustomInputDecoration.inputDecoration(
                             context: context,
-                            hintText: 'Seçenek girin',
+                            hintText: StringConstants.question_enter_options,
                           ),
                         ),
                       ),

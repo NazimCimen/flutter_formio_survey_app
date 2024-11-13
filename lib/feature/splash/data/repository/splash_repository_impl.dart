@@ -5,6 +5,7 @@ import 'package:flutter_survey_app_mobile/feature/splash/data/data_source/splash
 import 'package:flutter_survey_app_mobile/feature/splash/data/data_source/splash_remote_data_source.dart';
 import 'package:flutter_survey_app_mobile/feature/splash/data/model/app_version_model.dart';
 import 'package:flutter_survey_app_mobile/feature/splash/domain/repository/splash_repository.dart';
+import 'package:flutter_survey_app_mobile/product/constants/failure_constants.dart';
 
 class SplashRepositoryImpl implements SplashRepository {
   final SplashLocalDataSource splashLocalDataSource;
@@ -19,7 +20,7 @@ class SplashRepositoryImpl implements SplashRepository {
       final result = await splashLocalDataSource.checkCacheOnboardShown();
       return Right(result);
     } on CacheException {
-      return Left(CacheFailure(errorMessage: 'cache error'));
+      return Left(FailureConstants.cacheError);
     }
   }
 

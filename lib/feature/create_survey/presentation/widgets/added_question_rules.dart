@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';
 
@@ -15,24 +16,24 @@ class AddedQuestionRules extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CustomTextSubTitleWidget(
-          subTitle: 'Rules',
+        CustomTextSubTitleWidget(
+          subTitle: StringConstants.question_rules,
         ),
         _QuestionRuleDetail(
-          title: 'Cevaplaması zorunlu soru',
+          title: StringConstants.question_required_answer,
           condition: questionEntity.isRequired,
         ),
         Visibility(
           visible: questionEntity.type == QuestionType.multipleChoice,
           child: _QuestionRuleDetail(
-            title: 'Çoklu Seçim Özelliği',
+            title: StringConstants.question_multiple_choice,
             condition: questionEntity.multipleChoices,
           ),
         ),
         Visibility(
           visible: questionEntity.type != QuestionType.openEnded,
           child: _QuestionRuleDetail(
-            title: 'Seçeneklere Diğer ekle',
+            title: StringConstants.question_add_other,
             condition: questionEntity.addOptionOther,
           ),
         ),

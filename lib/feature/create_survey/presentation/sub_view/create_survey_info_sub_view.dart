@@ -20,7 +20,7 @@ class _AppBar extends BaseStateless<void> implements PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: Text(
-        'Create Your Survey',
+        StringConstants.survey_create_ur_survey,
         style: textTheme(context).titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: colorScheme(context).primary,
@@ -32,7 +32,7 @@ class _AppBar extends BaseStateless<void> implements PreferredSizeWidget {
           child: InkWell(
             onTap: navigateAndSetSurveyInfoValues,
             child: Text(
-              'NEXT',
+              StringConstants.next,
               style: textTheme(context).titleLarge?.copyWith(
                     color: colorScheme(context).onSecondary,
                   ),

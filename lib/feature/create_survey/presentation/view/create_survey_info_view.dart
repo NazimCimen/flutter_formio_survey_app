@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
 import 'package:flutter_survey_app_mobile/core/base/state.dart';
@@ -49,7 +50,7 @@ class CreateSurveyInfoViewState
                   child: Column(
                     children: [
                       ImageInputWidget(
-                        title: 'Survey Image',
+                        title: StringConstants.survey_image,
                         cropAspectRatio:
                             ImageAspectRatioEnum.surveyImage.ratioCrop,
                         selectedFileBytes: context
@@ -58,8 +59,8 @@ class CreateSurveyInfoViewState
                       ),
                       SizedBox(height: context.dynamicHeight(0.035)),
                       CustomInputField(
-                        title: 'Survey Title',
-                        hintText: 'Survey Title',
+                        title: StringConstants.survey_title,
+                        hintText: StringConstants.survey_title,
                         maxLines: 1,
                         controller: surveyTitleController,
                         validator: (value) =>
@@ -68,8 +69,8 @@ class CreateSurveyInfoViewState
                       ),
                       SizedBox(height: context.dynamicHeight(0.035)),
                       CustomInputField(
-                        title: 'Survey Description',
-                        hintText: 'Survey Description',
+                        title: StringConstants.survey_desc,
+                        hintText: StringConstants.survey_desc,
                         maxLines: 4,
                         controller: surveyDescriptionController,
                         validator: (value) =>
@@ -82,8 +83,8 @@ class CreateSurveyInfoViewState
                         onTap: () => selectStartDate(context),
                         child: AbsorbPointer(
                           child: CustomInputField(
-                            title: 'Start Date',
-                            hintText: 'Select Start Date',
+                            title: StringConstants.survey_start_date,
+                            hintText: StringConstants.survey_start_date,
                             controller: startDateController,
                             validator: (value) =>
                                 AppValidators.startDateValidator(value),
@@ -97,8 +98,8 @@ class CreateSurveyInfoViewState
                         onTap: () => selectEndDate(context),
                         child: AbsorbPointer(
                           child: CustomInputField(
-                            title: 'End Date',
-                            hintText: 'Select End Date',
+                            title: StringConstants.survey_end_date,
+                            hintText: StringConstants.survey_end_date,
                             controller: endDateController,
                             validator: (value) =>
                                 AppValidators.endDateValidator(value),
@@ -109,8 +110,8 @@ class CreateSurveyInfoViewState
                       ),
                       SizedBox(height: context.dynamicHeight(0.035)),
                       CustomInputField(
-                        title: 'Duration (in minutes)',
-                        hintText: 'Duration (in minutes)',
+                        title: StringConstants.survey_minute,
+                        hintText: StringConstants.survey_minute,
                         maxLines: 1,
                         controller: surveyTimeInMinute,
                         validator: (value) =>

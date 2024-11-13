@@ -6,8 +6,10 @@ import 'package:flutter_survey_app_mobile/feature/image_process/domain/repositor
 class GetImageUrlUseCase {
   final ImageProcessRepository repository;
   GetImageUrlUseCase({required this.repository});
-  Future<Either<Failure, String>> call(
-      {required Uint8List imageBytes, required String path}) async {
+  Future<Either<Failure, String>> call({
+    required Uint8List imageBytes,
+    required String path,
+  }) async {
     return repository.getImageUrl(imageBytes: imageBytes, path: path);
   }
 }

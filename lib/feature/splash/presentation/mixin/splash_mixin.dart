@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
 import 'package:flutter_survey_app_mobile/feature/splash/presentation/view/splash_view.dart';
@@ -39,9 +40,8 @@ mixin SplashMixin on State<SplashView> {
     if (isForceUpdate) {
       CustomDialogs.showCustomDialog(
         context: context,
-        title: 'Yeni Bir Güncelleme Sizi Bekliyor!',
-        description:
-            'En yeni özellikler ve iyileştirmelerle deneyiminizi bir üst seviyeye taşıdık. Devam edebilmek için lütfen uygulamanızı güncelleyin.',
+        title: StringConstants.force_update,
+        description: StringConstants.force_update_desc,
         refresh: null,
         imagePath: null,
       );

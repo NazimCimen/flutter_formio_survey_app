@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CustomSheets {
@@ -13,7 +14,7 @@ class CustomSheets {
           children: <Widget>[
             ListTile(
               leading: const Icon(Icons.camera),
-              title: const Text('Kamera'),
+              title: Text(StringConstants.camera),
               onTap: () {
                 Navigator.pop(
                   context,
@@ -23,7 +24,7 @@ class CustomSheets {
             ),
             ListTile(
               leading: const Icon(Icons.image),
-              title: const Text('Galeri'),
+              title: Text(StringConstants.gallery),
               onTap: () {
                 Navigator.pop(
                   context,

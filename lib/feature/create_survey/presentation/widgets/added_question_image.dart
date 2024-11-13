@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
 import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
 import 'package:flutter_survey_app_mobile/product/decorations/box_decorations/custom_box_decoration.dart';
@@ -21,8 +22,8 @@ class AddedQuestionImage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomTextSubTitleWidget(
-            subTitle: 'Question Image',
+          CustomTextSubTitleWidget(
+            subTitle: StringConstants.question_image,
           ),
           SizedBox(height: context.dynamicHeight(0.005)),
           AspectRatio(

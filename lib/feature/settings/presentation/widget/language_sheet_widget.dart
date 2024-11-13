@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_mobile/config/localization/locale_constants.dart';
-import 'package:flutter_survey_app_mobile/config/localization/string_constanrs.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/app_size/constant_size.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';

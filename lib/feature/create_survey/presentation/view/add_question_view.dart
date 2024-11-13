@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
@@ -33,7 +34,10 @@ class _AddQuestionViewState
       absorbing: watchViewModel.state == ViewState.loading,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: const _AppBar(),
+        appBar: _AppBar(
+          questionTypeTitle:
+              widget.entity.type != null ? widget.entity.type!.qType : '',
+        ),
         body: SafeArea(
           child: Padding(
             padding: context.paddingAllMedium,
@@ -46,7 +50,7 @@ class _AddQuestionViewState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ImageInputWidget(
-                    title: 'Question Image',
+                    title: StringConstants.question_image,
                     cropAspectRatio:
                         ImageAspectRatioEnum.questionImage.ratioCrop,
                     selectedFileBytes: selectedImageBytes,
@@ -54,8 +58,8 @@ class _AddQuestionViewState
                   SizedBox(height: context.dynamicHeight(0.02)),
                   CustomInputField(
                     maxLines: 2,
-                    hintText: 'Metninizi girin',
-                    title: 'Soru Metni',
+                    hintText: StringConstants.question_input_hint,
+                    title: StringConstants.question_input_title,
                     controller: titleController,
                     validator: null,
                     keyboardType: TextInputType.text,
@@ -86,19 +90,19 @@ class _AddQuestionViewState
     return Column(
       children: [
         _buildCheckBoxRow(
-          title: 'Cevaplaması zorunlu soru',
+          title: StringConstants.question_required_answer,
           value: isRequiredCheckBoxValue,
           onChanged: (value) => isRequiredCheckBoxPressed(value: value),
         ),
         if (widget.entity.type == QuestionType.multipleChoice)
           _buildCheckBoxRow(
-            title: 'Çoklu seçim özelliği',
+            title: StringConstants.question_multiple_choice,
             value: isMultipleChoiceCheckBoxValue,
             onChanged: (value) => isMultipleChoiceCheckBoxPressed(value: value),
           ),
         if (widget.entity.type != QuestionType.openEnded)
           _buildCheckBoxRow(
-            title: 'Seçeneklere diğer ekle',
+            title: StringConstants.question_add_other,
             value: isOtherCheckBoxValue,
             onChanged: (value) => isOtherCheckBoxPressed(value: value),
           ),

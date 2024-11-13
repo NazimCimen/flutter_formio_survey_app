@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
 import 'package:flutter_survey_app_mobile/core/utils/image_enum.dart';
@@ -24,12 +25,12 @@ class _SplashViewState extends BaseStateful<SplashView, void> with SplashMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                ImageEnums.appLogo.toPathPng,
+                ImageEnums.app_logo.toPathPng,
                 fit: BoxFit.cover,
                 height: context.dynamicHeight(0.15),
               ),
               SizedBox(height: context.dynamicHeight(0.05)),
-              const CustomTextHeadlineTitleWidget(title: 'FORMIO'),
+              CustomTextHeadlineTitleWidget(title: StringConstants.appName),
             ],
           ),
         ),

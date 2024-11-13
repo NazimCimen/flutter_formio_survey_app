@@ -17,7 +17,7 @@ class _AppBar extends BaseStateless<void> implements PreferredSizeWidget {
       ),
       backgroundColor: Colors.transparent,
       title: Text(
-        'Create Your Questions',
+        StringConstants.survey_create_ur_survey,
         style: textTheme(context).titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: colorScheme(context).primary,
@@ -29,7 +29,7 @@ class _AppBar extends BaseStateless<void> implements PreferredSizeWidget {
           child: InkWell(
             onTap: shareSurvey,
             child: Text(
-              'SHARE',
+              StringConstants.publish,
               style: textTheme(context).titleLarge?.copyWith(
                     color: colorScheme(context).onSecondary,
                   ),
@@ -72,19 +72,19 @@ class _CustomFloatingActionButton extends BaseStateless<CreateSurveyViewModel> {
       children: [
         _buildSpeedDialChild(
           icon: Icons.list_outlined,
-          label: 'Çoktan Seçmeli',
+          label: StringConstants.question_type_multiple,
           type: QuestionType.multipleChoice,
           context: context,
         ),
         _buildSpeedDialChild(
           icon: Icons.expand_more,
-          label: 'Aşağı Açılır Menu',
+          label: StringConstants.question_type_dropdown,
           type: QuestionType.dropdown,
           context: context,
         ),
         _buildSpeedDialChild(
           icon: Icons.short_text_outlined,
-          label: 'Açık Uçlu',
+          label: StringConstants.question_type_open_ended,
           type: QuestionType.openEnded,
           context: context,
         ),

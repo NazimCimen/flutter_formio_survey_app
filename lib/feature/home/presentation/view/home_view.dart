@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_survey_app_mobile/config/localization/string_constanrs.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
@@ -36,12 +36,12 @@ class _HomeViewState extends BaseStateful<HomeView, HomeViewModel>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: context.dynamicHeight(0.01)),
-            const CustomTextTitleWidget(
-              title: 'Capture Voices,\nUncover Trends',
+            CustomTextTitleWidget(
+              title: StringConstants.home_title,
             ),
             SizedBox(height: context.dynamicHeight(0.01)),
             Text(
-              'Formio ile anketlerin oluştur yanıtları analiz et ve trendleri yakala.',
+              StringConstants.home_title_desc,
               style: textTheme.bodyMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.tertiary,

@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/view/add_question_view.dart';
@@ -70,7 +71,7 @@ mixin AddQuestionViewMixin
   List<String>? validateQuestion() {
     final trimmedTitle = titleController.text.trim();
     if (trimmedTitle.isEmpty) {
-      showSnackBar(errorMsg: 'Soru Metnini girmeden ilerleyemezsiniz');
+      showSnackBar(errorMsg: StringConstants.valid_question_text);
       return null;
     }
     final options = inputOptions
@@ -78,7 +79,7 @@ mixin AddQuestionViewMixin
         .map((option) => option.text.trim())
         .toList();
     if (widget.entity.type != QuestionType.openEnded && options.isEmpty) {
-      showSnackBar(errorMsg: 'Please fill in the option fields.');
+      showSnackBar(errorMsg: StringConstants.valid_question_option);
       return null;
     }
     return options;

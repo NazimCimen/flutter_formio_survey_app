@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
@@ -16,7 +17,7 @@ mixin CreateQuestionsViewMixin
         if (readViewModel.state == ViewState.noAddedQuestion) {
           CustomSnackBars.showCustomScaffoldSnackBar(
             context: context,
-            text: 'Lütfen Anketinize soru ekleyin',
+            text: StringConstants.add_question_to_survey,
           );
         } else if (readViewModel.state == ViewState.success) {
           NavigatorService.pushNamedAndRemoveUntil(

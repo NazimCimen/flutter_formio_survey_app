@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/border_radius/dynamic_border_radius.dart';
 
@@ -62,7 +63,7 @@ class CustomDialogs {
                 Navigator.pop(context);
               },
               child: Text(
-                'Kapat',
+                StringConstants.close,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.tertiaryFixed,
@@ -74,7 +75,7 @@ class CustomDialogs {
               TextButton(
                 onPressed: refresh,
                 child: Text(
-                  'Yeniden Dene',
+                  StringConstants.refresh,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Theme.of(context).colorScheme.tertiaryFixed,
