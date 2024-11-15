@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class CropperUiSettings {
   static AndroidUiSettings getAndroidUiSettings() {
     return AndroidUiSettings(
-      toolbarTitle: 'Resmi Kırp',
+      toolbarTitle: StringConstants.crop_bar_title,
       toolbarColor: const Color(
         0xFF202E3B,
       ),
@@ -29,7 +30,7 @@ class CropperUiSettings {
   // iOS UI ayarları
   static IOSUiSettings getIosUiSettings() {
     return IOSUiSettings(
-      title: 'Resmi Kırp',
+      title: StringConstants.crop_bar_title,
       aspectRatioLockEnabled: true,
       aspectRatioPresets: [
         CropAspectRatioPreset.ratio5x4,

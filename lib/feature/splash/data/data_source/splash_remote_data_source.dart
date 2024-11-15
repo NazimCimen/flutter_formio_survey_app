@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_survey_app_mobile/core/connection/network_info.dart';
 import 'package:flutter_survey_app_mobile/core/error/failure.dart';
 import 'package:flutter_survey_app_mobile/feature/splash/data/model/app_version_model.dart';
+import 'package:flutter_survey_app_mobile/product/constants/failure_constants.dart';
 import 'package:flutter_survey_app_mobile/product/firebase/firebase_paths.dart';
 import 'package:flutter_survey_app_mobile/product/firebase/service/base_firebase_service.dart';
 
@@ -39,10 +40,10 @@ class SplashRemoteDataSourceImpl implements SplashRemoteDataSource {
 
         return Right(result);
       } catch (e) {
-        return Left(ServerFailure(errorMessage: 'data is null'));
+        return Left(FailureConstants.dataIsNull);
       }
     } else {
-      return Left(ConnectionFailure(errorMessage: 'no internet'));
+      return Left(FailureConstants.noInternet);
     }
   }
 }

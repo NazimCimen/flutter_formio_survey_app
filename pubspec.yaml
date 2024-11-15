@@ -12,7 +12,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # Core
   dartz: ^0.10.1 # Functional programming library for Dart
   get_it: ^7.7.0 # Service locator for dependency injection
@@ -31,7 +30,6 @@ dependencies:
   image_cropper: ^8.0.2 # Allows cropping of images
   image_picker: ^1.1.2 # Enables image picking from gallery or camera
   internet_connection_checker: ^1.0.0+1 # Checks for active internet connections
-
 
   # Firebase
   firebase_core: ^3.5.0  # Used to initialize and configure Firebase services in the application.

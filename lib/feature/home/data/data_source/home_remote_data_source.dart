@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_survey_app_mobile/core/error/failure.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/data/model/survey_model.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/data/model/user_model.dart';
+import 'package:flutter_survey_app_mobile/product/constants/failure_constants.dart';
 import 'package:flutter_survey_app_mobile/product/firebase/firebase_paths.dart';
 import 'package:flutter_survey_app_mobile/product/firebase/service/base_firebase_service.dart';
 
@@ -36,7 +37,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
       );
       return Right(user.publishedSurveyIds);
     } catch (e) {
-      return Left(ConnectionFailure(errorMessage: 'errorMessage'));
+      return Left(FailureConstants.noInternet);
     }
   }
 
@@ -59,7 +60,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
       }
       return Right(surveyList);
     } catch (e) {
-      return Left(ConnectionFailure(errorMessage: 'errorMessage'));
+      return Left(FailureConstants.noInternet);
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
@@ -55,8 +56,8 @@ class CreateQuestionsViewState
             child: Consumer<CreateSurveyViewModel>(
               builder: (context, viewModel, child) {
                 if (viewModel.state == ViewState.error) {
-                  return const CustomErrorWidget(
-                    title: 'Bir Sorun Oluştu Daha Sonra Tekrar Deneyin..',
+                  return CustomErrorWidget(
+                    title: StringConstants.error_unknown_msg_try,
                     iconData: Icons.error_outline,
                   );
                 } else if (viewModel.state == ViewState.loading) {
@@ -74,9 +75,8 @@ class CreateQuestionsViewState
                 } else if (viewModel.questionEntityMap.isNotEmpty) {
                   return const _ShowAddedQuestions();
                 } else {
-                  return const CustomErrorWidget(
-                    title:
-                        'Henüz soru oluşturmadınız! Soru eklemek için aşağıdaki butona tıklayın.',
+                  return CustomErrorWidget(
+                    title: StringConstants.error_no_added_question,
                     iconData: Icons.insert_chart_outlined,
                   );
                 }

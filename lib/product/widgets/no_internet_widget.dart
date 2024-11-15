@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/padding/dynamic_padding.dart';
 import 'package:flutter_survey_app_mobile/core/utils/image_enum.dart';
@@ -19,24 +20,23 @@ class NoInternetWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            ImageEnums.noInternet.toPathPng,
+            ImageEnums.no_internet.toPathPng,
             height: context.dynamicHeight(0.1),
           ),
           SizedBox(height: context.dynamicHeight(0.01)),
-          const CustomTextSubTitleWidget(
-            subTitle: 'Bağlantı Hatası',
+          CustomTextSubTitleWidget(
+            subTitle: StringConstants.error_connection,
           ),
           SizedBox(height: context.dynamicHeight(0.01)),
-          const CustomTextGreySubTitleWidget(
+          CustomTextGreySubTitleWidget(
             maxLine: 3,
-            subTitle:
-                'İnternet Bağlantınız yok. Bağlantınızı kontrol edip tekrar deneyin',
+            subTitle: StringConstants.error_connection_msg_try,
           ),
           SizedBox(height: context.dynamicHeight(0.01)),
           TextButton(
             onPressed: refresh,
             child: Text(
-              'Yeniden Dene',
+              StringConstants.refresh,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Theme.of(context).colorScheme.tertiaryFixed,

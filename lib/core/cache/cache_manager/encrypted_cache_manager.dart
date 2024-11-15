@@ -42,7 +42,7 @@ class EncryptedCacheManager extends BaseCacheManager<String> {
     final data = box.get(keyName);
     await box.close();
     if (data == null) return null;
-    return await encryptionService.decrypt(data);
+    return encryptionService.decrypt(data);
   }
 
   /// DELETE

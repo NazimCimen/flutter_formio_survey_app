@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_survey_app_mobile/core/error/failure.dart';
 import 'package:flutter_survey_app_mobile/core/utils/crop_ui_settings.dart';
+import 'package:flutter_survey_app_mobile/product/constants/failure_constants.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -14,6 +15,7 @@ abstract class ImageProcessLocalSource {
 
 class ImageProcessLocalSourceImpl extends ImageProcessLocalSource {
   ImageProcessLocalSourceImpl();
+
   ///IT USED TO GET IMAGE FROM DEVICE-GALLERY/CAMERA
   @override
   Future<Either<Failure, XFile?>> getImage(ImageSource source) async {
@@ -23,10 +25,10 @@ class ImageProcessLocalSourceImpl extends ImageProcessLocalSource {
       if (pickedFile != null) {
         return Right(XFile(pickedFile.path));
       } else {
-        return Left(ServerFailure(errorMessage: 'no image selected'));
+        return Left(FailureConstants.noImageSelected);
       }
     } catch (e) {
-      return Left(ServerFailure(errorMessage: 'no image selected'));
+      return Left(FailureConstants.noImageSelected);
     }
   }
 
@@ -49,10 +51,10 @@ class ImageProcessLocalSourceImpl extends ImageProcessLocalSource {
       if (croppedFile != null) {
         return Right(XFile(croppedFile.path));
       } else {
-        return Left(ServerFailure(errorMessage: 'Kırpma işlemi iptal edildi'));
+        return Left(FailureConstants.croppingCanceled);
       }
     } catch (e) {
-      return Left(ServerFailure(errorMessage: 'Hata: $e'));
+      return Left(FailureConstants.customError(e.toString()));
     }
   }
 }

@@ -1,5 +1,6 @@
 analyzer:
   errors:
+    avoid_dynamic_calls: ignore
     avoid_positional_boolean_parameters: ignore
     constant_identifier_names: ignore
     directives_ordering: ignore

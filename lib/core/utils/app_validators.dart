@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:intl/intl.dart';
 
 @immutable
@@ -13,24 +14,24 @@ final class AppValidators {
 
   static String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Lütfen geçerli bir e-posta giriniz';
+      return StringConstants.valid_mail1;
     }
     final validateEmail = RegExp(emailRegExp);
     if (!validateEmail.hasMatch(value)) {
-      return 'Geçersiz e-posta formatı';
+      return StringConstants.valid_mail2;
     }
     return null;
   }
 
   static String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Lütfen şifrenizi giriniz';
+      return StringConstants.valid_password1;
     } else if (value.length < 6) {
-      return 'Şifreniz en az 6 karakter olmalıdır';
+      return StringConstants.valid_password2;
     } else {
       final validatePassword = RegExp(passwordRegExp);
       if (!validatePassword.hasMatch(value)) {
-        return 'Şifreniz en az bir harf ve bir rakam içermelidir';
+        return StringConstants.valid_password3;
       }
     }
     return null;
@@ -38,13 +39,13 @@ final class AppValidators {
 
   static String? usernameValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Lütfen kullanıcı adınızı giriniz';
+      return StringConstants.valid_username1;
     } else if (value.length < 3 || value.length > 10) {
-      return 'Kullanıcı adınız 3 ile 10 karakter arasında olmalıdır';
+      return StringConstants.valid_username2;
     } else {
       final validateUsername = RegExp(usernameRegExp);
       if (!validateUsername.hasMatch(value)) {
-        return 'Kullanıcı adınız sadece harf, rakam ve alt çizgi içerebilir';
+        return StringConstants.valid_username3;
       }
     }
     return null;
@@ -52,40 +53,38 @@ final class AppValidators {
 
   static String? surveyTitleValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Anket başlığı boş olamaz';
+      return StringConstants.valid_survey_title1;
     } else if (value.length > 50) {
-      return 'Anket başlığı en fazla 50 karakter olmalıdır';
+      return StringConstants.valid_survey_title2;
     }
     return null;
   }
 
   static String? surveyDescriptionValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Anket açıklaması boş olamaz';
+      return StringConstants.valid_survey_desc1;
     } else if (value.length > 200) {
-      return 'Anket açıklaması en fazla 200 karakter olmalıdır';
+      return StringConstants.valid_survey_desc2;
     }
     return null;
   }
 
   static String? startDateValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Başlangıç tarihi boş olamaz';
+      return StringConstants.valid_survey_startdate1;
     }
-    // Tarih formatını kontrol ediyoruz.
     if (!_isValidDateFormat(value, 'yyyy-MM-dd')) {
-      return 'Geçersiz başlangıç tarihi formatı. Doğru format: yyyy-MM-dd';
+      return StringConstants.valid_survey_startdate2;
     }
     return null;
   }
 
   static String? endDateValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Bitiş tarihi boş olamaz';
+      return StringConstants.valid_survey_enddate1;
     }
-    // Tarih formatını kontrol ediyoruz.
     if (!_isValidDateFormat(value, 'yyyy-MM-dd')) {
-      return 'Geçersiz bitiş tarihi formatı. Doğru format: yyyy-MM-dd';
+      return StringConstants.valid_survey_enddate2;
     }
     return null;
   }
@@ -101,11 +100,11 @@ final class AppValidators {
 
   static String? durationInMinuteValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return null; // Boş geçilebilir.
+      return null;
     }
     final minutes = int.tryParse(value);
     if (minutes == null) {
-      return 'Lütfen geçerli bir dakika değeri giriniz';
+      return StringConstants.valid_survey_minute;
     }
     return null;
   }

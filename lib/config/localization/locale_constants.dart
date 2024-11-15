@@ -46,9 +46,10 @@ final class LocaleConstants {
       flagName: ImageEnums.flag_france.toPathPng,
     ),
     AppLanguages(
-        name: 'Deutsch',
-        locale: deLocale,
-        flagName: ImageEnums.flag_germany.toPathPng),
+      name: 'Deutsch',
+      locale: deLocale,
+      flagName: ImageEnums.flag_germany.toPathPng,
+    ),
     AppLanguages(
       name: 'Italiano',
       locale: itLocale,

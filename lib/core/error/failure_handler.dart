@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/core/error/exception.dart';
 import 'package:flutter_survey_app_mobile/core/error/failure.dart';
 
@@ -31,11 +32,11 @@ class FailureHandler {
       );
     } else if (e.toString().contains('SocketException')) {
       return ConnectionFailure(
-        errorMessage: 'İnternet bağlantı hatası oluştu.',
+        errorMessage: StringConstants.error_connection_msg,
       );
     } else {
       return UnKnownFaliure(
-        errorMessage: 'Bilinmeyen hata oluştu: $e',
+        errorMessage: '${StringConstants.error_connection_msg} $e',
       );
     }
   }

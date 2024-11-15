@@ -1,8 +1,10 @@
 part of '../view/add_question_view.dart';
 
 class _AppBar extends BaseStateless<void> implements PreferredSizeWidget {
-  const _AppBar();
-
+  const _AppBar({
+    required this.questionTypeTitle,
+  });
+  final String questionTypeTitle;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -10,7 +12,7 @@ class _AppBar extends BaseStateless<void> implements PreferredSizeWidget {
       elevation: 0,
       automaticallyImplyLeading: false,
       title: Text(
-        'Çoktan Seçmeli',
+        questionTypeTitle,
         style: textTheme(context).titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: colorScheme(context).primary,
@@ -23,7 +25,7 @@ class _AppBar extends BaseStateless<void> implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
-class _BottomActionButtons extends StatelessWidget {
+class _BottomActionButtons extends BaseStateless<void> {
   final VoidCallback onPressedCancel;
   final VoidCallback onPressedSave;
 
@@ -40,20 +42,20 @@ class _BottomActionButtons extends StatelessWidget {
         TextButton(
           onPressed: onPressedCancel,
           child: Text(
-            'CANCEL',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            StringConstants.cancel,
+            style: textTheme(context).bodyLarge?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.tertiaryFixed,
+                  color: colorScheme(context).tertiaryFixed,
                 ),
           ),
         ),
         TextButton(
           onPressed: onPressedSave,
           child: Text(
-            'SAVE',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+            StringConstants.save,
+            style: textTheme(context).bodyLarge?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.tertiaryFixed,
+                  color: colorScheme(context).tertiaryFixed,
                 ),
           ),
         ),

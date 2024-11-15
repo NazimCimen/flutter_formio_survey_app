@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_survey_app_mobile/core/connection/network_info.dart';
 import 'package:flutter_survey_app_mobile/core/error/failure.dart';
 import 'package:flutter_survey_app_mobile/core/error/failure_handler.dart';
+import 'package:flutter_survey_app_mobile/product/constants/failure_constants.dart';
 
 abstract class ImageProcessRemoteSource {
   Future<Either<Failure, String>> getImageUrl({
@@ -26,7 +27,7 @@ class ImageProcessRemoteSourceImpl extends ImageProcessRemoteSource {
   });
   @override
 
-/// IT USED TO GET IMAGE URL FROM STORAGE
+  /// IT USED TO GET IMAGE URL FROM STORAGE
   Future<Either<Failure, String>> getImageUrl({
     required Uint8List imageBytes,
     required String path,
@@ -34,7 +35,7 @@ class ImageProcessRemoteSourceImpl extends ImageProcessRemoteSource {
     try {
       final isConnected = await connectivity.currentConnectivityResult;
       if (!isConnected) {
-        return Left(ConnectionFailure(errorMessage: 'No internet connection'));
+        return Left(FailureConstants.noInternet);
       }
       final storageRef = storage.ref();
       final uniqueFileName =
@@ -47,7 +48,8 @@ class ImageProcessRemoteSourceImpl extends ImageProcessRemoteSource {
       return Left(FailureHandler.handleFailure(e: e));
     }
   }
-/// IT USED TO REMOVE SURVEY IMAGES FROM STORAGE 
+
+  /// IT USED TO REMOVE SURVEY IMAGES FROM STORAGE
   @override
   Future<Either<Failure, bool>> removeSurveyImages({
     required String path,
@@ -55,7 +57,7 @@ class ImageProcessRemoteSourceImpl extends ImageProcessRemoteSource {
     try {
       final isConnected = await connectivity.currentConnectivityResult;
       if (!isConnected) {
-        return Left(ConnectionFailure(errorMessage: 'No internet connection'));
+        return Left(FailureConstants.noInternet);
       }
       final listResult = await storage.ref(path).listAll();
 

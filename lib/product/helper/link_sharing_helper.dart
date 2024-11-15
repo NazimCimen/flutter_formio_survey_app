@@ -1,3 +1,4 @@
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:share_plus/share_plus.dart';
 
 abstract class LinkSharingHelper {
@@ -10,7 +11,7 @@ class LinkSharingHelperImpl extends LinkSharingHelper {
   void shareSurveyLink({required String surveyId}) {
     final link = generateSurveyLink(surveyId);
     Share.share(
-      'Bu anketi doldur: $link',
+      '${StringConstants.survey_share_menu_title}: $link',
     );
   }
 

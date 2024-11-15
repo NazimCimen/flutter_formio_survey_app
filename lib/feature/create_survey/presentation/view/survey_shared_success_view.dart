@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
@@ -31,8 +32,8 @@ class SurveySharedSuccessView extends StatelessWidget {
               height: context.dynamicHeight(0.1),
             ),
             SizedBox(height: context.dynamicHeight(0.02)),
-            const CustomTextSubTitleWidget(
-              subTitle: 'Anketiniz Başarılı bir şekilde oluşturuldu.',
+            CustomTextSubTitleWidget(
+              subTitle: StringConstants.survey_succes,
             ),
             SizedBox(height: context.dynamicHeight(0.02)),
             const _ShareSurvey(),
@@ -53,14 +54,14 @@ class _ShareSurvey extends BaseStateless<CreateSurveyViewModel> {
       children: [
         _TextButton(
           iconData: Icons.share,
-          text: 'Paylaş',
+          text: StringConstants.survey_share,
           onPressed: () {
             readViewModel(context).shareSurveyLink();
           },
         ),
         _TextButton(
           iconData: Icons.copy,
-          text: 'Copy Link',
+          text: StringConstants.survey_copy_link,
           onPressed: () {
             Clipboard.setData(
               ClipboardData(
@@ -70,7 +71,7 @@ class _ShareSurvey extends BaseStateless<CreateSurveyViewModel> {
 
             CustomSnackBars.showCustomScaffoldSnackBar(
               context: context,
-              text: 'Link kopyalandı!',
+              text: StringConstants.survey_link_coppied,
             );
           },
         ),
@@ -125,7 +126,7 @@ class _AppBar extends BaseStateless<CreateSurveyViewModel>
             NavigatorService.pushNamedAndRemoveUntil(AppRoutes.homeView);
           },
           child: Text(
-            'Ana Sayfa',
+            StringConstants.main_page,
             style: textTheme(context).titleLarge?.copyWith(
                   color: colorScheme(context).primary,
                   fontWeight: FontWeight.bold,

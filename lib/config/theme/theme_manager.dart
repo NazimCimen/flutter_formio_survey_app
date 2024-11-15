@@ -7,7 +7,6 @@ abstract class IThemeManager {
   late ThemeEnum currentThemeEnum;
   late ThemeMode themeMode;
   bool isLoadingTheme = false;
-
   Future<void> changeTheme(ThemeEnum theme);
   Future<void> loadTheme();
 }
@@ -32,11 +31,13 @@ class ThemeManager extends ChangeNotifier implements IThemeManager {
   ThemeManager() {
     loadTheme();
   }
+
   void isLoading(bool value) {
     isLoadingTheme = value;
     notifyListeners();
   }
 
+  /// IT USED TO CHANGE APP THEME LIGHT OR DARK.
   @override
   Future<void> changeTheme(ThemeEnum theme) async {
     isLoading(true);
@@ -50,6 +51,7 @@ class ThemeManager extends ChangeNotifier implements IThemeManager {
     isLoading(false);
   }
 
+  /// IT USED TO LOAD APP THEME WHEN APP LAUNCH.
   @override
   Future<void> loadTheme() async {
     final prefs = await SharedPreferences.getInstance();

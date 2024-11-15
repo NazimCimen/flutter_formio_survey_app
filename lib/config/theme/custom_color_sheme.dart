@@ -25,6 +25,7 @@ final class CustomColorScheme {
     ),
     onTertiary: Color(0xFFFFFFFF),
     outline: Color(0xFFBDBDBD),
+    scrim: Color.fromARGB(255, 248, 245, 245),
   );
 
   static const darkScheme = ColorScheme(
@@ -39,11 +40,11 @@ final class CustomColorScheme {
     onSurface: Color(0xFFFFFFFF),
     tertiary: Colors.grey,
     tertiaryFixed: Colors.amberAccent,
-    scrim: Colors.black,
     secondaryContainer: Colors.redAccent,
     tertiaryContainer: Colors.greenAccent,
     onPrimaryContainer: Color.fromARGB(95, 97, 97, 97),
     onTertiary: Color(0xFFFFFFFF),
     outline: Color(0xFF757575),
+    scrim: Color.fromARGB(255, 20, 20, 20),
   );
 }

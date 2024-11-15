@@ -44,7 +44,7 @@ class ImageInputWidget extends StatelessWidget {
                 }
               },
               child: const Icon(Icons.remove_circle_outline),
-            )
+            ),
           ],
         ),
         SizedBox(height: context.dynamicHeight(0.01)),
@@ -80,7 +80,7 @@ class ImageInputWidget extends StatelessWidget {
                       );
                     } else {
                       return Image.asset(
-                        ImageEnums.addImage.toPathPng,
+                        ImageEnums.add_image.toPathPng,
                         width: context.dynamicWidht(0.2),
                         color: Theme.of(context).colorScheme.onTertiary,
                       );

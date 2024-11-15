@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
@@ -45,8 +46,8 @@ class _PublishedSurveys extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CustomTextHeadlineTitleWidget(
-          title: 'Yayınladığım Anketler',
+        CustomTextHeadlineTitleWidget(
+          title: StringConstants.published_surveys,
         ),
         SizedBox(height: context.dynamicHeight(0.03)),
         Expanded(
@@ -104,8 +105,9 @@ class _SurveyCard extends BaseStateless<void> {
               children: [
                 CustomTextSubTitleWidget(subTitle: title ?? ''),
                 CustomTextGreySubTitleWidget(
-                  subTitle:
-                      answeredCount != null ? '$answeredCount answered' : '',
+                  subTitle: answeredCount != null
+                      ? '$answeredCount ${StringConstants.answered}'
+                      : '',
                 ),
               ],
             ),
@@ -125,14 +127,14 @@ class _NoPublishedSurvey extends BaseStateless<void> {
       child: Column(
         children: [
           Image.asset(
-            ImageEnums.webtest8.toPathPng,
+            ImageEnums.bg_home_no_survey.toPathPng,
             fit: BoxFit.cover,
             height: context.dynamicHeight(0.25),
           ),
           SizedBox(height: context.dynamicHeight(0.03)),
           Text(
             textAlign: TextAlign.center,
-            'Henüz bir anketiniz yok, haydi hemen bir tane oluşturalım!',
+            StringConstants.no_survey_lets_do,
             style: textTheme(context).bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -147,8 +149,8 @@ class _NoPublishedSurvey extends BaseStateless<void> {
             onPressed: () {
               NavigatorService.pushNamed(AppRoutes.createSurveyInfoView);
             },
-            child: const CustomTextHeadlineTitleWidget(
-              title: 'Hemen Oluştur',
+            child: CustomTextHeadlineTitleWidget(
+              title: StringConstants.create_now,
             ),
           ),
         ],

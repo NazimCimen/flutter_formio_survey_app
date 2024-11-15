@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 
 class QuestionEntity extends Equatable {
   final String? questionId;
@@ -69,11 +70,11 @@ extension QuestionTypeExtension on QuestionType {
   String get qType {
     switch (this) {
       case QuestionType.multipleChoice:
-        return 'Multiple Choice';
+        return StringConstants.question_type_multiple;
       case QuestionType.openEnded:
-        return 'Open Ended';
+        return StringConstants.question_type_open_ended;
       case QuestionType.dropdown:
-        return 'Dropdown';
+        return StringConstants.question_type_dropdown;
     }
   }
 }
