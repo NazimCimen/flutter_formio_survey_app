@@ -16,7 +16,7 @@ final class CustomLightTheme implements ApplicationTheme {
         useMaterial3: true,
         fontFamily: GoogleFonts.poppins().fontFamily,
         colorScheme: CustomColorScheme.lightScheme,
-        scaffoldBackgroundColor: colorScheme.surface,
+        scaffoldBackgroundColor: colorScheme.scrim,
       );
 }
 
@@ -29,6 +29,6 @@ final class CustomDarkTheme implements ApplicationTheme {
         useMaterial3: true,
         colorScheme: CustomColorScheme.darkScheme,
         fontFamily: GoogleFonts.poppins().fontFamily,
-        scaffoldBackgroundColor: colorScheme.surface,
+        scaffoldBackgroundColor: colorScheme.scrim,
       );
 }

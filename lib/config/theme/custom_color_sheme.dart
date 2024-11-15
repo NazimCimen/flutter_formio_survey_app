@@ -25,7 +25,7 @@ final class CustomColorScheme {
     ),
     onTertiary: Color(0xFFFFFFFF),
     outline: Color(0xFFBDBDBD),
-    scrim: Colors.black,
+    scrim: Color.fromARGB(255, 248, 245, 245),
   );
 
   static const darkScheme = ColorScheme(
@@ -45,6 +45,6 @@ final class CustomColorScheme {
     onPrimaryContainer: Color.fromARGB(95, 97, 97, 97),
     onTertiary: Color(0xFFFFFFFF),
     outline: Color(0xFF757575),
-    scrim: Colors.black,
+    scrim: Color.fromARGB(255, 20, 20, 20),
   );
 }
