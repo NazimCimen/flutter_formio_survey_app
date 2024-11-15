@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, non_constant_identifier_names
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 
