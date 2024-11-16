@@ -2,30 +2,32 @@
 
 ```plaintext
 lib/
-├── core/
-│   ├── api_helper/
-│   ├── config/
-│   ├── constants/
-│   ├── enums/
-│   ├── extensions/
-│   ├── router/
-│   ├── service/
+├── config/
+│   ├── localization/
+│   ├── routes/
 │   ├── theme/
-│   ├── usecase/
+├── core/
+│   ├── app/
+│   ├── base/
+│   ├── cache/
+│   ├── connection/
+│   ├── error/
+│   ├── init/
 │   ├── utils/
-├── data/
-│   ├── datasources/
-│   ├── models/
-│   ├── repositories/
-├── di/
-├── domain/
-│   ├── entities/
-│   ├── repositories/
-│   ├── usecases/
-├── presentation/
-│   ├── view/
-│   ├── viewmodel/
+├── dependency_injection/
+├── feature/
+│   ├── create_survey/
+│   ├── home/
+│   ├── image_process/
+│   ├── settings/
+│   ├── shared_layers/
+│   ├── splash/
+├── product/
+│   ├── components/
+│   ├── constants/
+│   ├── decorations/
+│   ├── firebase/
+│   ├── helper/
 │   ├── widgets/
-└── translations/
 └── main.dart
 ```
