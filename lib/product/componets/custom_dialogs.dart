@@ -26,6 +26,7 @@ class CustomDialogs {
     required String title,
     required String description,
     required VoidCallback? refresh,
+    required VoidCallback? close,
     required String? imagePath,
   }) {
     showDialog<void>(
@@ -39,15 +40,11 @@ class CustomDialogs {
           ),
           title: Text(
             textAlign: TextAlign.start,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
             title,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           content: Text(
             textAlign: TextAlign.start,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 3,
             description,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
@@ -59,9 +56,7 @@ class CustomDialogs {
               : null,
           actions: <Widget>[
             TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: close,
               child: Text(
                 StringConstants.close,
                 overflow: TextOverflow.ellipsis,
