@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/padding/dynamic_padding.dart';
-import 'package:flutter_survey_app_mobile/core/utils/image_enum.dart';
+import 'package:flutter_survey_app_mobile/core/utils/enum/image_enum.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';
 
 class NoInternetWidget extends StatelessWidget {

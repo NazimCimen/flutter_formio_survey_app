@@ -6,7 +6,7 @@ import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateless.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/padding/dynamic_padding.dart';
-import 'package:flutter_survey_app_mobile/core/utils/image_enum.dart';
+import 'package:flutter_survey_app_mobile/core/utils/enum/image_enum.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
 import 'package:flutter_survey_app_mobile/product/componets/custom_snack_bars.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';

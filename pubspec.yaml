@@ -22,7 +22,6 @@ dependencies:
   package_info_plus: ^8.1.0 # Retrieves package information like app version, build number, etc.
   equatable: ^2.0.5 # used to prevent object reference shifts
   easy_localization: ^3.0.7 # Simplifies localization and internationalization of the app
-  shared_preferences: ^2.3.2
   share_plus: ^10.0.2 # Enables sharing content from the app to other applications
   url_launcher: ^6.3.0 # Launches URLs in a web browser or another app
   mockito: ^5.4.4 # Used to test the app and improve the code quality
@@ -43,6 +42,7 @@ dependencies:
   flutter_speed_dial: ^7.0.0 # Creates floating action buttons with a speed dial effect
 
   # Cache
+  shared_preferences: ^2.3.2 # For local data storage
   hive: ^2.2.3 # A fast and lightweight NoSQL database for local data storage
   hive_flutter: ^1.1.0 # Provides simple and secure data storage with Hive in Flutter applications
   encrypt: ^5.0.3 # Used for data encryption
