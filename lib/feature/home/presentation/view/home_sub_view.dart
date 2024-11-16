@@ -29,7 +29,7 @@ class _DrawerWidget extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onPrimaryContainer,
+          color: Theme.of(context).colorScheme.scrim,
         ),
         child: ListView(
           padding: EdgeInsets.zero,
