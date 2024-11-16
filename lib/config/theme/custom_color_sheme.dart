@@ -17,7 +17,7 @@ final class CustomColorScheme {
     tertiaryFixed: Colors.amberAccent,
     secondaryContainer: Colors.red,
     tertiaryContainer: Colors.green,
-    onPrimaryContainer: Color(0xFFE2DFDF),
+    onPrimaryContainer: Colors.white,
     onTertiary: Color(0xFFFFFFFF),
     outline: Color(0xFFBDBDBD),
     scrim: Color(0xFFF8F5F5),

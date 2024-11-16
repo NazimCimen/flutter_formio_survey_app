@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/config/routes/app_routes.dart';
 import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
@@ -44,6 +45,10 @@ mixin SplashMixin on State<SplashView> {
         description: StringConstants.force_update_desc,
         refresh: null,
         imagePath: null,
+        close: () {
+          Navigator.pop(context);
+          SystemNavigator.pop();
+        },
       );
     } else {
       onboardScreenVisible

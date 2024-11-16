@@ -82,7 +82,7 @@ class ImageInputWidget extends StatelessWidget {
                       return Image.asset(
                         ImageEnums.add_image.toPathPng,
                         width: context.dynamicWidht(0.2),
-                        color: Theme.of(context).colorScheme.onTertiary,
+                        color: Theme.of(context).colorScheme.tertiary,
                       );
                     }
                   },
