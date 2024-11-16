@@ -17,15 +17,10 @@ final class CustomColorScheme {
     tertiaryFixed: Colors.amberAccent,
     secondaryContainer: Colors.red,
     tertiaryContainer: Colors.green,
-    onPrimaryContainer: Color.fromARGB(
-      255,
-      226,
-      223,
-      223,
-    ),
+    onPrimaryContainer: Color(0xFFE2DFDF),
     onTertiary: Color(0xFFFFFFFF),
     outline: Color(0xFFBDBDBD),
-    scrim: Color.fromARGB(255, 248, 245, 245),
+    scrim: Color(0xFFF8F5F5),
   );
 
   static const darkScheme = ColorScheme(
@@ -42,9 +37,9 @@ final class CustomColorScheme {
     tertiaryFixed: Colors.amberAccent,
     secondaryContainer: Colors.redAccent,
     tertiaryContainer: Colors.greenAccent,
-    onPrimaryContainer: Color.fromARGB(95, 97, 97, 97),
+    onPrimaryContainer: Color(0XFF5F5F5F),
     onTertiary: Color(0xFFFFFFFF),
     outline: Color(0xFF757575),
-    scrim: Color.fromARGB(255, 20, 20, 20),
+    scrim: Color(0xFF141414),
   );
 }

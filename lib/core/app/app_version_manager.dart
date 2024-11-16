@@ -1,5 +1,5 @@
 import 'package:flutter_survey_app_mobile/core/error/exception.dart';
-import 'package:flutter_survey_app_mobile/core/utils/device_platform_enum.dart';
+import 'package:flutter_survey_app_mobile/core/utils/enum/device_platform_enum.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'dart:io' show Platform;
 

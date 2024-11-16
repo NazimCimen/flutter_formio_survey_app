@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
 import 'package:flutter_survey_app_mobile/core/utils/size/app_size/dynamic_size.dart';
-import 'package:flutter_survey_app_mobile/core/utils/image_enum.dart';
+import 'package:flutter_survey_app_mobile/core/utils/enum/image_enum.dart';
 import 'package:flutter_survey_app_mobile/feature/splash/presentation/mixin/splash_mixin.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/custom_text_widgets.dart';
 
