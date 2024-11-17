@@ -83,8 +83,6 @@ void setupLocator() {
     ..registerLazySingleton<INetworkInfo>(
       () => NetworkInfo(serviceLocator<InternetConnectionChecker>()),
     )
-
-    /////////////////////////////// SPLASH FEATURE //////////////////////////////////////
     ..registerLazySingleton<AppVersionManager>(
       () => AppVersionManagerImpl(),
     )
@@ -124,9 +122,6 @@ void setupLocator() {
         serviceLocator<AppVersionManager>(),
       ),
     )
-    //////////////////////////////////////////////////////////////////////////////////
-
-    ////////////////////// CREATE SURVEY FEATURE /////////////////////////////////////
     ..registerLazySingleton<CreateSurveyLocalDataSource>(
       () => CreateSurveyLocalDataSourceImpl(
         cacheManager: serviceLocator<StandartCacheManager<String>>(),
@@ -205,9 +200,6 @@ void setupLocator() {
         shareLink: serviceLocator<LinkSharingHelper>(),
       ),
     )
-//////////////////////////////////////////////////////////////////////////////////////
-
-/////////////////////////////////////// HOME FEATURE //////////////////////////////////////////////
     ..registerLazySingleton<BaseFirebaseService<UserModel>>(
       () => FirebaseServiceImpl(
         firestore: serviceLocator<FirebaseFirestore>(),
@@ -240,9 +232,6 @@ void setupLocator() {
         getSurveysUseCase: serviceLocator<GetPublishedSurveysUsecase>(),
       ),
     )
-
-///////////////////////////////// IMAGE PROCESS FEATURE////////////////////////////////////////////////////
-
     ..registerLazySingleton<RemoveSurveyImagesUseCase>(
       () => RemoveSurveyImagesUseCase(
         repository: serviceLocator<ImageProcessRepository>(),
@@ -286,6 +275,4 @@ void setupLocator() {
         removeSurveyImagesUseCase: serviceLocator<RemoveSurveyImagesUseCase>(),
       ),
     );
-////////////////////////////////////////////////////////////////////////////////////////
-
 }

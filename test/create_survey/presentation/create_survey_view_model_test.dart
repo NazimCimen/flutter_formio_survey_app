@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_survey_app_mobile/core/base/state.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/survey_logic.dart';
@@ -24,6 +25,8 @@ import 'create_survey_view_model_test.mocks.dart';
   CacheDatasNoInternetUseCase,
   XFile,
 ])
+class MockBuildContext extends Mock implements BuildContext {}
+
 void main() {
   late CreateSurveyViewModel viewModel;
   late MockSurveyLogic mockSurveyLogic;
@@ -95,6 +98,7 @@ void main() {
   });
 
   group('getImage success/fail test', () {
+    final mockContext = MockBuildContext();
     test('success test', () async {
       // Arrange
       when(
@@ -110,6 +114,7 @@ void main() {
       await viewModel.getImage(
         cropRatio: ImageAspectRatioEnum.questionImage.ratioCrop,
         selectedSource: ImageSource.gallery,
+        context: mockContext,
       );
 
       // Assert (awaiting listeners)
@@ -130,6 +135,7 @@ void main() {
       await viewModel.getImage(
         selectedSource: ImageSource.gallery,
         cropRatio: ImageAspectRatioEnum.questionImage.ratioCrop,
+        context: mockContext,
       );
 
       // Assert
