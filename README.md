@@ -1,6 +1,7 @@
 ## FORMIO - ANKET UYGULAMASI (DEVAM EDİYOR)
 
-![Uygulama Tanıtım](https://github.com/NazimCimen/flutter_formio_survey_app/blob/main/assets/readme_image.png)
+![Uygulama Tanıtım](https://github.com/NazimCimen/flutter_formio_survey_app/blob/main/assets/readme1.png)
+![Uygulama Tanıtım](https://github.com/NazimCimen/flutter_formio_survey_app/blob/main/assets/readme2.png)
   <b>Bu uygulama, kullanıcıların çeşitli soru tiplerini seçerek kendi anketlerini kolayca oluşturmasına olanak tanır. Kullanıcılar, oluşturdukları anketlerin bağlantısını paylaşarak başkalarının anonim olarak yanıtlamasını sağlayabilir. Gelecekteki güncellemelerle,web platformu dahil olmak üzere anket yanıtlama, anket yanıtlarını analiz etme ve daha detaylı raporlama özellikleri de projeye eklenecektir.
 </p>
 
