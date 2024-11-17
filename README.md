@@ -1,6 +1,6 @@
 # 🌟 FORMIO - Anket Uygulaması (Devam Ediyor)      
 
-![Uygulama Tanıtım](https://github.com/NazimCimen/flutter_formio_survey_app/blob/main/assets/readme_img2.png)  
+![Uygulama Tanıtım](https://github.com/NazimCimen/flutter_formio_survey_app/blob/main/assets/readme1.png)  
 ![Uygulama Tanıtım](https://github.com/NazimCimen/flutter_formio_survey_app/blob/main/assets/readme2.png)  
 
 
