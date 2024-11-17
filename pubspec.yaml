@@ -13,22 +13,26 @@ dependencies:
     sdk: flutter
 
   # Core
+  mockito: ^5.4.4 # Used to test the app and improve the code quality
+  provider: ^6.1.2 # State management library
   dartz: ^0.10.1 # Functional programming library for Dart
   get_it: ^7.7.0 # Service locator for dependency injection
   uuid: ^4.5.0 # Generates unique IDs for objects or entities
-  intl: ^0.19.0 # Provides internationalization and localization facilities
-  change_app_package_name: ^1.4.0 # Allows changing the app package name without manual code adjustments
   json_annotation: 4.9.0 # Enables code generation for JSON serialization/deserialization
   package_info_plus: ^8.1.0 # Retrieves package information like app version, build number, etc.
   equatable: ^2.0.5 # used to prevent object reference shifts
+  internet_connection_checker: ^1.0.0+1 # Checks for active internet connections
+
+  # Config
   easy_localization: ^3.0.7 # Simplifies localization and internationalization of the app
+  intl: ^0.19.0 # Provides internationalization and localization facilities
+
+  # Utils
   share_plus: ^10.0.2 # Enables sharing content from the app to other applications
   url_launcher: ^6.3.0 # Launches URLs in a web browser or another app
-  mockito: ^5.4.4 # Used to test the app and improve the code quality
-  provider: ^6.1.2 # State management library
+  change_app_package_name: ^1.4.0 # Allows changing the app package name without manual code adjustments
   image_cropper: ^8.0.2 # Allows cropping of images
   image_picker: ^1.1.2 # Enables image picking from gallery or camera
-  internet_connection_checker: ^1.0.0+1 # Checks for active internet connections
 
   # Firebase
   firebase_core: ^3.5.0  # Used to initialize and configure Firebase services in the application.
