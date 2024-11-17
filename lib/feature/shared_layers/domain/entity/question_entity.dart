@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_survey_app_mobile/config/localization/string_constants.dart';
+import 'package:flutter_survey_app_mobile/product/constants/question_type_enum.dart';
 
 class QuestionEntity extends Equatable {
   final String? questionId;
@@ -57,24 +57,5 @@ class QuestionEntity extends Equatable {
       isRequired: isRequired ?? this.isRequired,
       addOptionOther: addOptionOther ?? this.addOptionOther,
     );
-  }
-}
-
-enum QuestionType {
-  multipleChoice,
-  openEnded,
-  dropdown,
-}
-
-extension QuestionTypeExtension on QuestionType {
-  String get qType {
-    switch (this) {
-      case QuestionType.multipleChoice:
-        return StringConstants.question_type_multiple;
-      case QuestionType.openEnded:
-        return StringConstants.question_type_open_ended;
-      case QuestionType.dropdown:
-        return StringConstants.question_type_dropdown;
-    }
   }
 }

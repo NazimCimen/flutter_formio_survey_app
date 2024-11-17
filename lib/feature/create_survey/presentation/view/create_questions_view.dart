@@ -18,6 +18,7 @@ import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/wid
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/added_question_title.dart';
 import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
+import 'package:flutter_survey_app_mobile/product/constants/question_type_enum.dart';
 import 'package:flutter_survey_app_mobile/product/decorations/box_decorations/custom_box_decoration.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/custom_error_widget.dart';
 import 'package:flutter_survey_app_mobile/product/widgets/custom_progress_indicator.dart';

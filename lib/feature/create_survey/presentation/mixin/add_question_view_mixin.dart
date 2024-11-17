@@ -5,7 +5,7 @@ import 'package:flutter_survey_app_mobile/config/routes/navigator_service.dart';
 import 'package:flutter_survey_app_mobile/core/base/base_stateful.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/view/add_question_view.dart';
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/viewmodel/create_survey_view_model.dart';
-import 'package:flutter_survey_app_mobile/feature/shared_layers/domain/entity/question_entity.dart';
+import 'package:flutter_survey_app_mobile/product/constants/question_type_enum.dart';
 
 mixin AddQuestionViewMixin
     on BaseStateful<AddQuestionView, CreateSurveyViewModel> {

@@ -14,6 +14,7 @@ import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/wid
 import 'package:flutter_survey_app_mobile/feature/create_survey/presentation/widgets/image_input_widgets.dart';
 import 'package:flutter_survey_app_mobile/product/componets/custom_snack_bars.dart';
 import 'package:flutter_survey_app_mobile/product/constants/image_aspect_ratio.dart';
+import 'package:flutter_survey_app_mobile/product/constants/question_type_enum.dart';
 
 part '../sub_view/add_question_sub_view.dart';
 
