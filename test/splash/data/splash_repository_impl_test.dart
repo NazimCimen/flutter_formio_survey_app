@@ -8,7 +8,6 @@ import 'package:flutter_survey_app_mobile/feature/splash/data/repository/splash_
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
 import 'splash_repository_impl_test.mocks.dart';
 
 @GenerateMocks([
