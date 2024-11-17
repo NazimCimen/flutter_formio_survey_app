@@ -1,13 +1,16 @@
-# 🌟 FORMIO - Anket Uygulaması (Devam Ediyor)        ![Version](https://img.shields.io/badge/version-1.0.0-blue)  ![Flutter](https://img.shields.io/badge/Flutter-v3.22.0-blue)
+# 🌟 FORMIO - Anket Uygulaması (Devam Ediyor)      
 
 ![Uygulama Tanıtım](https://github.com/NazimCimen/flutter_formio_survey_app/blob/main/assets/readme1.png)  
 ![Uygulama Tanıtım](https://github.com/NazimCimen/flutter_formio_survey_app/blob/main/assets/readme2.png)  
+
 
 Bu uygulama, kullanıcıların çeşitli soru tiplerini seçerek kendi anketlerini kolayca oluşturmasına olanak tanır. Kullanıcılar, oluşturdukları anketlerin bağlantısını paylaşarak başkalarının anonim olarak yanıtlamasını sağlayabilir.  
 **Gelecek Güncellemeler**:  
 - Web platformunda anket yanıtlama.  
 - Anket yanıtlarını analiz etme.  
 - Daha detaylı raporlama.  
+
+![Version](https://img.shields.io/badge/version-1.0.0-blue)  ![Flutter](https://img.shields.io/badge/Flutter-v3.22.0-blue)
 
 
 # 🛠️ Proje Özellikleri
