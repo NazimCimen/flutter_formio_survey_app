@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_survey_app_mobile/core/base/state.dart';
 import 'package:flutter_survey_app_mobile/core/connection/network_info.dart';
 import 'package:flutter_survey_app_mobile/core/error/failure.dart';
@@ -14,6 +13,7 @@ import 'package:flutter_survey_app_mobile/product/helper/link_sharing_helper.dar
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter/material.dart';
 
 class CreateSurveyViewModel extends ChangeNotifier {
   final CacheDatasNoInternetUseCase cacheDatasNoInternetUseCase;

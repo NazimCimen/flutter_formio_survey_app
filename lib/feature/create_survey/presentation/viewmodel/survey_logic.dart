@@ -117,14 +117,10 @@ class SurveyLogic {
       final response = await removeSurveyUseCase.call(surveyId: surveyId);
       response.fold(
         (fail) {
-          if (fail is! ConnectionFailure) {
-            // Log failure and send to Crashlytics
-          }
+          if (fail is! ConnectionFailure) {}
         },
         (success) {
-          if (!success) {
-            // Log failure and send to Crashlytics
-          }
+          if (!success) {}
         },
       );
     }
