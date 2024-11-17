@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_survey_app_mobile/core/base/state.dart';
 import 'package:flutter_survey_app_mobile/core/connection/network_info.dart';
 import 'package:flutter_survey_app_mobile/core/error/failure.dart';
@@ -90,6 +91,7 @@ class CreateSurveyViewModel extends ChangeNotifier {
   Future<void> getImage({
     required ImageSource selectedSource,
     required CropAspectRatio cropRatio,
+    required BuildContext context,
   }) async {
     final result = await imageHelper.getImage(
       selectedSource: selectedSource,
